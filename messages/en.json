@@ -1,0 +1,218 @@
+{
+  "nav": {
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "process": "Process",
+    "contact": "Contact",
+    "cta": "Get a Free Proposal"
+  },
+  "hero": {
+    "badge": "Powered by AI",
+    "title1": "We Build Software",
+    "title2": "at the Speed of AI",
+    "subtitle": "Enterprise consulting powered by artificial intelligence. Velocity, Quality, Security — guaranteed.",
+    "cta_primary": "Start a Project",
+    "cta_secondary": "See Our Work",
+    "typing": ["Custom SaaS", "AI Automation", "Web Platforms", "IT Solutions", "Landing Pages"]
+  },
+  "proof_bar": {
+    "label": "Technologies we master"
+  },
+  "pillars": {
+    "badge": "Our Promise",
+    "title": "Three Pillars, Zero Compromise",
+    "subtitle": "Every project we deliver is built on the same foundation.",
+    "velocity": {
+      "title": "Velocity",
+      "stat": "3× faster delivery",
+      "description": "AI-accelerated workflows compress weeks into days. We ship faster than any traditional agency — without cutting corners."
+    },
+    "quality": {
+      "title": "Quality",
+      "stat": "100% human-reviewed",
+      "description": "Every line of AI-generated output is reviewed and refined by a senior engineer. You get machine speed with human precision."
+    },
+    "security": {
+      "title": "Security",
+      "stat": "Enterprise-grade",
+      "description": "OWASP best practices, secure-by-default architecture, and rigorous code audits on every project we deliver."
+    }
+  },
+  "services": {
+    "badge": "What We Do",
+    "title": "Solutions Built for Scale",
+    "subtitle": "From idea to production — we cover every layer of your software needs.",
+    "items": [
+      {
+        "title": "Custom SaaS Development",
+        "description": "End-to-end SaaS platforms built with modern stacks. Scalable, secure, and ready for enterprise.",
+        "tag": "Most Popular"
+      },
+      {
+        "title": "AI Integration & Automation",
+        "description": "Connect AI to your existing workflows. Automate repetitive tasks, generate insights, and reduce operational costs.",
+        "tag": ""
+      },
+      {
+        "title": "Web Presence & Landing Pages",
+        "description": "High-conversion, SEO-optimized web experiences that make your brand impossible to ignore.",
+        "tag": ""
+      },
+      {
+        "title": "Process Automation",
+        "description": "Sales outreach, office management, HR flows — we automate the operations that slow your business down.",
+        "tag": ""
+      },
+      {
+        "title": "IT Project Management",
+        "description": "Technical leadership for complex projects. We manage scope, timelines, and teams so you don't have to.",
+        "tag": ""
+      },
+      {
+        "title": "Market Analysis & Outreach",
+        "description": "AI-driven market research, lead generation, and proposal writing to win enterprise contracts and tenders.",
+        "tag": "New"
+      }
+    ]
+  },
+  "process": {
+    "badge": "How We Work",
+    "title": "From Brief to Production in Record Time",
+    "subtitle": "A proven process designed for speed without sacrificing quality.",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Discovery",
+        "description": "We map your business, goals, and constraints in a focused session. No fluff, just clarity."
+      },
+      {
+        "number": "02",
+        "title": "Architecture",
+        "description": "We design the solution with AI-assisted planning, selecting the right stack and approach."
+      },
+      {
+        "number": "03",
+        "title": "Build",
+        "description": "AI-accelerated development with human review at every checkpoint. Fast and precise."
+      },
+      {
+        "number": "04",
+        "title": "Deploy & Scale",
+        "description": "Production-ready delivery with monitoring, support, and a clear path to growth."
+      }
+    ]
+  },
+  "portfolio": {
+    "badge": "Our Work",
+    "title": "Results That Speak",
+    "subtitle": "Real projects, real impact.",
+    "items": [
+      {
+        "title": "Campos Inmobiliaria",
+        "description": "Full real estate web platform with property listings, advanced search, and lead management system.",
+        "tags": ["Next.js", "TypeScript", "PostgreSQL"],
+        "url": "https://www.camposinmobiliaria.com",
+        "cta": "Visit Site"
+      }
+    ],
+    "coming_soon": "More projects coming soon"
+  },
+  "testimonials": {
+    "badge": "Client Feedback",
+    "title": "What Our Clients Say",
+    "subtitle": "Real feedback from real partners.",
+    "stats": [
+      { "value": 10, "suffix": "+", "label": "Projects Delivered" },
+      { "value": 3, "suffix": "×", "label": "Faster Than Traditional" },
+      { "value": 100, "suffix": "%", "label": "Human-Reviewed Code" },
+      { "value": 6, "suffix": "+", "label": "Years of Experience" }
+    ],
+    "items": [
+      {
+        "quote": "Kershell delivered our platform in half the time we expected. The quality was exceptional — every feature worked flawlessly from day one.",
+        "name": "Carlos Campos",
+        "role": "CEO",
+        "company": "Campos Inmobiliaria",
+        "pending": false
+      },
+      {
+        "quote": "Pending client feedback — your testimonial could be here.",
+        "name": "",
+        "role": "",
+        "company": "",
+        "pending": true
+      },
+      {
+        "quote": "Pending client feedback — your testimonial could be here.",
+        "name": "",
+        "role": "",
+        "company": "",
+        "pending": true
+      }
+    ]
+  },
+  "why": {
+    "badge": "Why Kershell TI",
+    "title": "Not Your Average Agency",
+    "subtitle": "Traditional agencies charge for overhead. We charge for outcomes.",
+    "traditional": "Traditional Agency",
+    "kershell": "Kershell TI",
+    "points": [
+      { "traditional": "Weeks of onboarding", "kershell": "Start in 48 hours" },
+      { "traditional": "Bloated teams, high cost", "kershell": "Lean AI-powered team" },
+      { "traditional": "Slow iteration cycles", "kershell": "3× faster delivery" },
+      { "traditional": "Generic solutions", "kershell": "Tailored to your business" },
+      { "traditional": "Post-launch disappear", "kershell": "Long-term partnership" },
+      { "traditional": "Hidden fees", "kershell": "Transparent pricing" }
+    ]
+  },
+  "stats": {
+    "projects": "Projects Delivered",
+    "faster": "Faster than Traditional",
+    "reviewed": "Human-Reviewed Code",
+    "experience": "Years of Experience"
+  },
+  "contact": {
+    "badge": "Let's Talk",
+    "title": "Ready to Build Something?",
+    "subtitle": "Tell us about your project. We'll get back to you within 24 hours.",
+    "name": "Your Name",
+    "email": "Work Email",
+    "company": "Company Name",
+    "project_type": "Project Type",
+    "message": "Describe your project",
+    "submit": "Send Message",
+    "submitting": "Sending...",
+    "success": "Message sent! We'll be in touch soon.",
+    "types": ["Custom SaaS", "AI Integration", "Landing Page", "Process Automation", "IT Consulting", "Other"]
+  },
+  "footer": {
+    "tagline": "Enterprise software at the speed of AI.",
+    "links": "Quick Links",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "copyright": "All rights reserved."
+  },
+  "legal": {
+    "privacy_title": "Privacy Policy",
+    "terms_title": "Terms of Service",
+    "last_updated": "Last updated",
+    "info_collect_title": "Information We Collect",
+    "info_collect_body": "We collect information you voluntarily provide through our contact form, including your name, email address, company name, and project details. We also collect standard web analytics data (page views, browser type, general location) through privacy-focused analytics tools that do not use cookies.",
+    "info_use_title": "How We Use Your Information",
+    "info_use_body": "We use the information you provide solely to respond to your inquiry, evaluate your project, and communicate with you about our services. We do not sell, rent, or share your personal information with third parties for marketing purposes.",
+    "data_security_title": "Data Security",
+    "data_security_body": "We implement industry-standard security measures to protect your personal information. All data transmitted through our website is encrypted using SSL/TLS. However, no method of electronic transmission or storage is 100% secure.",
+    "contact_title": "Contact",
+    "contact_body": "If you have questions about this privacy policy, please contact us at contact@kershell.io.",
+    "acceptance_title": "Acceptance of Terms",
+    "acceptance_body": "By accessing and using the Kershell TI website and services, you accept and agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you should not use our website or services.",
+    "services_title": "Our Services",
+    "services_body": "Kershell TI provides software consulting, development, and automation services. All deliverables, timelines, and pricing are agreed upon in individual project contracts. The information on this website is for general informational purposes and does not constitute a binding offer.",
+    "liability_title": "Limitation of Liability",
+    "liability_body": "Kershell TI shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of our services. Our total liability for any claim shall not exceed the amount paid by you for the specific service giving rise to the claim.",
+    "governing_title": "Governing Law",
+    "governing_body": "These terms shall be governed by and construed in accordance with applicable law. Any disputes arising under these terms shall be resolved through good-faith negotiation before pursuing formal legal proceedings."
+  }
+}

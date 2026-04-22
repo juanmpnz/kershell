@@ -1,0 +1,218 @@
+{
+  "nav": {
+    "services": "Servicios",
+    "portfolio": "Portafolio",
+    "process": "Proceso",
+    "contact": "Contacto",
+    "cta": "Propuesta Gratis"
+  },
+  "hero": {
+    "badge": "Impulsado por IA",
+    "title1": "Construimos Software",
+    "title2": "a la Velocidad de la IA",
+    "subtitle": "Consultoría empresarial potenciada por inteligencia artificial. Velocidad, Calidad, Seguridad — garantizadas.",
+    "cta_primary": "Iniciar Proyecto",
+    "cta_secondary": "Ver Nuestro Trabajo",
+    "typing": ["SaaS a Medida", "Automatización IA", "Plataformas Web", "Soluciones TI", "Landing Pages"]
+  },
+  "proof_bar": {
+    "label": "Tecnologías que dominamos"
+  },
+  "pillars": {
+    "badge": "Nuestra Promesa",
+    "title": "Tres Pilares, Cero Compromiso",
+    "subtitle": "Cada proyecto que entregamos se construye sobre la misma base.",
+    "velocity": {
+      "title": "Velocidad",
+      "stat": "3× más rápido",
+      "description": "Los flujos de trabajo acelerados por IA comprimen semanas en días. Entregamos más rápido que cualquier agencia tradicional — sin atajos."
+    },
+    "quality": {
+      "title": "Calidad",
+      "stat": "100% revisión humana",
+      "description": "Cada línea de código generada por IA es revisada y refinada por un ingeniero senior. Velocidad de máquina con precisión humana."
+    },
+    "security": {
+      "title": "Seguridad",
+      "stat": "Estándar empresarial",
+      "description": "Mejores prácticas OWASP, arquitectura segura por defecto y auditorías rigurosas de código en cada proyecto."
+    }
+  },
+  "services": {
+    "badge": "Qué Hacemos",
+    "title": "Soluciones Construidas para Escalar",
+    "subtitle": "De la idea a producción — cubrimos cada capa de tus necesidades de software.",
+    "items": [
+      {
+        "title": "Desarrollo SaaS a Medida",
+        "description": "Plataformas SaaS de extremo a extremo con stacks modernos. Escalables, seguras y listas para empresas.",
+        "tag": "Más Popular"
+      },
+      {
+        "title": "Integración y Automatización IA",
+        "description": "Conecta IA a tus flujos existentes. Automatiza tareas repetitivas, genera insights y reduce costos operativos.",
+        "tag": ""
+      },
+      {
+        "title": "Presencia Web y Landing Pages",
+        "description": "Experiencias web de alta conversión y optimizadas para SEO que hacen tu marca imposible de ignorar.",
+        "tag": ""
+      },
+      {
+        "title": "Automatización de Procesos",
+        "description": "Ventas, gestión de oficina, flujos de RRHH — automatizamos las operaciones que frenan tu negocio.",
+        "tag": ""
+      },
+      {
+        "title": "Gestión de Proyectos TI",
+        "description": "Liderazgo técnico para proyectos complejos. Gestionamos alcance, tiempos y equipos.",
+        "tag": ""
+      },
+      {
+        "title": "Análisis de Mercado y Alcance",
+        "description": "Investigación de mercado, generación de leads y redacción de propuestas con IA para ganar contratos y licitaciones.",
+        "tag": "Nuevo"
+      }
+    ]
+  },
+  "process": {
+    "badge": "Cómo Trabajamos",
+    "title": "Del Brief a Producción en Tiempo Récord",
+    "subtitle": "Un proceso probado diseñado para velocidad sin sacrificar calidad.",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Discovery",
+        "description": "Mapeamos tu negocio, objetivos y restricciones en una sesión enfocada. Sin relleno, solo claridad."
+      },
+      {
+        "number": "02",
+        "title": "Arquitectura",
+        "description": "Diseñamos la solución con planificación asistida por IA, seleccionando el stack y enfoque correctos."
+      },
+      {
+        "number": "03",
+        "title": "Build",
+        "description": "Desarrollo acelerado con IA y revisión humana en cada punto de control. Rápido y preciso."
+      },
+      {
+        "number": "04",
+        "title": "Deploy & Scale",
+        "description": "Entrega lista para producción con monitoreo, soporte y un camino claro hacia el crecimiento."
+      }
+    ]
+  },
+  "portfolio": {
+    "badge": "Nuestro Trabajo",
+    "title": "Resultados que Hablan",
+    "subtitle": "Proyectos reales, impacto real.",
+    "items": [
+      {
+        "title": "Campos Inmobiliaria",
+        "description": "Plataforma web inmobiliaria completa con listados de propiedades, búsqueda avanzada y sistema de gestión de leads.",
+        "tags": ["Next.js", "TypeScript", "PostgreSQL"],
+        "url": "https://www.camposinmobiliaria.com",
+        "cta": "Ver Sitio"
+      }
+    ],
+    "coming_soon": "Más proyectos próximamente"
+  },
+  "testimonials": {
+    "badge": "Opiniones de Clientes",
+    "title": "Lo Que Dicen Nuestros Clientes",
+    "subtitle": "Feedback real de socios reales.",
+    "stats": [
+      { "value": 10, "suffix": "+", "label": "Proyectos Entregados" },
+      { "value": 3, "suffix": "×", "label": "Más Rápido que lo Tradicional" },
+      { "value": 100, "suffix": "%", "label": "Código Revisado por Humanos" },
+      { "value": 6, "suffix": "+", "label": "Años de Experiencia" }
+    ],
+    "items": [
+      {
+        "quote": "Kershell entregó nuestra plataforma en la mitad del tiempo esperado. La calidad fue excepcional — cada funcionalidad funcionó perfectamente desde el primer día.",
+        "name": "Carlos Campos",
+        "role": "CEO",
+        "company": "Campos Inmobiliaria",
+        "pending": false
+      },
+      {
+        "quote": "Feedback de cliente pendiente — tu testimonio podría estar aquí.",
+        "name": "",
+        "role": "",
+        "company": "",
+        "pending": true
+      },
+      {
+        "quote": "Feedback de cliente pendiente — tu testimonio podría estar aquí.",
+        "name": "",
+        "role": "",
+        "company": "",
+        "pending": true
+      }
+    ]
+  },
+  "why": {
+    "badge": "Por Qué Kershell TI",
+    "title": "No Somos una Agencia Cualquiera",
+    "subtitle": "Las agencias tradicionales cobran por overhead. Nosotros cobramos por resultados.",
+    "traditional": "Agencia Tradicional",
+    "kershell": "Kershell TI",
+    "points": [
+      { "traditional": "Semanas de onboarding", "kershell": "Inicio en 48 horas" },
+      { "traditional": "Equipos grandes, alto costo", "kershell": "Equipo lean con IA" },
+      { "traditional": "Ciclos de iteración lentos", "kershell": "3× más rápido" },
+      { "traditional": "Soluciones genéricas", "kershell": "A la medida de tu negocio" },
+      { "traditional": "Desaparecen post-lanzamiento", "kershell": "Alianza a largo plazo" },
+      { "traditional": "Costos ocultos", "kershell": "Precios transparentes" }
+    ]
+  },
+  "stats": {
+    "projects": "Proyectos Entregados",
+    "faster": "Más Rápido que lo Tradicional",
+    "reviewed": "Código Revisado por Humanos",
+    "experience": "Años de Experiencia"
+  },
+  "contact": {
+    "badge": "Hablemos",
+    "title": "¿Listo para Construir algo?",
+    "subtitle": "Cuéntanos sobre tu proyecto. Te respondemos en menos de 24 horas.",
+    "name": "Tu Nombre",
+    "email": "Email Corporativo",
+    "company": "Nombre de la Empresa",
+    "project_type": "Tipo de Proyecto",
+    "message": "Describe tu proyecto",
+    "submit": "Enviar Mensaje",
+    "submitting": "Enviando...",
+    "success": "¡Mensaje enviado! Nos pondremos en contacto pronto.",
+    "types": ["SaaS a Medida", "Integración IA", "Landing Page", "Automatización", "Consultoría TI", "Otro"]
+  },
+  "footer": {
+    "tagline": "Software empresarial a la velocidad de la IA.",
+    "links": "Accesos Rápidos",
+    "legal": "Legal",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio",
+    "copyright": "Todos los derechos reservados."
+  },
+  "legal": {
+    "privacy_title": "Política de Privacidad",
+    "terms_title": "Términos de Servicio",
+    "last_updated": "Última actualización",
+    "info_collect_title": "Información que Recopilamos",
+    "info_collect_body": "Recopilamos información que proporcionas voluntariamente a través de nuestro formulario de contacto, incluyendo tu nombre, dirección de email, nombre de empresa y detalles del proyecto. También recopilamos datos estándar de analítica web (vistas de página, tipo de navegador, ubicación general) a través de herramientas de analítica enfocadas en privacidad que no usan cookies.",
+    "info_use_title": "Cómo Usamos tu Información",
+    "info_use_body": "Usamos la información que proporcionas únicamente para responder a tu consulta, evaluar tu proyecto y comunicarnos contigo sobre nuestros servicios. No vendemos, alquilamos ni compartimos tu información personal con terceros con fines de marketing.",
+    "data_security_title": "Seguridad de Datos",
+    "data_security_body": "Implementamos medidas de seguridad estándar de la industria para proteger tu información personal. Todos los datos transmitidos a través de nuestro sitio web están cifrados usando SSL/TLS. Sin embargo, ningún método de transmisión electrónica o almacenamiento es 100% seguro.",
+    "contact_title": "Contacto",
+    "contact_body": "Si tienes preguntas sobre esta política de privacidad, contáctanos en contact@kershell.io.",
+    "acceptance_title": "Aceptación de Términos",
+    "acceptance_body": "Al acceder y usar el sitio web y servicios de Kershell TI, aceptas y acuerdas estar sujeto a estos Términos de Servicio. Si no estás de acuerdo con alguna parte de estos términos, no debes usar nuestro sitio web ni servicios.",
+    "services_title": "Nuestros Servicios",
+    "services_body": "Kershell TI proporciona servicios de consultoría de software, desarrollo y automatización. Todos los entregables, plazos y precios se acuerdan en contratos individuales de proyecto. La información en este sitio web es para fines informativos generales y no constituye una oferta vinculante.",
+    "liability_title": "Limitación de Responsabilidad",
+    "liability_body": "Kershell TI no será responsable de ningún daño indirecto, incidental, especial, consecuente o punitivo resultante del uso de nuestros servicios. Nuestra responsabilidad total por cualquier reclamación no excederá el monto pagado por usted por el servicio específico que da origen a la reclamación.",
+    "governing_title": "Ley Aplicable",
+    "governing_body": "Estos términos se regirán e interpretarán de acuerdo con la ley aplicable. Cualquier disputa que surja bajo estos términos se resolverá mediante negociación de buena fe antes de iniciar procedimientos legales formales."
+  }
+}

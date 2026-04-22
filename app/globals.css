@@ -1,26 +1,139 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+  KERSHELL Design Tokens
+  ─────────────────────────────────────
+  bg-base:      #0A0A0F  (deepest — hero)
+  bg-surface:   #12121A  (alternating sections)
+  bg-card:      #111827  (cards)
+  bg-card-hi:   #16203A  (hover / elevated)
+  border:       rgba(255,255,255,0.07)
+  primary:      #6C63FF  (violet — primary accent)
+  primary-hover:#5A52E0
+  primary-muted:rgba(108,99,255,0.09)
+  accent:       #00D9FF  (cyan — speed/data)
+  success:      #00FF88  (green neon — security)
+  text-hi:      #F1F5F9
+  text-mid:     #94A3B8
+  text-lo:      #4B5563
+  ─────────────────────────────────────
+*/
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  * {
+    border-color: rgba(255, 255, 255, 0.07);
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: #0A0A0F;
+    color: #F1F5F9;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: rgba(108, 99, 255, 0.35);
+    color: #fff;
+  }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: #0A0A0F; }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(108, 99, 255, 0.35);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(108, 99, 255, 0.6);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  /* Section badge / label */
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(108, 99, 255, 0.35);
+    background: rgba(108, 99, 255, 0.09);
+    padding: 0.375rem 1rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #B4ADFF;
+  }
+
+  /* Card */
+  .card {
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 0.75rem;
+  }
+
+  .card:hover {
+    border-color: rgba(108, 99, 255, 0.25);
+    background: #16203A;
+  }
+
+  /* Glitch text effect */
+  .glitch-text {
+    position: relative;
+    display: inline-block;
+  }
+
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+
+  .glitch-text::before {
+    color: #00D9FF;
+    animation: glitch-1 4s infinite linear alternate-reverse;
+  }
+
+  .glitch-text::after {
+    color: #6C63FF;
+    animation: glitch-2 4s infinite linear alternate-reverse;
+  }
 }
+
+@keyframes scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes bounce-y {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(7px); }
+}
+
+@keyframes glitch-1 {
+  0%, 92% { opacity: 0; }
+  93%  { opacity: 0.7; transform: translate(-2px, -1px); clip-path: inset(20% 0 60% 0); }
+  94%  { opacity: 0; }
+  96%  { opacity: 0.5; transform: translate(2px, 1px); clip-path: inset(50% 0 20% 0); }
+  97%  { opacity: 0; }
+}
+
+@keyframes glitch-2 {
+  0%, 94% { opacity: 0; }
+  95%  { opacity: 0.6; transform: translate(2px, 1px); clip-path: inset(30% 0 40% 0); }
+  96%  { opacity: 0; }
+  98%  { opacity: 0.4; transform: translate(-1px, -2px); clip-path: inset(60% 0 10% 0); }
+  99%  { opacity: 0; }
+}
+
+.animate-scroll-left { animation: scroll-left 32s linear infinite; }
+.animate-bounce-y    { animation: bounce-y 2.2s ease-in-out infinite; }
