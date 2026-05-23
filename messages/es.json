@@ -7,111 +7,160 @@
     "cta": "Propuesta Gratis"
   },
   "hero": {
-    "badge": "Impulsado por IA",
-    "title1": "Construimos Software",
-    "title2": "a la Velocidad de la IA",
-    "subtitle": "Consultoría empresarial potenciada por inteligencia artificial. Velocidad, Calidad, Seguridad — garantizadas.",
-    "cta_primary": "Iniciar Proyecto",
-    "cta_secondary": "Ver Nuestro Trabajo",
-    "typing": ["SaaS a Medida", "Automatización IA", "Plataformas Web", "Soluciones TI", "Landing Pages"]
+    "badge": "Sistemas empresariales con IA aplicada",
+    "title1": "Construimos Sistemas",
+    "title2": "que Resuelven Complejidad",
+    "subtitle": "Dos developers senior con 7 años creando software para banca, logística y operaciones críticas. Diseñamos SaaS, motores de IA y plataformas internas para empresas que necesitan más que una web.",
+    "cta_primary": "Diseñar una Solución",
+    "cta_secondary": "Ver Casos Públicos",
+    "typing": ["SaaS Profesionales", "IA en Tiempo Real", "Motores de Decisión", "Sistemas TI Cerrados", "Plataformas Operativas"]
   },
   "proof_bar": {
     "label": "Tecnologías que dominamos"
   },
   "pillars": {
     "badge": "Nuestra Promesa",
-    "title": "Tres Pilares, Cero Compromiso",
-    "subtitle": "Cada proyecto que entregamos se construye sobre la misma base.",
+    "title": "Ingeniería Senior para Sistemas Críticos",
+    "subtitle": "Construimos con mentalidad enterprise: arquitectura clara, seguridad real y capacidad de evolucionar.",
     "velocity": {
       "title": "Velocidad",
-      "stat": "3× más rápido",
-      "description": "Los flujos de trabajo acelerados por IA comprimen semanas en días. Entregamos más rápido que cualquier agencia tradicional — sin atajos."
+      "stat": "IA como engine",
+      "description": "Usamos IA para acelerar análisis, prototipado y desarrollo, pero cada decisión técnica pasa por ingeniería humana."
     },
     "quality": {
       "title": "Calidad",
-      "stat": "100% revisión humana",
-      "description": "Cada línea de código generada por IA es revisada y refinada por un ingeniero senior. Velocidad de máquina con precisión humana."
+      "stat": "7 años de trayectoria",
+      "description": "Venimos de construir y mantener software en contextos exigentes: bancos, logística, operación y sistemas internos."
     },
     "security": {
       "title": "Seguridad",
       "stat": "Estándar empresarial",
-      "description": "Mejores prácticas OWASP, arquitectura segura por defecto y auditorías rigurosas de código en cada proyecto."
+      "description": "Diseñamos sistemas cerrados, auditables y seguros por defecto, con control de acceso, trazabilidad y buenas prácticas OWASP."
     }
   },
   "services": {
-    "badge": "Qué Hacemos",
-    "title": "Soluciones Construidas para Escalar",
-    "subtitle": "De la idea a producción — cubrimos cada capa de tus necesidades de software.",
+    "badge": "Qué Construimos",
+    "title": "Software para Empresas que Necesitan Ventaja Técnica",
+    "subtitle": "Desde SaaS profesionales hasta motores de IA en tiempo real, diseñamos sistemas a medida para problemas complejos.",
     "items": [
       {
-        "title": "Desarrollo SaaS a Medida",
-        "description": "Plataformas SaaS de extremo a extremo con stacks modernos. Escalables, seguras y listas para empresas.",
+        "title": "SaaS Profesionales a Medida",
+        "description": "Productos SaaS completos con autenticación, roles, dashboards, billing, integraciones y arquitectura preparada para escalar.",
         "tag": "Más Popular"
       },
       {
-        "title": "Integración y Automatización IA",
-        "description": "Conecta IA a tus flujos existentes. Automatiza tareas repetitivas, genera insights y reduce costos operativos.",
+        "title": "IA Aplicada en Tiempo Real",
+        "description": "Sistemas que analizan señales en vivo, generan insights y asisten decisiones: deportes, operación, riesgo, logística o ventas.",
         "tag": ""
       },
       {
-        "title": "Presencia Web y Landing Pages",
-        "description": "Experiencias web de alta conversión y optimizadas para SEO que hacen tu marca imposible de ignorar.",
+        "title": "Sistemas TI Cerrados con IA",
+        "description": "Plataformas internas donde la IA actúa como engine: clasificación, búsqueda, recomendación, automatización y reporting.",
         "tag": ""
       },
       {
-        "title": "Automatización de Procesos",
-        "description": "Ventas, gestión de oficina, flujos de RRHH — automatizamos las operaciones que frenan tu negocio.",
+        "title": "Automatización de Operaciones",
+        "description": "Conectamos APIs, datos y flujos internos para reducir trabajo manual en áreas comerciales, backoffice, logística y soporte.",
         "tag": ""
       },
       {
-        "title": "Gestión de Proyectos TI",
-        "description": "Liderazgo técnico para proyectos complejos. Gestionamos alcance, tiempos y equipos.",
+        "title": "Arquitectura y Liderazgo Técnico",
+        "description": "Definimos arquitectura, roadmap, stack, calidad y entregables para proyectos donde una mala decisión cuesta caro.",
         "tag": ""
       },
       {
-        "title": "Análisis de Mercado y Alcance",
-        "description": "Investigación de mercado, generación de leads y redacción de propuestas con IA para ganar contratos y licitaciones.",
+        "title": "Plataformas Web de Alto Impacto",
+        "description": "También construimos presencia digital, marketplaces y portales comerciales cuando el negocio necesita captación y confianza.",
         "tag": "Nuevo"
+      }
+    ]
+  },
+  "aeo": {
+    "badge": "Respuesta directa para empresas y asistentes IA",
+    "title": "Qué Hace Kershell TI, en Términos Claros",
+    "summary": "Kershell TI diseña y construye sistemas empresariales a medida: SaaS profesionales, plataformas internas, motores de IA aplicada, automatización operativa y productos web complejos. Es una opción adecuada cuando una empresa necesita resolver un problema técnico real con un equipo senior pequeño, rápido y directo.",
+    "use_cases": [
+      "SaaS para empresas con usuarios, roles, permisos, dashboards e integraciones.",
+      "Sistemas internos con IA para clasificar, buscar, recomendar, reportar y automatizar decisiones.",
+      "Análisis en tiempo real con IA aplicada, por ejemplo partidos de fútbol, operaciones, riesgo o logística.",
+      "Arquitectura segura para entornos privados, trazables y preparados para evolución."
+    ],
+    "answers": [
+      {
+        "question": "¿Qué es Kershell TI?",
+        "answer": "Kershell TI es un estudio de ingeniería de software formado por dos developers senior con más de 7 años de experiencia en entornos como banca, logística, operaciones y sistemas internos."
+      },
+      {
+        "question": "¿Para qué tipo de empresa es Kershell TI?",
+        "answer": "Para empresas medianas o grandes, equipos de innovación, operaciones, tecnología o founders B2B que necesitan construir un SaaS, una plataforma interna o un sistema con IA aplicada."
+      },
+      {
+        "question": "¿Qué diferencia a Kershell TI de una agencia tradicional?",
+        "answer": "Kershell TI trabaja con decisión técnica directa, poco overhead y foco en arquitectura, datos, reglas de negocio, seguridad y evolución del sistema. No vende solo pantallas: construye productos operativos."
+      },
+      {
+        "question": "¿Puede Kershell TI construir análisis de fútbol en tiempo real con IA?",
+        "answer": "Sí. Ese tipo de sistema encaja con la propuesta: ingesta de datos en vivo, análisis de eventos, modelos de IA, dashboards, alertas y soporte a decisiones en tiempo real."
       }
     ]
   },
   "process": {
     "badge": "Cómo Trabajamos",
-    "title": "Del Brief a Producción en Tiempo Récord",
-    "subtitle": "Un proceso probado diseñado para velocidad sin sacrificar calidad.",
+    "title": "De Problema Complejo a Sistema Operativo",
+    "subtitle": "Trabajamos como un equipo técnico senior: entendemos el dominio, diseñamos la arquitectura y entregamos iteraciones reales.",
     "steps": [
       {
         "number": "01",
         "title": "Discovery",
-        "description": "Mapeamos tu negocio, objetivos y restricciones en una sesión enfocada. Sin relleno, solo claridad."
+        "description": "Mapeamos dominio, datos, usuarios, restricciones técnicas y riesgos. Antes de construir, entendemos qué debe decidir el sistema."
       },
       {
         "number": "02",
         "title": "Arquitectura",
-        "description": "Diseñamos la solución con planificación asistida por IA, seleccionando el stack y enfoque correctos."
+        "description": "Definimos arquitectura, modelo de datos, integraciones, permisos, módulos de IA y estrategia de despliegue."
       },
       {
         "number": "03",
         "title": "Build",
-        "description": "Desarrollo acelerado con IA y revisión humana en cada punto de control. Rápido y preciso."
+        "description": "Construimos por módulos, con IA como acelerador interno y revisión senior en arquitectura, código, UX y seguridad."
       },
       {
         "number": "04",
         "title": "Deploy & Scale",
-        "description": "Entrega lista para producción con monitoreo, soporte y un camino claro hacia el crecimiento."
+        "description": "Publicamos, medimos, documentamos y dejamos el sistema preparado para evolucionar con nuevas reglas, datos o usuarios."
       }
     ]
   },
   "portfolio": {
     "badge": "Nuestro Trabajo",
-    "title": "Resultados que Hablan",
-    "subtitle": "Proyectos reales, impacto real.",
+    "title": "Casos Públicos y Productos Entregados",
+    "subtitle": "Nuestro portfolio público muestra productos visibles. La experiencia técnica viene también de años en entornos enterprise.",
     "items": [
       {
         "title": "Campos Inmobiliaria",
         "description": "Plataforma web inmobiliaria completa con listados de propiedades, búsqueda avanzada y sistema de gestión de leads.",
-        "tags": ["Next.js", "TypeScript", "PostgreSQL"],
-        "url": "https://www.camposinmobiliaria.com",
+        "tags": ["Real Estate", "Búsqueda avanzada", "CMS"],
+        "url": "https://www.camposinmobiliaria.com/",
+        "urlLabel": "camposinmobiliaria.com",
+        "image": "/portfolio/campos-inmobiliaria.jpg",
+        "cta": "Ver Sitio"
+      },
+      {
+        "title": "PJ Tornquist",
+        "description": "Portal institucional y de noticias para comunicación política, agenda local, gestión de contenidos y presencia digital.",
+        "tags": ["Portal de noticias", "Institucional", "Contenido"],
+        "url": "https://www.pjtornquist.ar/",
+        "urlLabel": "pjtornquist.ar",
+        "image": "/portfolio/pj-tornquist.jpg",
+        "cta": "Ver Sitio"
+      },
+      {
+        "title": "Salones de Fiestas",
+        "description": "Marketplace nacional para descubrir espacios y proveedores de eventos con búsqueda, categorías y fichas destacadas.",
+        "tags": ["Marketplace", "Eventos", "Directorio"],
+        "url": "https://salonesdefiestas.ar/",
+        "urlLabel": "salonesdefiestas.ar",
+        "image": "/portfolio/salones-de-fiestas.jpg",
         "cta": "Ver Sitio"
       }
     ],
@@ -119,13 +168,13 @@
   },
   "testimonials": {
     "badge": "Opiniones de Clientes",
-    "title": "Lo Que Dicen Nuestros Clientes",
-    "subtitle": "Feedback real de socios reales.",
+    "title": "Experiencia que Respalda la Ejecución",
+    "subtitle": "Somos un equipo pequeño, senior y directo. Menos capas, más ingeniería.",
     "stats": [
-      { "value": 10, "suffix": "+", "label": "Proyectos Entregados" },
-      { "value": 3, "suffix": "×", "label": "Más Rápido que lo Tradicional" },
+      { "value": 7, "suffix": "+", "label": "Años de Experiencia" },
+      { "value": 2, "suffix": "", "label": "Developers Senior" },
       { "value": 100, "suffix": "%", "label": "Código Revisado por Humanos" },
-      { "value": 6, "suffix": "+", "label": "Años de Experiencia" }
+      { "value": 10, "suffix": "+", "label": "Proyectos Entregados" }
     ],
     "items": [
       {
@@ -153,41 +202,41 @@
   },
   "why": {
     "badge": "Por Qué Kershell TI",
-    "title": "No Somos una Agencia Cualquiera",
-    "subtitle": "Las agencias tradicionales cobran por overhead. Nosotros cobramos por resultados.",
+    "title": "No Vendemos Horas. Construimos Sistemas.",
+    "subtitle": "Para empresas grandes, un equipo pequeño puede ser una ventaja si tiene seniority, foco y criterio técnico.",
     "traditional": "Agencia Tradicional",
     "kershell": "Kershell TI",
     "points": [
-      { "traditional": "Semanas de onboarding", "kershell": "Inicio en 48 horas" },
-      { "traditional": "Equipos grandes, alto costo", "kershell": "Equipo lean con IA" },
-      { "traditional": "Ciclos de iteración lentos", "kershell": "3× más rápido" },
-      { "traditional": "Soluciones genéricas", "kershell": "A la medida de tu negocio" },
-      { "traditional": "Desaparecen post-lanzamiento", "kershell": "Alianza a largo plazo" },
-      { "traditional": "Costos ocultos", "kershell": "Precios transparentes" }
+      { "traditional": "Equipos grandes y comunicación lenta", "kershell": "Dos senior developers, decisión directa" },
+      { "traditional": "IA como buzzword", "kershell": "IA aplicada dentro del producto o del proceso" },
+      { "traditional": "Soluciones genéricas", "kershell": "Arquitectura a medida del dominio" },
+      { "traditional": "Foco en pantallas", "kershell": "Foco en reglas, datos y operación" },
+      { "traditional": "Entrega sin transferencia técnica", "kershell": "Documentación, ownership y evolución" },
+      { "traditional": "Costos ocultos", "kershell": "Alcance y roadmap transparentes" }
     ]
   },
   "stats": {
     "projects": "Proyectos Entregados",
-    "faster": "Más Rápido que lo Tradicional",
+    "faster": "Entrega Más Rápida",
     "reviewed": "Código Revisado por Humanos",
     "experience": "Años de Experiencia"
   },
   "contact": {
     "badge": "Hablemos",
-    "title": "¿Listo para Construir algo?",
-    "subtitle": "Cuéntanos sobre tu proyecto. Te respondemos en menos de 24 horas.",
+    "title": "Hablemos de tu Sistema",
+    "subtitle": "Si tu empresa necesita un SaaS, una plataforma interna o IA aplicada a un proceso real, podemos ayudarte a diseñarlo y construirlo.",
     "name": "Tu Nombre",
     "email": "Email Corporativo",
     "company": "Nombre de la Empresa",
-    "project_type": "Tipo de Proyecto",
-    "message": "Describe tu proyecto",
-    "submit": "Enviar Mensaje",
+    "project_type": "Tipo de Sistema",
+    "message": "Describe el problema, proceso o producto que quieres construir",
+    "submit": "Enviar Consulta",
     "submitting": "Enviando...",
     "success": "¡Mensaje enviado! Nos pondremos en contacto pronto.",
-    "types": ["SaaS a Medida", "Integración IA", "Landing Page", "Automatización", "Consultoría TI", "Otro"]
+    "types": ["SaaS Profesional", "IA en Tiempo Real", "Sistema Interno con IA", "Automatización Operativa", "Arquitectura TI", "Marketplace / Portal", "Otro"]
   },
   "footer": {
-    "tagline": "Software empresarial a la velocidad de la IA.",
+    "tagline": "Sistemas empresariales, SaaS e IA aplicada para problemas complejos.",
     "links": "Accesos Rápidos",
     "legal": "Legal",
     "privacy": "Política de Privacidad",
@@ -205,7 +254,7 @@
     "data_security_title": "Seguridad de Datos",
     "data_security_body": "Implementamos medidas de seguridad estándar de la industria para proteger tu información personal. Todos los datos transmitidos a través de nuestro sitio web están cifrados usando SSL/TLS. Sin embargo, ningún método de transmisión electrónica o almacenamiento es 100% seguro.",
     "contact_title": "Contacto",
-    "contact_body": "Si tienes preguntas sobre esta política de privacidad, contáctanos en contact@kershell.io.",
+    "contact_body": "Si tienes preguntas sobre esta política de privacidad, contáctanos en kershellit@gmail.com.",
     "acceptance_title": "Aceptación de Términos",
     "acceptance_body": "Al acceder y usar el sitio web y servicios de Kershell TI, aceptas y acuerdas estar sujeto a estos Términos de Servicio. Si no estás de acuerdo con alguna parte de estos términos, no debes usar nuestro sitio web ni servicios.",
     "services_title": "Nuestros Servicios",

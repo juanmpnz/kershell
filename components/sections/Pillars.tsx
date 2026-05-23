@@ -15,10 +15,10 @@ export default function Pillars() {
   const t = useTranslations("pillars");
 
   return (
-    <section className="py-24 lg:py-32 bg-[#0A0A0F]">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+    <section className="py-16 sm:py-20 lg:py-32 bg-[#0A0A0F]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         {/* Header */}
-        <div className="mx-auto max-w-2xl text-center mb-16">
+        <div className="mx-auto max-w-2xl text-center mb-10 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -34,7 +34,7 @@ export default function Pillars() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="font-[var(--font-syne)] text-4xl font-bold text-white sm:text-5xl"
+            className="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl"
           >
             {t("title")}
           </motion.h2>
@@ -44,7 +44,7 @@ export default function Pillars() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-4 text-[#94A3B8] text-lg"
+            className="mt-4 text-base leading-relaxed text-[#94A3B8] sm:text-lg"
           >
             {t("subtitle")}
           </motion.p>
@@ -64,12 +64,12 @@ export default function Pillars() {
               >
                 <Tilt3D className="h-full">
                   <div
-                    className="card p-8 h-full transition-all hover:bg-[#16203A]"
+                    className="card h-full p-5 transition-all hover:bg-[#16203A] sm:p-8"
                     style={{ borderLeftWidth: 3, borderLeftColor: pillar.color }}
                   >
                     {/* Icon */}
                     <div
-                      className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-lg border"
+                      className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-lg border sm:mb-6 sm:h-12 sm:w-12"
                       style={{
                         backgroundColor: `${pillar.color}10`,
                         borderColor: `${pillar.color}33`,
@@ -80,14 +80,14 @@ export default function Pillars() {
 
                     {/* Stat */}
                     <div
-                      className="mb-2 font-[var(--font-syne)] text-2xl font-bold"
+                      className="mb-2 text-xl font-bold sm:text-2xl"
                       style={{ color: pillar.color }}
                     >
                       {t(`${pillar.key}.stat`)}
                     </div>
 
                     {/* Title */}
-                    <h3 className="mb-3 font-[var(--font-syne)] text-xl font-bold text-white">
+                    <h3 className="mb-3 text-lg font-bold text-white sm:text-xl">
                       {t(`${pillar.key}.title`)}
                     </h3>
 

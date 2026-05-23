@@ -7,111 +7,160 @@
     "cta": "Get a Free Proposal"
   },
   "hero": {
-    "badge": "Powered by AI",
-    "title1": "We Build Software",
-    "title2": "at the Speed of AI",
-    "subtitle": "Enterprise consulting powered by artificial intelligence. Velocity, Quality, Security — guaranteed.",
-    "cta_primary": "Start a Project",
-    "cta_secondary": "See Our Work",
-    "typing": ["Custom SaaS", "AI Automation", "Web Platforms", "IT Solutions", "Landing Pages"]
+    "badge": "Enterprise systems with applied AI",
+    "title1": "We Build Systems",
+    "title2": "for Complex Problems",
+    "subtitle": "Two senior developers with 7 years building software for banking, logistics, and critical operations. We design SaaS, AI engines, and internal platforms for companies that need more than a website.",
+    "cta_primary": "Design a Solution",
+    "cta_secondary": "See Public Work",
+    "typing": ["Professional SaaS", "Real-Time AI", "Decision Engines", "Closed IT Systems", "Operational Platforms"]
   },
   "proof_bar": {
     "label": "Technologies we master"
   },
   "pillars": {
     "badge": "Our Promise",
-    "title": "Three Pillars, Zero Compromise",
-    "subtitle": "Every project we deliver is built on the same foundation.",
+    "title": "Senior Engineering for Critical Systems",
+    "subtitle": "We build with an enterprise mindset: clear architecture, real security, and room to evolve.",
     "velocity": {
       "title": "Velocity",
-      "stat": "3× faster delivery",
-      "description": "AI-accelerated workflows compress weeks into days. We ship faster than any traditional agency — without cutting corners."
+      "stat": "AI as engine",
+      "description": "We use AI to accelerate analysis, prototyping, and development, but every technical decision goes through human engineering judgment."
     },
     "quality": {
       "title": "Quality",
-      "stat": "100% human-reviewed",
-      "description": "Every line of AI-generated output is reviewed and refined by a senior engineer. You get machine speed with human precision."
+      "stat": "7 years of experience",
+      "description": "We come from building and maintaining software in demanding environments: banking, logistics, operations, and internal systems."
     },
     "security": {
       "title": "Security",
       "stat": "Enterprise-grade",
-      "description": "OWASP best practices, secure-by-default architecture, and rigorous code audits on every project we deliver."
+      "description": "We design closed, auditable, secure-by-default systems with access control, traceability, and OWASP best practices."
     }
   },
   "services": {
-    "badge": "What We Do",
-    "title": "Solutions Built for Scale",
-    "subtitle": "From idea to production — we cover every layer of your software needs.",
+    "badge": "What We Build",
+    "title": "Software for Companies That Need Technical Advantage",
+    "subtitle": "From professional SaaS to real-time AI engines, we design custom systems for complex problems.",
     "items": [
       {
-        "title": "Custom SaaS Development",
-        "description": "End-to-end SaaS platforms built with modern stacks. Scalable, secure, and ready for enterprise.",
+        "title": "Professional Custom SaaS",
+        "description": "Complete SaaS products with auth, roles, dashboards, billing, integrations, and architecture ready to scale.",
         "tag": "Most Popular"
       },
       {
-        "title": "AI Integration & Automation",
-        "description": "Connect AI to your existing workflows. Automate repetitive tasks, generate insights, and reduce operational costs.",
+        "title": "Real-Time Applied AI",
+        "description": "Systems that analyze live signals, generate insights, and assist decisions across sports, operations, risk, logistics, or sales.",
         "tag": ""
       },
       {
-        "title": "Web Presence & Landing Pages",
-        "description": "High-conversion, SEO-optimized web experiences that make your brand impossible to ignore.",
+        "title": "Closed IT Systems with AI",
+        "description": "Internal platforms where AI acts as the engine: classification, search, recommendation, automation, and reporting.",
         "tag": ""
       },
       {
-        "title": "Process Automation",
-        "description": "Sales outreach, office management, HR flows — we automate the operations that slow your business down.",
+        "title": "Operational Automation",
+        "description": "We connect APIs, data, and internal workflows to reduce manual work across sales, backoffice, logistics, and support.",
         "tag": ""
       },
       {
-        "title": "IT Project Management",
-        "description": "Technical leadership for complex projects. We manage scope, timelines, and teams so you don't have to.",
+        "title": "Architecture & Technical Leadership",
+        "description": "We define architecture, roadmap, stack, quality, and deliverables for projects where bad technical decisions are expensive.",
         "tag": ""
       },
       {
-        "title": "Market Analysis & Outreach",
-        "description": "AI-driven market research, lead generation, and proposal writing to win enterprise contracts and tenders.",
+        "title": "High-Impact Web Platforms",
+        "description": "We also build digital presence, marketplaces, and commercial portals when the business needs acquisition and trust.",
         "tag": "New"
+      }
+    ]
+  },
+  "aeo": {
+    "badge": "Direct answer for companies and AI assistants",
+    "title": "What Kershell TI Does, in Clear Terms",
+    "summary": "Kershell TI designs and builds custom enterprise systems: professional SaaS, internal platforms, applied AI engines, operational automation, and complex web products. It is a strong fit when a company needs to solve a real technical problem with a small, fast, senior team.",
+    "use_cases": [
+      "Enterprise SaaS with users, roles, permissions, dashboards, and integrations.",
+      "Internal AI systems for classification, search, recommendation, reporting, and decision automation.",
+      "Real-time applied AI analytics, for example football match analysis, operations, risk, or logistics.",
+      "Secure architecture for private, traceable environments designed to evolve."
+    ],
+    "answers": [
+      {
+        "question": "What is Kershell TI?",
+        "answer": "Kershell TI is a software engineering studio formed by two senior developers with 7+ years of experience in environments such as banking, logistics, operations, and internal systems."
+      },
+      {
+        "question": "What type of company is Kershell TI for?",
+        "answer": "Kershell TI is for mid-market and large companies, innovation teams, operations teams, technology leaders, and B2B founders that need a SaaS, internal platform, or applied AI system."
+      },
+      {
+        "question": "How is Kershell TI different from a traditional agency?",
+        "answer": "Kershell TI works with direct technical decision-making, low overhead, and a focus on architecture, data, business rules, security, and system evolution. It does not sell only screens: it builds operating products."
+      },
+      {
+        "question": "Can Kershell TI build real-time football match analysis with AI?",
+        "answer": "Yes. That type of system fits the offer: live data ingestion, event analysis, AI models, dashboards, alerts, and real-time decision support."
       }
     ]
   },
   "process": {
     "badge": "How We Work",
-    "title": "From Brief to Production in Record Time",
-    "subtitle": "A proven process designed for speed without sacrificing quality.",
+    "title": "From Complex Problem to Operating System",
+    "subtitle": "We work like a senior technical team: understand the domain, design the architecture, and ship real iterations.",
     "steps": [
       {
         "number": "01",
         "title": "Discovery",
-        "description": "We map your business, goals, and constraints in a focused session. No fluff, just clarity."
+        "description": "We map domain, data, users, technical constraints, and risks. Before building, we understand what the system must decide."
       },
       {
         "number": "02",
         "title": "Architecture",
-        "description": "We design the solution with AI-assisted planning, selecting the right stack and approach."
+        "description": "We define architecture, data model, integrations, permissions, AI modules, and deployment strategy."
       },
       {
         "number": "03",
         "title": "Build",
-        "description": "AI-accelerated development with human review at every checkpoint. Fast and precise."
+        "description": "We build by modules, with AI as an internal accelerator and senior review across architecture, code, UX, and security."
       },
       {
         "number": "04",
         "title": "Deploy & Scale",
-        "description": "Production-ready delivery with monitoring, support, and a clear path to growth."
+        "description": "We publish, measure, document, and leave the system ready to evolve with new rules, data, or users."
       }
     ]
   },
   "portfolio": {
     "badge": "Our Work",
-    "title": "Results That Speak",
-    "subtitle": "Real projects, real impact.",
+    "title": "Public Work and Delivered Products",
+    "subtitle": "Our public portfolio shows visible products. Our technical background also comes from years in enterprise environments.",
     "items": [
       {
         "title": "Campos Inmobiliaria",
         "description": "Full real estate web platform with property listings, advanced search, and lead management system.",
-        "tags": ["Next.js", "TypeScript", "PostgreSQL"],
-        "url": "https://www.camposinmobiliaria.com",
+        "tags": ["Real Estate", "Advanced Search", "CMS"],
+        "url": "https://www.camposinmobiliaria.com/",
+        "urlLabel": "camposinmobiliaria.com",
+        "image": "/portfolio/campos-inmobiliaria.jpg",
+        "cta": "Visit Site"
+      },
+      {
+        "title": "PJ Tornquist",
+        "description": "Institutional news portal for political communication, local agenda, content management, and digital presence.",
+        "tags": ["News Portal", "Institutional", "Content"],
+        "url": "https://www.pjtornquist.ar/",
+        "urlLabel": "pjtornquist.ar",
+        "image": "/portfolio/pj-tornquist.jpg",
+        "cta": "Visit Site"
+      },
+      {
+        "title": "Salones de Fiestas",
+        "description": "National marketplace for discovering event venues and providers with search, categories, and featured listings.",
+        "tags": ["Marketplace", "Events", "Directory"],
+        "url": "https://salonesdefiestas.ar/",
+        "urlLabel": "salonesdefiestas.ar",
+        "image": "/portfolio/salones-de-fiestas.jpg",
         "cta": "Visit Site"
       }
     ],
@@ -119,13 +168,13 @@
   },
   "testimonials": {
     "badge": "Client Feedback",
-    "title": "What Our Clients Say",
-    "subtitle": "Real feedback from real partners.",
+    "title": "Experience Behind the Execution",
+    "subtitle": "We are a small, senior, direct team. Fewer layers, more engineering.",
     "stats": [
-      { "value": 10, "suffix": "+", "label": "Projects Delivered" },
-      { "value": 3, "suffix": "×", "label": "Faster Than Traditional" },
+      { "value": 7, "suffix": "+", "label": "Years of Experience" },
+      { "value": 2, "suffix": "", "label": "Senior Developers" },
       { "value": 100, "suffix": "%", "label": "Human-Reviewed Code" },
-      { "value": 6, "suffix": "+", "label": "Years of Experience" }
+      { "value": 10, "suffix": "+", "label": "Projects Delivered" }
     ],
     "items": [
       {
@@ -153,41 +202,41 @@
   },
   "why": {
     "badge": "Why Kershell TI",
-    "title": "Not Your Average Agency",
-    "subtitle": "Traditional agencies charge for overhead. We charge for outcomes.",
+    "title": "We Do Not Sell Hours. We Build Systems.",
+    "subtitle": "For large companies, a small team can be an advantage when it has seniority, focus, and technical judgment.",
     "traditional": "Traditional Agency",
     "kershell": "Kershell TI",
     "points": [
-      { "traditional": "Weeks of onboarding", "kershell": "Start in 48 hours" },
-      { "traditional": "Bloated teams, high cost", "kershell": "Lean AI-powered team" },
-      { "traditional": "Slow iteration cycles", "kershell": "3× faster delivery" },
-      { "traditional": "Generic solutions", "kershell": "Tailored to your business" },
-      { "traditional": "Post-launch disappear", "kershell": "Long-term partnership" },
-      { "traditional": "Hidden fees", "kershell": "Transparent pricing" }
+      { "traditional": "Large teams and slow communication", "kershell": "Two senior developers, direct decisions" },
+      { "traditional": "AI as a buzzword", "kershell": "AI applied inside the product or process" },
+      { "traditional": "Generic solutions", "kershell": "Architecture tailored to the domain" },
+      { "traditional": "Focus on screens", "kershell": "Focus on rules, data, and operations" },
+      { "traditional": "Delivery without technical transfer", "kershell": "Documentation, ownership, and evolution" },
+      { "traditional": "Hidden fees", "kershell": "Transparent scope and roadmap" }
     ]
   },
   "stats": {
     "projects": "Projects Delivered",
-    "faster": "Faster than Traditional",
+    "faster": "Faster Delivery",
     "reviewed": "Human-Reviewed Code",
     "experience": "Years of Experience"
   },
   "contact": {
     "badge": "Let's Talk",
-    "title": "Ready to Build Something?",
-    "subtitle": "Tell us about your project. We'll get back to you within 24 hours.",
+    "title": "Let's Talk About Your System",
+    "subtitle": "If your company needs a SaaS, an internal platform, or AI applied to a real process, we can help you design and build it.",
     "name": "Your Name",
     "email": "Work Email",
     "company": "Company Name",
-    "project_type": "Project Type",
-    "message": "Describe your project",
-    "submit": "Send Message",
+    "project_type": "System Type",
+    "message": "Describe the problem, process, or product you want to build",
+    "submit": "Send Inquiry",
     "submitting": "Sending...",
     "success": "Message sent! We'll be in touch soon.",
-    "types": ["Custom SaaS", "AI Integration", "Landing Page", "Process Automation", "IT Consulting", "Other"]
+    "types": ["Professional SaaS", "Real-Time AI", "Internal AI System", "Operational Automation", "IT Architecture", "Marketplace / Portal", "Other"]
   },
   "footer": {
-    "tagline": "Enterprise software at the speed of AI.",
+    "tagline": "Enterprise systems, SaaS, and applied AI for complex problems.",
     "links": "Quick Links",
     "legal": "Legal",
     "privacy": "Privacy Policy",
@@ -205,7 +254,7 @@
     "data_security_title": "Data Security",
     "data_security_body": "We implement industry-standard security measures to protect your personal information. All data transmitted through our website is encrypted using SSL/TLS. However, no method of electronic transmission or storage is 100% secure.",
     "contact_title": "Contact",
-    "contact_body": "If you have questions about this privacy policy, please contact us at contact@kershell.io.",
+    "contact_body": "If you have questions about this privacy policy, please contact us at kershellit@gmail.com.",
     "acceptance_title": "Acceptance of Terms",
     "acceptance_body": "By accessing and using the Kershell TI website and services, you accept and agree to be bound by these Terms of Service. If you do not agree with any part of these terms, you should not use our website or services.",
     "services_title": "Our Services",

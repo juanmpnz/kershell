@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Kershell TI | AI-Powered Software Consulting — Velocity, Quality, Security",
+  title: "Kershell TI | Enterprise Systems, SaaS & Applied AI",
   description:
-    "Enterprise software consulting accelerated by AI. Custom SaaS, web platforms, and automation. 3x faster delivery, human-reviewed quality.",
+    "Senior software engineering for professional SaaS, internal IT systems, real-time AI engines, and complex enterprise platforms.",
 };
 
 export default function RootLayout({

@@ -2,6 +2,16 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+Configure contact form delivery:
+
+```bash
+RESEND_API_KEY=your_resend_api_key
+CONTACT_EMAIL=kershellit@gmail.com
+CONTACT_FROM_EMAIL="Kershell Contact <onboarding@resend.dev>"
+```
+
+For production, use a Resend sender from a verified domain in `CONTACT_FROM_EMAIL`.
+
 First, run the development server:
 
 ```bash

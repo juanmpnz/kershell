@@ -15,6 +15,7 @@ export default function Contact() {
     company: "",
     project_type: "",
     message: "",
+    website: "",
   });
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -55,18 +56,18 @@ export default function Contact() {
     "w-full rounded-lg border border-white/[0.08] bg-[#0A0A0F] px-4 py-3 text-sm text-[#F1F5F9] placeholder:text-[#4B5563] outline-none transition-all focus:border-[#6C63FF]/55 focus:ring-1 focus:ring-[#6C63FF]/20";
 
   return (
-    <section id="contact" className="relative py-24 lg:py-32 bg-[#12121A]">
+    <section id="contact" className="relative py-16 sm:py-20 lg:py-32 bg-[#12121A]">
       {/* Glow */}
       <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[250px] rounded-full pointer-events-none"
+        className="pointer-events-none absolute bottom-0 left-1/2 h-[220px] w-[320px] -translate-x-1/2 rounded-full sm:h-[250px] sm:w-[600px]"
         style={{
           background: "radial-gradient(ellipse at center, rgba(108,99,255,0.08) 0%, transparent 70%)",
         }}
       />
 
-      <div className="relative mx-auto max-w-3xl px-6 lg:px-10">
+      <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-10">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="mb-10 text-center sm:mb-12">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -82,7 +83,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="font-[var(--font-syne)] text-4xl font-bold text-white sm:text-5xl"
+            className="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl"
           >
             {t("title")}
           </motion.h2>
@@ -92,7 +93,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-4 text-[#94A3B8] text-lg"
+            className="mt-4 text-base leading-relaxed text-[#94A3B8] sm:text-lg"
           >
             {t("subtitle")}
           </motion.p>
@@ -104,7 +105,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55, delay: 0.2 }}
-          className="rounded-xl border border-white/[0.07] bg-[#111827] p-8 lg:p-10"
+          className="rounded-xl border border-white/[0.07] bg-[#111827] p-5 sm:p-8 lg:p-10"
         >
           {success ? (
             <div className="flex flex-col items-center justify-center gap-5 py-14 text-center">
@@ -114,8 +115,18 @@ export default function Contact() {
               <p className="text-lg font-semibold text-white">{t("success")}</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+              <input
+                type="text"
+                name="website"
+                value={form.website}
+                onChange={handleChange}
+                autoComplete="off"
+                tabIndex={-1}
+                aria-hidden="true"
+                className="hidden"
+              />
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
                 <input
                   name="name"
                   type="text"
@@ -136,7 +147,7 @@ export default function Contact() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
                 <input
                   name="company"
                   type="text"

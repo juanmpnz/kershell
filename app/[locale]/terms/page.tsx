@@ -4,9 +4,9 @@ export default function TermsPage() {
   const t = useTranslations("legal");
 
   return (
-    <main className="min-h-screen bg-[#0A0A0F] pt-32 pb-20">
-      <div className="mx-auto max-w-3xl px-6 lg:px-10">
-        <h1 className="font-[var(--font-syne)] text-4xl font-bold text-white mb-8">
+    <main className="min-h-screen bg-[#0A0A0F] pt-28 pb-16 sm:pt-32 sm:pb-20">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-10">
+        <h1 className="mb-8 text-3xl font-bold leading-tight text-white sm:text-4xl">
           {t("terms_title")}
         </h1>
         <div className="prose prose-invert prose-sm max-w-none text-[#94A3B8] space-y-6">

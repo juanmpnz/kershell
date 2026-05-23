@@ -27,11 +27,13 @@
   html {
     scroll-behavior: smooth;
     color-scheme: dark;
+    overflow-x: hidden;
   }
 
   body {
     background-color: #0A0A0F;
     color: #F1F5F9;
+    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -61,12 +63,22 @@
     border-radius: 9999px;
     border: 1px solid rgba(108, 99, 255, 0.35);
     background: rgba(108, 99, 255, 0.09);
-    padding: 0.375rem 1rem;
+    max-width: 100%;
+    padding: 0.375rem 0.875rem;
     font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: #B4ADFF;
+    text-align: center;
+    line-height: 1.35;
+  }
+
+  @media (min-width: 640px) {
+    .section-label {
+      padding-inline: 1rem;
+      letter-spacing: 0.12em;
+    }
   }
 
   /* Card */

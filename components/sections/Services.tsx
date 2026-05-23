@@ -19,10 +19,10 @@ export default function Services() {
   const items = t.raw("items") as { title: string; description: string; tag: string }[];
 
   return (
-    <section id="services" className="py-24 lg:py-32 bg-[#12121A]">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+    <section id="services" className="py-16 sm:py-20 lg:py-32 bg-[#12121A]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         {/* Header */}
-        <div className="mx-auto max-w-2xl text-center mb-16">
+        <div className="mx-auto max-w-2xl text-center mb-10 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -38,7 +38,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="font-[var(--font-syne)] text-4xl font-bold text-white sm:text-5xl"
+            className="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl"
           >
             {t("title")}
           </motion.h2>
@@ -48,7 +48,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-4 text-[#94A3B8] text-lg"
+            className="mt-4 text-base leading-relaxed text-[#94A3B8] sm:text-lg"
           >
             {t("subtitle")}
           </motion.p>
@@ -67,28 +67,30 @@ export default function Services() {
                 transition={{ duration: 0.5, delay: i * 0.07 }}
               >
                 <Tilt3D className="h-full" intensity={7}>
-                  <div className="group relative card p-7 h-full transition-all hover:border-[#6C63FF]/25 hover:bg-[#16203A]">
-                    {/* Tag */}
-                    {item.tag && (
-                      <span
-                        className={`absolute top-5 right-5 rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${TAG_STYLES[item.tag] ?? "text-[#94A3B8] border-white/[0.07] bg-white/[0.03]"}`}
-                      >
-                        {item.tag}
-                      </span>
-                    )}
+                  <div className="group card h-full p-5 transition-all hover:border-[#6C63FF]/25 hover:bg-[#16203A] sm:p-7">
+                    <div className="mb-5 flex min-h-11 items-start justify-between gap-3">
+                      {/* Icon */}
+                      <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[#6C63FF]/20 bg-[#6C63FF]/10 transition-colors group-hover:border-[#6C63FF]/35 group-hover:bg-[#6C63FF]/18">
+                        <Icon className="h-5 w-5 text-[#6C63FF]" strokeWidth={1.7} />
+                      </div>
 
-                    {/* Icon */}
-                    <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-[#6C63FF]/10 border border-[#6C63FF]/20 transition-colors group-hover:bg-[#6C63FF]/18 group-hover:border-[#6C63FF]/35">
-                      <Icon className="h-5 w-5 text-[#6C63FF]" strokeWidth={1.7} />
+                      {/* Tag */}
+                      {item.tag && (
+                        <span
+                          className={`max-w-[8.5rem] rounded-full border px-2.5 py-0.5 text-right text-[10px] font-semibold uppercase leading-snug tracking-wider ${TAG_STYLES[item.tag] ?? "text-[#94A3B8] border-white/[0.07] bg-white/[0.03]"}`}
+                        >
+                          {item.tag}
+                        </span>
+                      )}
                     </div>
 
-                    <h3 className="mb-2 font-[var(--font-syne)] text-lg font-semibold text-white">
+                    <h3 className="mb-2 text-lg font-semibold text-white">
                       {item.title}
                     </h3>
                     <p className="text-sm text-[#94A3B8] leading-relaxed">{item.description}</p>
 
                     {/* Hover arrow */}
-                    <div className="mt-5 flex items-center gap-1.5 text-xs font-semibold text-[#6C63FF] opacity-0 transition-all group-hover:opacity-100">
+                    <div className="mt-5 flex items-center gap-1.5 text-xs font-semibold text-[#6C63FF] opacity-100 transition-all sm:opacity-0 sm:group-hover:opacity-100">
                       <span>Learn more</span>
                       <ArrowRight className="h-3.5 w-3.5 translate-x-0 transition-transform group-hover:translate-x-1" />
                     </div>

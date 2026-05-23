@@ -4,6 +4,7 @@ import Hero from "@/components/sections/Hero";
 import ProofBar from "@/components/sections/ProofBar";
 import Pillars from "@/components/sections/Pillars";
 import Services from "@/components/sections/Services";
+import AeoAnswerBlock from "@/components/sections/AeoAnswerBlock";
 import Process from "@/components/sections/Process";
 import Portfolio from "@/components/sections/Portfolio";
 import Testimonials from "@/components/sections/Testimonials";
@@ -19,6 +20,7 @@ export default function HomePage() {
         <ProofBar />
         <Pillars />
         <Services />
+        <AeoAnswerBlock />
         <Process />
         <Portfolio />
         <Testimonials />
