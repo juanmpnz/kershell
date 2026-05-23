@@ -17,14 +17,14 @@ export default function HomePage() {
       <Navbar />
       <main>
         <Hero />
+        <Testimonials />
         <ProofBar />
         <Pillars />
         <Services />
-        <AeoAnswerBlock />
         <Process />
         <Portfolio />
-        <Testimonials />
         <WhyKershell />
+        <AeoAnswerBlock />
         <Contact />
       </main>
       <Footer />

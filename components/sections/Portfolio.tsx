@@ -1,119 +1,114 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Lock } from "lucide-react";
+import Reveal from "@/components/animations/Reveal";
+import { KMonogram } from "@/components/brand/KMonogram";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+
+type PortfolioItem = {
+  title: string;
+  subtitle?: string;
+  description: string;
+  tags: string[];
+  url: string;
+  urlLabel: string;
+  cta: string;
+};
+
+function WorkPreview({ domain }: { domain: string }) {
+  return (
+    <div className="relative aspect-[16/10] overflow-hidden border-b border-border bg-ink">
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-30"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(135deg, transparent 0, transparent 12px, rgba(180,242,63,0.14) 12px, rgba(180,242,63,0.14) 13px)",
+        }}
+      />
+      <div className="absolute left-4 top-4 font-mono text-[11px] text-muted">{domain}</div>
+      <KMonogram className="absolute bottom-[-18px] left-4 h-28 w-28 text-border" />
+    </div>
+  );
+}
 
 export default function Portfolio() {
   const t = useTranslations("portfolio");
-  const items = t.raw("items") as {
-    title: string;
-    description: string;
-    tags: string[];
-    url: string;
-    urlLabel: string;
-    image: string;
-    cta: string;
-  }[];
+  const items = (t.raw("items") as PortfolioItem[]).slice(0, 3);
 
   return (
-    <section id="portfolio" className="py-16 sm:py-20 lg:py-32 bg-[#12121A]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-        {/* Header */}
-        <div className="mx-auto max-w-2xl text-center mb-10 sm:mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="mb-4 section-label"
-          >
-            {t("badge")}
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0.1 }}
-            className="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl"
-          >
+    <section id="portfolio" className="console-section bg-ink">
+      <div className="console-container">
+        <div className="mb-12 max-w-3xl">
+          <Eyebrow>{t("badge")}</Eyebrow>
+          <h2 className="mt-5 text-[36px] font-semibold leading-[1.06] tracking-[-0.03em] text-text md:text-h2">
             {t("title")}
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-4 text-base leading-relaxed text-[#94A3B8] sm:text-lg"
-          >
-            {t("subtitle")}
-          </motion.p>
+          </h2>
+          <p className="mt-4 max-w-2xl text-lead text-text-dim">{t("subtitle")}</p>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {/* Real projects */}
-          {items.map((item, i) => (
-            <motion.a
-              key={i}
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group card block overflow-hidden p-0 transition-all hover:border-[#6C63FF]/25 hover:bg-[#16203A]"
-            >
-              {/* Visual */}
-              <div className="relative aspect-video overflow-hidden border-b border-white/[0.07] bg-[#0A0A0F]">
-                <Image
-                  src={item.image}
-                  alt={`${item.title} website screenshot`}
-                  fill
-                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.035]"
-                />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0A0A0F]/60 via-transparent to-transparent opacity-75" />
-                <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between gap-2 sm:bottom-3 sm:left-3 sm:right-3 sm:gap-3">
-                  <span className="truncate rounded-full border border-white/10 bg-[#0A0A0F]/80 px-3 py-1 text-[11px] font-medium text-[#F1F5F9] backdrop-blur-md">
-                    {item.urlLabel}
-                  </span>
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 bg-[#0A0A0F]/80 text-white backdrop-blur-md">
-                    <ExternalLink className="h-3.5 w-3.5" />
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-5 sm:p-7">
-                {/* Tags */}
-                <div className="mb-4 flex flex-wrap gap-2">
-                  {item.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-white/[0.07] bg-white/[0.03] px-2.5 py-0.5 text-[11px] font-medium text-[#94A3B8] sm:px-3"
-                    >
-                      {tag}
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+          {items.map((item, index) => {
+            const isPending = item.url === "#";
+            const body = (
+              <>
+                <WorkPreview domain={item.urlLabel} />
+                <div className="p-6">
+                  <div className="mb-4 flex flex-wrap gap-2">
+                    {item.tags.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-sm border border-border px-2 py-1 font-mono text-[11px] text-muted"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <h3 className="text-xl font-semibold text-text">{item.title}</h3>
+                  {item.subtitle ? (
+                    <p className="mt-1 font-mono text-[12px] text-accent">{item.subtitle}</p>
+                  ) : null}
+                  <p className="mt-4 text-[13px] leading-relaxed text-text-dim">{item.description}</p>
+                  <div className="mt-6 flex items-center justify-between gap-4 border-t border-border pt-4">
+                    <span className="truncate font-mono text-[11px] text-muted">{item.urlLabel}</span>
+                    <span className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.12em] text-accent">
+                      {item.cta}
+                      {!isPending ? <ExternalLink className="h-3.5 w-3.5" /> : null}
                     </span>
-                  ))}
+                  </div>
                 </div>
+              </>
+            );
 
-                <h3 className="mb-2 text-lg font-bold leading-snug text-white">
-                  {item.title}
-                </h3>
-                <p className="mb-5 text-sm leading-relaxed text-[#94A3B8]">{item.description}</p>
-
-                <div className="flex items-center gap-1.5 text-sm font-semibold text-[#6C63FF] transition-colors group-hover:text-[#B4ADFF]">
-                  {item.cta}
-                  <ExternalLink className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </div>
-              </div>
-            </motion.a>
-          ))}
+            return isPending ? (
+              <Reveal
+                as="article"
+                key={item.title}
+                delay={index * 80}
+                className="group overflow-hidden rounded-lg border border-border bg-surface transition duration-200 hover:scale-[1.01] hover:bg-surface-2"
+              >
+                {body}
+              </Reveal>
+            ) : (
+              <Reveal key={item.title} delay={index * 80}>
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block overflow-hidden rounded-lg border border-border bg-surface transition duration-200 hover:scale-[1.01] hover:bg-surface-2"
+                >
+                  {body}
+                </a>
+              </Reveal>
+            );
+          })}
         </div>
+
+        <p className="mt-8 flex max-w-3xl items-start gap-2 text-sm leading-relaxed text-muted">
+          <Lock className="mt-0.5 h-4 w-4 shrink-0" />
+          {t("nda_note")}
+        </p>
       </div>
     </section>
   );

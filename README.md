@@ -6,7 +6,7 @@ Configure contact form delivery:
 
 ```bash
 RESEND_API_KEY=your_resend_api_key
-CONTACT_EMAIL=kershellit@gmail.com
+CONTACT_EMAIL=hello@kershell.dev
 CONTACT_FROM_EMAIL="Kershell Contact <onboarding@resend.dev>"
 ```
 

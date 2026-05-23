@@ -1,17 +1,20 @@
 "use client";
 
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Github, Linkedin, Mail } from "lucide-react";
+import { Logo } from "@/components/brand/Logo";
 
 export default function Footer() {
   const t = useTranslations("footer");
+  const navT = useTranslations("nav");
   const locale = useLocale();
 
   const navLinks = [
-    { label: "Services", href: "#services" },
-    { label: "Portfolio", href: "#portfolio" },
-    { label: "Process", href: "#process" },
-    { label: "Contact", href: "#contact" },
+    { label: navT("services"), href: "#services" },
+    { label: navT("process"), href: "#process" },
+    { label: navT("portfolio"), href: "#portfolio" },
+    { label: navT("why"), href: "#why" },
+    { label: navT("contact"), href: "#contact" },
   ];
 
   const scrollTo = (href: string) => {
@@ -19,34 +22,28 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-white/[0.07] bg-[#0A0A0F]">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-10">
-        <div className="grid grid-cols-1 gap-9 sm:grid-cols-2 md:grid-cols-3 md:gap-10">
-          {/* Brand */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-7 w-7 items-center justify-center rounded bg-[#6C63FF]">
-                <span className="text-[11px] font-extrabold text-white leading-none">K</span>
-              </div>
-              <span className="text-sm font-bold tracking-[0.1em] text-white uppercase">
-                Kershell
-              </span>
-            </div>
-            <p className="max-w-xs text-sm leading-relaxed text-[#4B5563]">
-              {t("tagline")}
-            </p>
-            <div className="flex items-center gap-2.5">
+    <footer className="border-t border-border bg-surface">
+      <div className="console-container py-14">
+        <div className="grid gap-10 md:grid-cols-[2fr_1fr_1fr]">
+          <div>
+            <Logo href={`/${locale}`} size={24} withCursor />
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-text-dim">{t("tagline")}</p>
+            <span className="mt-5 inline-flex rounded-full border border-accent bg-accent-soft px-3 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
+              AI + human expertise
+            </span>
+            <div className="mt-6 flex items-center gap-2">
               {[
-                { icon: Linkedin, href: "https://linkedin.com" },
-                { icon: Github, href: "https://github.com" },
-                { icon: Mail, href: "mailto:kershellit@gmail.com" },
-              ].map(({ icon: Icon, href }) => (
+                { icon: Linkedin, href: "https://linkedin.com/company/kershell-ti", label: "Kershell on LinkedIn" },
+                { icon: Github, href: "https://github.com/juanmpnz", label: "Kershell on GitHub" },
+                { icon: Mail, href: "mailto:hello@kershell.dev", label: "Email Kershell" },
+              ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={href}
                   href={href}
+                  aria-label={label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/[0.07] text-[#4B5563] transition-all hover:border-[#6C63FF]/35 hover:text-[#6C63FF]"
+                  className="flex h-9 w-9 items-center justify-center rounded-md border border-border text-muted transition-colors hover:border-accent hover:text-accent"
                 >
                   <Icon className="h-4 w-4" />
                 </a>
@@ -54,17 +51,16 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick links */}
           <div>
-            <h4 className="mb-4 text-[0.7rem] font-semibold text-[#4B5563] uppercase tracking-[0.14em]">
+            <h3 className="mb-4 font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
               {t("links")}
-            </h4>
-            <ul className="space-y-2.5">
+            </h3>
+            <ul className="space-y-3">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <button
                     onClick={() => scrollTo(link.href)}
-                    className="text-sm text-[#4B5563] transition-colors hover:text-[#94A3B8]"
+                    className="text-sm text-text-dim transition-colors hover:text-accent"
                   >
                     {link.label}
                   </button>
@@ -73,19 +69,18 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Legal */}
           <div>
-            <h4 className="mb-4 text-[0.7rem] font-semibold text-[#4B5563] uppercase tracking-[0.14em]">
+            <h3 className="mb-4 font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
               {t("legal")}
-            </h4>
-            <ul className="space-y-2.5">
+            </h3>
+            <ul className="space-y-3">
               <li>
-                <a href={`/${locale}/privacy`} className="text-sm text-[#4B5563] transition-colors hover:text-[#94A3B8]">
+                <a href={`/${locale}/privacy`} className="text-sm text-text-dim transition-colors hover:text-accent">
                   {t("privacy")}
                 </a>
               </li>
               <li>
-                <a href={`/${locale}/terms`} className="text-sm text-[#4B5563] transition-colors hover:text-[#94A3B8]">
+                <a href={`/${locale}/terms`} className="text-sm text-text-dim transition-colors hover:text-accent">
                   {t("terms")}
                 </a>
               </li>
@@ -93,13 +88,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-white/[0.07] pt-7 sm:mt-12 sm:pt-8 md:flex-row md:items-center">
-          <p className="text-xs leading-relaxed text-[#4B5563]">
-            &copy; {new Date().getFullYear()} Kershell. {t("copyright")}
-          </p>
-          <span className="text-xs uppercase tracking-wider text-[#6C63FF]">
-            AI + Human Expertise
-          </span>
+        <div className="mt-12 flex flex-col justify-between gap-4 border-t border-border pt-6 font-mono text-[11px] uppercase tracking-[0.16em] text-muted md:flex-row">
+          <p>&copy; {new Date().getFullYear()} Kershell. {t("copyright")}</p>
+          <p>v0.console</p>
         </div>
       </div>
     </footer>

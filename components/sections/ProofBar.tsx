@@ -1,41 +1,49 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { Eyebrow } from "@/components/ui/Eyebrow";
 
 const TECHS = [
-  "React", "Next.js", "TypeScript", "Python", "Node.js",
-  "PostgreSQL", "AWS", "OpenAI", "Tailwind CSS", "Docker",
-  "Prisma", "Vercel", "Redis", "GraphQL", "FastAPI",
-  "React", "Next.js", "TypeScript", "Python", "Node.js",
-  "PostgreSQL", "AWS", "OpenAI", "Tailwind CSS", "Docker",
-  "Prisma", "Vercel", "Redis", "GraphQL", "FastAPI",
+  "React",
+  "Next.js",
+  "TypeScript",
+  "Python",
+  "Node.js",
+  "PostgreSQL",
+  "AWS",
+  "OpenAI",
+  "Tailwind CSS",
+  "Docker",
+  "Prisma",
+  "Vercel",
+  "Redis",
+  "GraphQL",
+  "FastAPI",
 ];
 
 export default function ProofBar() {
   const t = useTranslations("proof_bar");
+  const loop = [...TECHS, ...TECHS];
 
   return (
-    <section className="relative overflow-hidden border-y border-white/[0.07] bg-[#12121A] py-7 sm:py-9">
-      <div className="mx-auto mb-5 max-w-7xl px-4 text-center sm:mb-6 sm:px-6 lg:px-10">
-        <p className="text-[0.65rem] font-semibold uppercase leading-relaxed tracking-[0.12em] text-[#4B5563] sm:text-[0.7rem] sm:tracking-[0.18em]">
-          {t("label")}
-        </p>
+    <section className="overflow-hidden border-b border-border bg-ink py-10">
+      <div className="console-container mb-5">
+        <Eyebrow>{t("label")}</Eyebrow>
       </div>
-
-      {/* Fade masks */}
-      <div className="pointer-events-none absolute left-0 top-1/2 z-10 h-full w-12 -translate-y-1/2 bg-gradient-to-r from-[#12121A] to-transparent sm:w-28" />
-      <div className="pointer-events-none absolute right-0 top-1/2 z-10 h-full w-12 -translate-y-1/2 bg-gradient-to-l from-[#12121A] to-transparent sm:w-28" />
-
-      <div className="flex overflow-hidden">
-        <div className="flex animate-scroll-left gap-3 whitespace-nowrap">
-          {TECHS.map((tech, i) => (
-            <div
-              key={`${tech}-${i}`}
-              className="flex select-none items-center rounded-full border border-white/[0.07] bg-white/[0.03] px-4 py-2 text-xs font-medium text-[#4B5563] sm:px-5 sm:text-sm"
-            >
-              {tech}
-            </div>
-          ))}
+      <div className="relative">
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-ink to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-ink to-transparent" />
+        <div className="flex overflow-hidden">
+          <div className="animate-marquee flex min-w-max gap-3 whitespace-nowrap px-3">
+            {loop.map((tech, index) => (
+              <span
+                key={`${tech}-${index}`}
+                className="select-none rounded-md border border-border bg-surface px-4 py-2.5 font-mono text-sm text-text-dim"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>

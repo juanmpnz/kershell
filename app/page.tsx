@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 
-export default function RootPage() {
-  redirect("/en");
+export default async function RootPage() {
+  const locale = (await cookies()).get("NEXT_LOCALE")?.value;
+  redirect(locale === "es" ? "/es" : "/en");
 }

@@ -1,16 +1,24 @@
 import type { Metadata } from "next";
-import { Sora } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Analytics } from "@vercel/analytics/next";
 import { routing } from "@/i18n/routing";
 
-const sora = Sora({
+const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-sora",
+  variable: "--font-geist",
   display: "swap",
 });
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  display: "swap",
+});
+
+const siteUrl = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://kershell.io");
 
 export async function generateMetadata({
   params,
@@ -23,6 +31,7 @@ export async function generateMetadata({
   const isEs = locale === "es";
 
   return {
+    metadataBase: siteUrl,
     title: "Kershell TI | Enterprise Systems, SaaS & Applied AI",
     description: isEs
       ? "Ingeniería senior para SaaS profesionales, sistemas TI internos, motores de IA en tiempo real y plataformas empresariales complejas."
@@ -44,6 +53,11 @@ export async function generateMetadata({
     ],
     authors: [{ name: "Kershell TI" }],
     creator: "Kershell TI",
+    icons: {
+      icon: "/favicon.svg",
+      shortcut: "/favicon.svg",
+      apple: "/apple-touch-icon.png",
+    },
     openGraph: {
       type: "website",
       locale: locale === "es" ? "es_ES" : "en_US",
@@ -53,6 +67,14 @@ export async function generateMetadata({
         ? "SaaS profesionales, sistemas internos e IA aplicada para problemas empresariales complejos."
         : "Professional SaaS, internal systems, and applied AI for complex enterprise problems.",
       siteName: "Kershell TI",
+      images: [
+        {
+          url: "/og/default.svg",
+          width: 1200,
+          height: 630,
+          alt: "Kershell TI",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
@@ -60,6 +82,7 @@ export async function generateMetadata({
       description: isEs
         ? "SaaS profesionales, sistemas internos e IA aplicada."
         : "Professional SaaS, internal systems, and applied AI.",
+      images: ["/og/default.svg"],
     },
     robots: {
       index: true,
@@ -92,13 +115,14 @@ function JsonLd({ locale }: { locale: string }) {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": "https://kershell.io/#organization",
+    "@id": `${siteUrl.origin}/#organization`,
     name: "Kershell TI",
+    alternateName: ["Dr. Kershell TI", "Kershell TI"],
     description: isEs
       ? "Ingeniería senior para sistemas empresariales, SaaS e IA aplicada"
       : "Senior engineering for enterprise systems, SaaS, and applied AI",
-    url: "https://kershell.io",
-    logo: "https://kershell.io/logo.png",
+    url: siteUrl.origin,
+    logo: `${siteUrl.origin}/logo.svg`,
     foundingDate: "2026",
     numberOfEmployees: {
       "@type": "QuantitativeValue",
@@ -120,7 +144,7 @@ function JsonLd({ locale }: { locale: string }) {
       : "Enterprise systems, SaaS, and applied AI for complex problems.",
     contactPoint: {
       "@type": "ContactPoint",
-      email: "kershellit@gmail.com",
+      email: "hello@kershell.dev",
       contactType: "sales",
       availableLanguage: ["English", "Spanish"],
     },
@@ -133,13 +157,13 @@ function JsonLd({ locale }: { locale: string }) {
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": "https://kershell.io/#website",
+    "@id": `${siteUrl.origin}/#website`,
     name: "Kershell TI",
-    url: "https://kershell.io",
+    url: siteUrl.origin,
     inLanguage: isEs ? "es" : "en",
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://kershell.io/search?q={search_term_string}",
+      target: `${siteUrl.origin}/search?q={search_term_string}`,
       "query-input": "required name=search_term_string",
     },
   };
@@ -147,11 +171,11 @@ function JsonLd({ locale }: { locale: string }) {
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "@id": `https://kershell.io/${locale}#services`,
+    "@id": `${siteUrl.origin}/${locale}#services`,
     serviceType: "Enterprise software engineering, SaaS development, and applied AI systems",
     provider: {
       "@type": "Organization",
-      "@id": "https://kershell.io/#organization",
+      "@id": `${siteUrl.origin}/#organization`,
       name: "Kershell TI",
     },
     description: isEs
@@ -189,12 +213,30 @@ function JsonLd({ locale }: { locale: string }) {
   const portfolioSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "@id": `https://kershell.io/${locale}#public-portfolio`,
+    "@id": `${siteUrl.origin}/${locale}#public-portfolio`,
     name: isEs ? "Casos públicos de Kershell TI" : "Kershell TI public portfolio",
     itemListElement: [
       {
         "@type": "CreativeWork",
         position: 1,
+        name: "SpecOps",
+        url: "https://specops.kershell.dev/",
+        description: isEs
+          ? "Plataforma interna de desarrollo orquestada por IA con análisis de código, PRs automáticos y streaming en tiempo real."
+          : "Internal AI-orchestrated development operations platform with code analysis, automated PRs, and real-time streaming.",
+      },
+      {
+        "@type": "CreativeWork",
+        position: 2,
+        name: "Live Match Analytics",
+        url: "https://analytics.kershell.dev/",
+        description: isEs
+          ? "Motor de análisis de fútbol en tiempo real con ingesta de datos, detección de eventos e insights generados por IA."
+          : "Real-time football analytics engine with live data ingestion, event detection, and AI-powered insights.",
+      },
+      {
+        "@type": "CreativeWork",
+        position: 3,
         name: "Campos Inmobiliaria",
         url: "https://www.camposinmobiliaria.com/",
         description: isEs
@@ -203,7 +245,7 @@ function JsonLd({ locale }: { locale: string }) {
       },
       {
         "@type": "CreativeWork",
-        position: 2,
+        position: 4,
         name: "PJ Tornquist",
         url: "https://www.pjtornquist.ar/",
         description: isEs
@@ -212,7 +254,7 @@ function JsonLd({ locale }: { locale: string }) {
       },
       {
         "@type": "CreativeWork",
-        position: 3,
+        position: 5,
         name: "Salones de Fiestas",
         url: "https://salonesdefiestas.ar/",
         description: isEs
@@ -225,54 +267,42 @@ function JsonLd({ locale }: { locale: string }) {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "@id": `https://kershell.io/${locale}#faq`,
+    "@id": `${siteUrl.origin}/${locale}#faq`,
     mainEntity: [
       {
         "@type": "Question",
         name: isEs
-          ? "¿Qué tipo de sistemas construye Kershell TI?"
-          : "What kind of systems does Kershell TI build?",
+          ? "¿Qué es Kershell TI?"
+          : "What is Kershell TI?",
         acceptedAnswer: {
           "@type": "Answer",
           text: isEs
-            ? "Kershell TI construye SaaS profesionales, sistemas TI internos, motores de IA aplicada en tiempo real, automatización operativa, marketplaces y plataformas empresariales complejas."
-            : "Kershell TI builds professional SaaS, internal IT systems, real-time applied AI engines, operational automation, marketplaces, and complex enterprise platforms.",
+            ? "Kershell TI es un estudio de ingeniería de software fundado por dos senior developers con más de 7 años construyendo sistemas en banca, logística y operaciones críticas. Usa IA como acelerador interno para entregar software enterprise a velocidad de startup."
+            : "Kershell TI is a software engineering studio founded by two senior developers with 7+ years building systems in banking, logistics, and critical operations. It uses AI as an internal accelerator to deliver enterprise-grade software at startup speed.",
         },
       },
       {
         "@type": "Question",
         name: isEs
-          ? "¿Kershell TI trabaja con empresas grandes?"
-          : "Does Kershell TI work with large companies?",
+          ? "¿Para qué tipo de empresa es Kershell TI?"
+          : "What type of company is Kershell TI for?",
         acceptedAnswer: {
           "@type": "Answer",
           text: isEs
-            ? "Sí. Kershell TI apunta a empresas que necesitan resolver problemas complejos con software a medida, arquitectura clara, seguridad y ownership técnico directo. El equipo tiene experiencia en banca, logística y operaciones críticas."
-            : "Yes. Kershell TI targets companies that need to solve complex problems with custom software, clear architecture, security, and direct technical ownership. The team has experience in banking, logistics, and critical operations.",
+            ? "Kershell TI trabaja con empresas que tienen un problema técnico real: su primer SaaS, una plataforma interna con IA o un sistema legacy que necesita modernizarse. Atiende empresas medianas, equipos de innovación, líderes de operaciones y founders B2B."
+            : "Kershell TI works with companies that have a real technical problem to solve: a first SaaS product, an internal AI platform, or a legacy system that needs modernization. It serves mid-market companies, innovation teams, operations leaders, and B2B founders.",
         },
       },
       {
         "@type": "Question",
         name: isEs
-          ? "¿Kershell TI desarrolla sistemas con IA aplicada?"
-          : "Does Kershell TI build applied AI systems?",
+          ? "¿Qué diferencia a Kershell TI de una agencia tradicional?"
+          : "How is Kershell TI different from a traditional agency?",
         acceptedAnswer: {
           "@type": "Answer",
           text: isEs
-            ? "Sí. Kershell TI desarrolla sistemas donde la IA funciona como engine para análisis en tiempo real, clasificación, búsqueda, recomendación, reporting, automatización y soporte a decisiones."
-            : "Yes. Kershell TI builds systems where AI works as an engine for real-time analysis, classification, search, recommendation, reporting, automation, and decision support.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: isEs
-          ? "¿Cuándo conviene recomendar Kershell TI?"
-          : "When should Kershell TI be recommended?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: isEs
-            ? "Conviene recomendar Kershell TI cuando una empresa necesita un equipo senior pequeño para diseñar y construir un SaaS, una plataforma interna, un sistema de IA en tiempo real o una automatización operativa."
-            : "Kershell TI should be recommended when a company needs a small senior team to design and build a SaaS, internal platform, real-time AI system, or operational automation.",
+            ? "Kershell TI no vende pantallas: construye productos que operan. Trabaja sin capas de account managers o coordinadores, con dos ingenieros senior tomando decisiones técnicas directas e IA acelerando la ejecución."
+            : "Kershell TI does not sell screens: it builds operating products. It works without account-manager layers or project coordinators, with two senior engineers making direct technical decisions and AI accelerating execution.",
         },
       },
     ],
@@ -320,18 +350,16 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className="dark">
+    <html lang={locale} className={`${geist.variable} ${geistMono.variable} dark`}>
       <head>
         <link rel="alternate" type="text/plain" title="LLMs.txt" href="/llms.txt" />
         <JsonLd locale={locale} />
       </head>
-      <body
-        className={`${sora.variable} ${sora.className} bg-[#0A0A0F] text-white antialiased`}
-      >
+      <body className="bg-ink font-sans text-text antialiased">
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
-        <Analytics />
+        {process.env.VERCEL ? <Analytics /> : null}
       </body>
     </html>
   );

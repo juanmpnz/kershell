@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
 
 interface CountUpProps {
   end: number;
@@ -19,36 +18,61 @@ export default function CountUp({
   className,
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (!isInView) return;
+    const element = ref.current;
+    if (!element) return;
 
-    let start = 0;
-    const startTime = performance.now();
+    let frame = 0;
+    let hasStarted = false;
 
-    const step = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      const current = Math.round(eased * end);
+    const run = () => {
+      if (hasStarted) return;
+      hasStarted = true;
 
-      if (current !== start) {
-        start = current;
-        setCount(current);
-      }
+      const startTime = performance.now();
 
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      }
+      const step = (currentTime: number) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+
+        setCount(Math.round(eased * end));
+
+        if (progress < 1) {
+          frame = requestAnimationFrame(step);
+        }
+      };
+
+      frame = requestAnimationFrame(step);
     };
 
-    requestAnimationFrame(step);
-  }, [isInView, end, duration]);
+    if (!("IntersectionObserver" in window)) {
+      run();
+      return () => cancelAnimationFrame(frame);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          run();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2, rootMargin: "0px 0px -10% 0px" }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+    };
+  }, [end, duration]);
 
   return (
-    <span ref={ref} className={className}>
+    <span ref={ref} className={className} aria-label={`${prefix}${end}${suffix}`}>
       {prefix}
       {count}
       {suffix}

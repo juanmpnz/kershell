@@ -1,0 +1,58 @@
+/* Kershell — Direction A · Console — globals.css
+   Pegá esto al inicio de tu app/globals.css (o styles/globals.css).
+   Reemplaza cualquier definición previa de variables :root. */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Color tokens */
+  --ink:           #0A0B0D;
+  --surface:       #111316;
+  --surface-2:     #1A1D21;
+  --border:        #262B33;
+  --text:          #ECEEF0;
+  --text-dim:      #B6BBC2;
+  --muted:         #7B8088;
+  --accent:        #B4F23F;
+  --accent-ink:    #0A0B0D;
+  --accent-soft:   rgba(180, 242, 63, 0.14);
+
+  /* Easings */
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:   cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html { color-scheme: dark; }
+
+body {
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--font-geist), system-ui, -apple-system, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Selection */
+::selection { background: var(--accent); color: var(--accent-ink); }
+
+/* Focus baseline */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Container queries on every <section> by default */
+section { container-type: inline-size; }
