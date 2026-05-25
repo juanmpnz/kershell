@@ -122,7 +122,7 @@ function JsonLd({ locale }: { locale: string }) {
       ? "Ingeniería senior para sistemas empresariales, SaaS e IA aplicada"
       : "Senior engineering for enterprise systems, SaaS, and applied AI",
     url: siteUrl.origin,
-    logo: `${siteUrl.origin}/logo.svg`,
+    logo: `${siteUrl.origin}/brand/kershell-square.svg`,
     foundingDate: "2026",
     numberOfEmployees: {
       "@type": "QuantitativeValue",

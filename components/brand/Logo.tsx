@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { KMonogram } from "@/components/brand/KMonogram";
 
 type LogoProps = {
   size?: number;
@@ -16,23 +15,31 @@ export function Logo({
 }: LogoProps) {
   const content = (
     <span
-      className={`inline-flex items-center gap-[0.32em] text-text ${className ?? ""}`}
+      className={`inline-flex items-center gap-[0.04em] text-text ${className ?? ""}`}
       style={{ fontSize: size }}
     >
-      <KMonogram size={size} strokeWidth={16} />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="22 6 96 88"
+        width={size * 1.1}
+        height={size}
+        fill="none"
+        aria-hidden="true"
+        className="shrink-0"
+      >
+        <g stroke="currentColor" strokeWidth="16" strokeLinecap="butt" strokeLinejoin="miter">
+          <path d="M 30 6 L 30 94" />
+          <path d="M 38 50 L 82 8" />
+          <path d="M 38 50 L 82 92" />
+        </g>
+        <rect x="98" y="76" width="18" height="18" fill="var(--accent)" />
+      </svg>
       <span
         className="font-sans font-semibold leading-none tracking-[-0.025em] text-text"
         style={{ fontSize: size }}
       >
-        Kershell
+        ershell
       </span>
-      {withCursor ? (
-        <span
-          aria-hidden
-          className="ml-[0.1em] inline-block bg-accent"
-          style={{ width: size * 0.5, height: size * 0.9 }}
-        />
-      ) : null}
     </span>
   );
 
