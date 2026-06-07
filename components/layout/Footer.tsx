@@ -26,7 +26,7 @@ export default function Footer() {
       <div className="console-container py-14">
         <div className="grid gap-10 md:grid-cols-[2fr_1fr_1fr]">
           <div>
-            <Logo href={`/${locale}`} size={24} withCursor />
+            <Logo href={`/${locale}`} size={20} />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-text-dim">{t("tagline")}</p>
             <span className="mt-5 inline-flex rounded-full border border-accent bg-accent-soft px-3 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
               AI + human expertise

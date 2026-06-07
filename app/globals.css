@@ -4,10 +4,15 @@
   --color-ink: #0a0b0d;
   --color-surface: #111316;
   --color-surface-2: #1a1d21;
+  --color-surface-3: #22262c;
   --color-border: #262b33;
   --color-text: #eceef0;
   --color-text-dim: #b6bbc2;
   --color-muted: #7b8088;
+  --color-warn: #f5a623;
+  --color-danger: #f26b5c;
+  --color-ok: #7ae2a1;
+  --color-info: #7ad0ff;
   --color-accent: #b4f23f;
   --color-accent-ink: #0a0b0d;
   --color-accent-soft: rgba(180, 242, 63, 0.14);
@@ -47,12 +52,19 @@
 
 :root {
   --ink: #0a0b0d;
+  --ink-2: #070809;
   --surface: #111316;
   --surface-2: #1a1d21;
+  --surface-3: #22262c;
   --border: #262b33;
   --text: #eceef0;
   --text-dim: #b6bbc2;
   --muted: #7b8088;
+  --muted-soft: #565c66;
+  --warn: #f5a623;
+  --danger: #f26b5c;
+  --ok: #7ae2a1;
+  --info: #7ad0ff;
   --accent: #b4f23f;
   --accent-ink: #0a0b0d;
   --accent-soft: rgba(180, 242, 63, 0.14);
