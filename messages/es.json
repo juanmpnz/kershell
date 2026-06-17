@@ -226,18 +226,17 @@
   },
   "why": {
     "badge": "Por Qué Kershell TI",
-    "title": "Agencia Tradicional vs Kershell TI",
+    "title": "Por Qué Kershell TI",
     "subtitle": "La diferencia no es estética. Es ownership, criterio técnico y velocidad para llevar software real a producción.",
     "aspect": "Aspecto",
-    "traditional": "Agencia Tradicional",
     "kershell": "Kershell TI",
     "rows": [
-      { "aspect": "Equipo", "traditional": "10-15 personas, mayoría junior, rotando", "kershell": "2 senior developers, mismo equipo de inicio a fin" },
-      { "aspect": "IA", "traditional": "IA mencionada en el pitch deck", "kershell": "IA corriendo dentro del producto, gobernada por reglas de ingeniería" },
-      { "aspect": "Arquitectura", "traditional": "Templates genéricos para todos", "kershell": "Arquitectura específica del dominio, diseñada para tus datos y reglas" },
-      { "aspect": "Foco", "traditional": "Mockups pixel-perfect", "kershell": "Reglas de negocio, integridad de datos y evolución del sistema" },
-      { "aspect": "Handover", "traditional": "ZIP file y buena suerte", "kershell": "Documentación, transferencia de ownership y roadmap de evolución" },
-      { "aspect": "Modelo de costo", "traditional": "Facturación por hora con scope creep", "kershell": "Alcance cerrado, roadmap transparente, sin costos ocultos" }
+      { "aspect": "Equipo", "kershell": "2 senior developers, mismo equipo de inicio a fin" },
+      { "aspect": "IA", "kershell": "IA corriendo dentro del producto, gobernada por reglas de ingeniería" },
+      { "aspect": "Arquitectura", "kershell": "Arquitectura específica del dominio, diseñada para tus datos y reglas" },
+      { "aspect": "Foco", "kershell": "Reglas de negocio, integridad de datos y evolución del sistema" },
+      { "aspect": "Handover", "kershell": "Documentación, transferencia de ownership y roadmap de evolución" },
+      { "aspect": "Modelo de costo", "kershell": "Alcance cerrado, roadmap transparente, sin costos ocultos" }
     ]
   },
   "stats": {

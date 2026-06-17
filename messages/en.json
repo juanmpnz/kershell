@@ -226,18 +226,17 @@
   },
   "why": {
     "badge": "Why Kershell TI",
-    "title": "Traditional Agency vs Kershell TI",
+    "title": "Why Kershell TI",
     "subtitle": "The difference is not style. It is ownership, technical judgment, and how fast working software reaches production.",
     "aspect": "Aspect",
-    "traditional": "Traditional Agency",
     "kershell": "Kershell TI",
     "rows": [
-      { "aspect": "Team", "traditional": "10-15 people, most junior, rotating", "kershell": "2 senior developers, same team start to finish" },
-      { "aspect": "AI", "traditional": "AI mentioned in the pitch deck", "kershell": "AI running inside the product, governed by engineering rules" },
-      { "aspect": "Architecture", "traditional": "One-size-fits-all templates", "kershell": "Domain-specific architecture designed for your data and rules" },
-      { "aspect": "Focus", "traditional": "Pixel-perfect mockups", "kershell": "Business rules, data integrity, and system evolution" },
-      { "aspect": "Handover", "traditional": "ZIP file and good luck", "kershell": "Documentation, ownership transfer, and evolution roadmap" },
-      { "aspect": "Cost model", "traditional": "Hourly billing with scope creep", "kershell": "Fixed scope, transparent roadmap, no hidden fees" }
+      { "aspect": "Team", "kershell": "2 senior developers, same team start to finish" },
+      { "aspect": "AI", "kershell": "AI running inside the product, governed by engineering rules" },
+      { "aspect": "Architecture", "kershell": "Domain-specific architecture designed for your data and rules" },
+      { "aspect": "Focus", "kershell": "Business rules, data integrity, and system evolution" },
+      { "aspect": "Handover", "kershell": "Documentation, ownership transfer, and evolution roadmap" },
+      { "aspect": "Cost model", "kershell": "Fixed scope, transparent roadmap, no hidden fees" }
     ]
   },
   "stats": {

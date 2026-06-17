@@ -6,7 +6,6 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 
 type CompareRow = {
   aspect: string;
-  traditional: string;
   kershell: string;
 };
 
@@ -26,9 +25,8 @@ export default function WhyKershell() {
         </div>
 
         <div className="overflow-hidden rounded-lg border border-border bg-ink">
-          <div className="hidden grid-cols-[0.7fr_1fr_1fr] border-b border-border bg-ink font-mono text-[11px] uppercase tracking-[0.16em] text-muted md:grid">
+          <div className="hidden grid-cols-[0.7fr_1.4fr] border-b border-border bg-ink font-mono text-[11px] uppercase tracking-[0.16em] text-muted md:grid">
             <div className="px-6 py-4">{t("aspect")}</div>
-            <div className="border-l border-border px-6 py-4">{t("traditional")}</div>
             <div className="flex items-center gap-2 border-l border-border px-6 py-4 text-accent">
               <KMonogram size={14} />
               {t("kershell")}
@@ -38,13 +36,10 @@ export default function WhyKershell() {
           {rows.map((row) => (
             <div
               key={row.aspect}
-              className="grid grid-cols-1 border-b border-border last:border-b-0 md:grid-cols-[0.7fr_1fr_1fr]"
+              className="grid grid-cols-1 border-b border-border last:border-b-0 md:grid-cols-[0.7fr_1.4fr]"
             >
               <div className="bg-surface px-5 py-4 text-sm font-semibold text-text md:bg-transparent md:px-6">
                 {row.aspect}
-              </div>
-              <div className="border-t border-border px-5 py-4 text-sm leading-relaxed text-muted md:border-l md:border-t-0 md:px-6">
-                <span className="decoration-accent/80 decoration-2 line-through">{row.traditional}</span>
               </div>
               <div className="border-t border-border px-5 py-4 text-sm leading-relaxed text-text md:border-l md:border-t-0 md:px-6">
                 <span className="mr-2 text-accent">-&gt;</span>
