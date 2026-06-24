@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-// TODO: confirmar dominio en Resend; usar CONTACT_EMAIL env si hello@kershell.dev cambia.
-const CONTACT_EMAIL = process.env.CONTACT_EMAIL || "hello@kershell.dev";
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL || "info@heykershell.com";
 const CONTACT_FROM_EMAIL =
-  process.env.CONTACT_FROM_EMAIL || "Kershell Contact <onboarding@resend.dev>";
+  process.env.CONTACT_FROM_EMAIL || "Kershell Contact <info@heykershell.com>";
 const MAX_CONTENT_LENGTH = 12_000;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 5;

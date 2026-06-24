@@ -6,8 +6,8 @@ Configure contact form delivery:
 
 ```bash
 RESEND_API_KEY=your_resend_api_key
-CONTACT_EMAIL=hello@kershell.dev
-CONTACT_FROM_EMAIL="Kershell Contact <onboarding@resend.dev>"
+CONTACT_EMAIL=info@heykershell.com
+CONTACT_FROM_EMAIL="Kershell Contact <info@heykershell.com>"
 ```
 
 For production, use a Resend sender from a verified domain in `CONTACT_FROM_EMAIL`.

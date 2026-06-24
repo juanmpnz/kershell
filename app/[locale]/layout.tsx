@@ -144,7 +144,7 @@ function JsonLd({ locale }: { locale: string }) {
       : "Enterprise systems, SaaS, and applied AI for complex problems.",
     contactPoint: {
       "@type": "ContactPoint",
-      email: "hello@kershell.dev",
+      email: "info@heykershell.com",
       contactType: "sales",
       availableLanguage: ["English", "Spanish"],
     },

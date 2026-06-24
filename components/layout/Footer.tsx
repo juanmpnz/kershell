@@ -35,7 +35,7 @@ export default function Footer() {
               {[
                 { icon: Linkedin, href: "https://linkedin.com/company/kershell-ti", label: "Kershell on LinkedIn" },
                 { icon: Github, href: "https://github.com/juanmpnz", label: "Kershell on GitHub" },
-                { icon: Mail, href: "mailto:hello@kershell.dev", label: "Email Kershell" },
+                { icon: Mail, href: "mailto:info@heykershell.com", label: "Email Kershell" },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={href}
