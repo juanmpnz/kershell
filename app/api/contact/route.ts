@@ -145,7 +145,7 @@ export async function POST(req: NextRequest) {
     const safeMessage = escapeHtml(message).replace(/\n/g, "<br />");
     const subjectCompany = company ? ` (${company})` : "";
 
-    await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: CONTACT_FROM_EMAIL,
       to: CONTACT_EMAIL,
       replyTo: email,
@@ -175,8 +175,28 @@ export async function POST(req: NextRequest) {
       `,
     });
 
+    if (error) {
+      console.error("Resend contact form delivery failed.", {
+        error,
+        from: CONTACT_FROM_EMAIL,
+        to: CONTACT_EMAIL,
+      });
+      return errorResponse("Email delivery failed", 502);
+    }
+
+    console.info("Contact form email accepted by Resend.", {
+      id: data?.id,
+      from: CONTACT_FROM_EMAIL,
+      to: CONTACT_EMAIL,
+    });
+
     return NextResponse.json({ success: true });
-  } catch {
+  } catch (error) {
+    console.error("Contact form delivery crashed.", {
+      error,
+      from: CONTACT_FROM_EMAIL,
+      to: CONTACT_EMAIL,
+    });
     return NextResponse.json(
       { error: "Failed to send message. Please try again." },
       { status: 500 }
