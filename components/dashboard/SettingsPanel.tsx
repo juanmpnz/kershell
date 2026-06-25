@@ -154,9 +154,6 @@ export function SettingsPanel({ user }: SettingsPanelProps) {
             <SettingsRow description="Sincronización futura de leads y cuentas." label="Apollo">
               <Badge tone="warn">Pendiente</Badge>
             </SettingsRow>
-            <SettingsRow description="Repositorio y actividad técnica." label="GitHub">
-              <Badge tone="info">Próximo</Badge>
-            </SettingsRow>
             <SettingsRow description="Persistencia backend para datos reales." label="Supabase">
               <Badge tone="accent">Preparado</Badge>
             </SettingsRow>

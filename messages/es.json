@@ -146,7 +146,7 @@
         "subtitle": "AI-Powered Development Operations Platform",
         "description": "Nuestra plataforma interna de desarrollo orquestada por IA. Tareas, análisis de código asistido por IA, PRs automáticos, deploy en tiempo real con streaming SSE, y un motor cerrado de IA donde reglas de ingeniería senior gobiernan cada generación de código.",
         "tags": ["Internal Platform", "Applied AI", "Developer Tools"],
-        "tech": ["NestJS + Clean Architecture", "React + TanStack Query", "Claude API + RAG", "GitHub OAuth + Automated PRs", "SSE Real-Time Streaming", "SQLite + Turbo Monorepo"],
+        "tech": ["NestJS + Clean Architecture", "React + TanStack Query", "Claude API + RAG", "OAuth + Automated PRs", "SSE Real-Time Streaming", "SQLite + Turbo Monorepo"],
         "url": "#",
         "urlLabel": "specops.kershell.dev",
         "cta": "Deploy pending"

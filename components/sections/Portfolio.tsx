@@ -54,7 +54,7 @@ export default function Portfolio() {
             const body = (
               <>
                 <WorkPreview domain={item.urlLabel} />
-                <div className="p-6">
+                <div className="flex flex-1 flex-col p-6">
                   <div className="mb-4 flex flex-wrap gap-2">
                     {item.tags.slice(0, 3).map((tag) => (
                       <span
@@ -69,8 +69,8 @@ export default function Portfolio() {
                   {item.subtitle ? (
                     <p className="mt-1 font-mono text-[12px] text-accent">{item.subtitle}</p>
                   ) : null}
-                  <p className="mt-4 text-[13px] leading-relaxed text-text-dim">{item.description}</p>
-                  <div className="mt-6 flex items-center justify-between gap-4 border-t border-border pt-4">
+                  <p className="mb-6 mt-4 text-[13px] leading-relaxed text-text-dim">{item.description}</p>
+                  <div className="mt-auto flex items-center justify-between gap-4 border-t border-border pt-4">
                     <span className="truncate font-mono text-[11px] text-muted">{item.urlLabel}</span>
                     <span className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.12em] text-accent">
                       {item.cta}
@@ -86,17 +86,17 @@ export default function Portfolio() {
                 as="article"
                 key={item.title}
                 delay={index * 80}
-                className="group overflow-hidden rounded-lg border border-border bg-surface transition duration-200 hover:scale-[1.01] hover:bg-surface-2"
+                className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-surface transition duration-200 hover:scale-[1.01] hover:bg-surface-2"
               >
                 {body}
               </Reveal>
             ) : (
-              <Reveal key={item.title} delay={index * 80}>
+              <Reveal key={item.title} delay={index * 80} className="h-full">
                 <a
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group block overflow-hidden rounded-lg border border-border bg-surface transition duration-200 hover:scale-[1.01] hover:bg-surface-2"
+                  className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-surface transition duration-200 hover:scale-[1.01] hover:bg-surface-2"
                 >
                   {body}
                 </a>

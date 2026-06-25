@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Linkedin, Mail } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 
 export default function Footer() {
@@ -34,7 +34,6 @@ export default function Footer() {
             <div className="mt-6 flex items-center gap-2">
               {[
                 { icon: Linkedin, href: "https://linkedin.com/company/kershell-ti", label: "Kershell on LinkedIn" },
-                { icon: Github, href: "https://github.com/juanmpnz", label: "Kershell on GitHub" },
                 { icon: Mail, href: "mailto:info@heykershell.com", label: "Email Kershell" },
               ].map(({ icon: Icon, href, label }) => (
                 <a

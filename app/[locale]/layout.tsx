@@ -148,10 +148,7 @@ function JsonLd({ locale }: { locale: string }) {
       contactType: "sales",
       availableLanguage: ["English", "Spanish"],
     },
-    sameAs: [
-      "https://linkedin.com/company/kershell",
-      "https://github.com/kershell",
-    ],
+    sameAs: ["https://linkedin.com/company/kershell"],
   };
 
   const websiteSchema = {

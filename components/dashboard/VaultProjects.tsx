@@ -129,7 +129,7 @@ function ProjectCard({ project, subscriptions }: { project: Project; subscriptio
 
   return (
     <Link
-      className="flex min-h-60 flex-col rounded-[10px] border border-border bg-surface p-5 transition hover:bg-surface-2"
+      className="flex h-[340px] flex-col rounded-[10px] border border-border bg-surface p-5 transition hover:bg-surface-2"
       href={`/dashboard/vault/${project.id}`}
     >
       <div className="flex items-start justify-between gap-4">
@@ -144,11 +144,11 @@ function ProjectCard({ project, subscriptions }: { project: Project; subscriptio
         </Badge>
       </div>
 
-      <h2 className="mt-7 text-lg font-medium text-text">{project.name}</h2>
+      <h2 className="mt-7 truncate text-lg font-medium text-text">{project.name}</h2>
       <p className="mt-1 font-mono text-[11px] uppercase text-muted">{project.code}</p>
       <p className="mt-4 line-clamp-2 text-[13px] leading-5 text-text-dim">{project.summary}</p>
 
-      <div className="mt-5 flex flex-wrap gap-2">
+      <div className="mt-5 flex max-h-[58px] flex-wrap gap-2 overflow-hidden">
         {project.stack.map((item) => (
           <span className="rounded border border-border bg-[var(--ink-2)] px-[7px] py-[3px] font-mono text-[10.5px] text-text-dim" key={item}>
             {item}
