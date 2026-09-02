@@ -24,7 +24,7 @@
     "next-intl": "^4.14.2",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "resend": "^6.12.2",
+    "resend": "^6.18.1",
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
