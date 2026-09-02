@@ -31,14 +31,14 @@ pnpm audit --prod
 ```
 
 Existing lint debt is recorded with exact per-file counts in
-`eslint-suppressions.json`. New violations must fail the gate; prune a
+`apps/site/eslint-suppressions.json`. New violations must fail the gate; prune a
 suppression when its underlying issue is fixed.
 
 ## Non-negotiable boundaries
 
 - Never commit, log, render, seed, or send real credentials to the browser.
-- Do not inspect or print `.env.local`; use `.env.example` to discover variable
-  names and ask for values only when an approved deployment needs them.
+- Do not inspect or print `.env.local`; use `apps/site/.env.example` to discover
+  variable names and ask for values only when an approved deployment needs them.
 - Proxy redirects are navigation helpers, not authorization. Authenticate and
   authorize at every data access, Route Handler, and Server Action.
 - Browser storage may hold display preferences only. It may not be a fallback
@@ -66,7 +66,7 @@ suppression when its underlying issue is fixed.
 ## Known temporary code
 
 - `/admin` and `/dashboard` are competing prototypes, not two supported admins.
-- `lib/dashboard/store.ts` is a mock and must not be extended as persistence.
+- `apps/site/lib/dashboard/store.ts` is a mock and must not be extended as persistence.
 - `supabase/admin-records.sql` is a transition mechanism, not the target schema.
 - Token-like values in seed files are fictional examples; replace them with
   obvious placeholders before enabling any vault workflow.

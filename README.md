@@ -20,12 +20,12 @@ Sitio publico bilingue y prototipos del administrador privado de Kershell.
 
 ```bash
 pnpm install --ignore-scripts --frozen-lockfile
-cp .env.example .env.local
+cp apps/site/.env.example apps/site/.env.local
 pnpm dev
 ```
 
-No copies valores reales a `.env.example` ni leas/imprimas `.env.local` en
-salidas de agentes o CI.
+No copies valores reales a `apps/site/.env.example` ni leas/imprimas
+`apps/site/.env.local` en salidas de agentes o CI.
 
 ## Comandos
 
@@ -39,17 +39,18 @@ salidas de agentes o CI.
 | `pnpm audit --prod` | Auditoria de dependencias runtime |
 
 La deuda de lint previa queda cuantificada por archivo en
-`eslint-suppressions.json`; cualquier infraccion nueva hace fallar el comando.
+`apps/site/eslint-suppressions.json`; cualquier infraccion nueva hace fallar el
+comando.
 
 ## Mapa actual
 
-- `app/[locale]`: landing publico localizado.
-- `app/admin`: administrador antiguo con persistencia JSONB y fallback local.
-- `app/(dashboard)/dashboard`: administrador nuevo conectado a datos seed.
-- `lib/dashboard`: tipos y store mock en memoria.
-- `app/api`: contacto, login administrativo y estado JSONB.
+- `apps/site/app/[locale]`: landing publico localizado.
+- `apps/site/app/admin`: administrador antiguo con persistencia JSONB y fallback local.
+- `apps/site/app/(dashboard)/dashboard`: administrador nuevo conectado a datos seed.
+- `apps/site/lib/dashboard`: tipos y store mock en memoria.
+- `apps/site/app/api`: contacto, login administrativo y estado JSONB.
 - `supabase/admin-records.sql`: tabla transitoria, no modelo relacional final.
-- `handoff`, `logo-handoff`, `app/admin/dashboard-handoff`: material de diseno
+- `handoff`, `logo-handoff`, `apps/site/app/admin/dashboard-handoff`: material de diseno
   historico que debe archivarse fuera del runtime durante el refactor.
 
 ## Arquitectura y trabajo futuro

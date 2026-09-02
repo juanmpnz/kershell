@@ -8,11 +8,11 @@ lectura antes del despliegue.
 **Acceptance:** dominio Workspace, owner, hostname, Better Auth/Drizzle, 2SV,
 politica de secretos, SO, Docker y reverse proxy quedan registrados sin secretos.
 
-**Verify:** ADR-002/003/004 y `.env.example` son coherentes.
+**Verify:** ADR-002/003/004 y `apps/site/.env.example` son coherentes.
 
 **Dependencies:** ninguna.
 
-**Files:** `docs/spec-platform.md`, `docs/decisions/*`, `.env.example`.
+**Files:** `docs/spec-platform.md`, `docs/decisions/*`, `apps/site/.env.example`.
 
 ## Task 2: Parchear runtime y dependencias criticas
 
@@ -30,7 +30,7 @@ Node 24 LTS queda fijado y no se mezclan otras actualizaciones mayores.
 ## Task 3: Incorporar lint y tests unitarios
 
 **Status:** completada el 2026-09-02. La deuda previa queda cuantificada en
-`eslint-suppressions.json` y las nuevas infracciones fallan el gate.
+`apps/site/eslint-suppressions.json` y las nuevas infracciones fallan el gate.
 
 **Acceptance:** existen scripts `lint` y `test`; un test deliberadamente RED
 demuestra el runner antes de implementar el primer contrato y despues queda GREEN.
@@ -53,7 +53,7 @@ ausencia de secretos en pagina publica.
 
 **Dependencies:** Task 3.
 
-**Files:** maximo cuatro archivos bajo `tests/characterization`.
+**Files:** maximo cuatro archivos bajo `apps/site/tests/characterization`.
 
 ## Task 5: Endurecer cabeceras y configuracion Next
 
@@ -67,7 +67,7 @@ referrer policy aparecen; `X-Powered-By` y remote image wildcard desaparecen.
 
 **Dependencies:** Task 4.
 
-**Files:** `next.config.ts`, tests de headers, documentacion CSP.
+**Files:** `apps/site/next.config.ts`, tests de headers, documentacion CSP.
 
 ## Task 6: Crear workspace raiz
 
@@ -84,10 +84,13 @@ los gates del runtime raiz permanecen verdes.
 
 ## Task 7: Mover runtime actual a `apps/site`
 
+**Status:** completada el 2026-09-02; runtime y configuracion viven en
+`apps/site`, los comandos raiz delegan al paquete y las 23 rutas se conservan.
+
 **Acceptance:** configuracion y package del Next actual viven en `apps/site`; el
 movimiento es mecanico y la salida caracterizada no cambia.
 
-**Verify:** tests de Task 4 y `pnpm --filter site build`.
+**Verify:** tests de Task 4 y `pnpm --filter @kershell/site build`.
 
 **Dependencies:** Task 6.
 

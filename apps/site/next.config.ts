@@ -1,14 +1,15 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
-import { dirname } from "node:path";
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createSecurityHeaders } from "./lib/security/headers";
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 const projectRoot = dirname(fileURLToPath(import.meta.url));
+const workspaceRoot = join(projectRoot, "../..");
 
 const nextConfig: NextConfig = {
-  outputFileTracingRoot: projectRoot,
+  outputFileTracingRoot: workspaceRoot,
   poweredByHeader: false,
   async headers() {
     return [
@@ -19,7 +20,7 @@ const nextConfig: NextConfig = {
     ];
   },
   turbopack: {
-    root: projectRoot,
+    root: workspaceRoot,
   },
 };
 

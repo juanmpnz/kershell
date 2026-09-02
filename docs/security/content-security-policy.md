@@ -2,10 +2,10 @@
 
 ## Current phase
 
-The shared runtime uses an enforced, self-hosted CSP from `next.config.ts`.
-Scripts, styles, images, fonts, connections, forms and workers default to local
-resources. Objects and framing are blocked. Production also upgrades insecure
-requests and enables HSTS.
+The shared runtime uses an enforced, self-hosted CSP from
+`apps/site/next.config.ts`. Scripts, styles, images, fonts, connections, forms
+and workers default to local resources. Objects and framing are blocked.
+Production also upgrades insecure requests and enables HSTS.
 
 The current landing remains statically renderable. Next.js needs inline script
 and style allowances for this CSP mode, so this is a meaningful baseline rather

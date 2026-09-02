@@ -18,7 +18,7 @@ when credentials or vault behavior are in scope.
 - Do not store auth/session/company data in `localStorage`. Display preferences
   are the only allowed browser-persistent state.
 - Until ADR-003 is replaced, store secret references and metadata, not values.
-- Never read or print `.env.local`; discover names from `.env.example`.
+- Never read or print `.env.local`; discover names from `apps/site/.env.example`.
 
 ## Threat-model checklist
 
