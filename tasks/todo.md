@@ -71,6 +71,9 @@ referrer policy aparecen; `X-Powered-By` y remote image wildcard desaparecen.
 
 ## Task 6: Crear workspace raiz
 
+**Status:** completada el 2026-09-02; pnpm reconoce los futuros paquetes y todos
+los gates del runtime raiz permanecen verdes.
+
 **Acceptance:** pnpm reconoce `apps/*` y `packages/*` sin cambiar rutas actuales.
 
 **Verify:** install congelado, scripts raiz, typecheck y build existentes.
