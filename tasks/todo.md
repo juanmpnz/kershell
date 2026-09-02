@@ -16,6 +16,8 @@ politica de secretos, SO, Docker y reverse proxy quedan registrados sin secretos
 
 ## Task 2: Parchear runtime y dependencias criticas
 
+**Status:** completada el 2026-09-02.
+
 **Acceptance:** Next.js pasa a la linea 16.3.x parcheada, React queda compatible,
 Node 24 LTS queda fijado y no se mezclan otras actualizaciones mayores.
 
@@ -27,6 +29,9 @@ Node 24 LTS queda fijado y no se mezclan otras actualizaciones mayores.
 
 ## Task 3: Incorporar lint y tests unitarios
 
+**Status:** completada el 2026-09-02. La deuda previa queda cuantificada en
+`eslint-suppressions.json` y las nuevas infracciones fallan el gate.
+
 **Acceptance:** existen scripts `lint` y `test`; un test deliberadamente RED
 demuestra el runner antes de implementar el primer contrato y despues queda GREEN.
 
@@ -37,6 +42,9 @@ demuestra el runner antes de implementar el primer contrato y despues queda GREE
 **Files:** `package.json`, lockfile, configuracion ESLint, configuracion Vitest.
 
 ## Task 4: Caracterizar rutas actuales
+
+**Status:** en progreso; localizacion, redirect privado y 401 de API estan
+cubiertos. Falta caracterizar la salida HTTP publica y verificar secretos.
 
 **Acceptance:** tests cubren landing localizado, redirect privado, 401 de API y
 ausencia de secretos en pagina publica.

@@ -23,13 +23,16 @@ private admin have different trust boundaries even while they share a repo.
 ## Current commands
 
 ```bash
+pnpm run lint
+pnpm run test
 pnpm run typecheck
 pnpm run build
 pnpm audit --prod
 ```
 
-There is currently no lint or test command. Adding those gates is an explicit
-refactor task; never report them as passing before they exist.
+Existing lint debt is recorded with exact per-file counts in
+`eslint-suppressions.json`. New violations must fail the gate; prune a
+suppression when its underlying issue is fixed.
 
 ## Non-negotiable boundaries
 

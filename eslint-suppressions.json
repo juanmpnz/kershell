@@ -1,0 +1,55 @@
+{
+  "app/(dashboard)/dashboard/subscriptions/page.tsx": {
+    "@next/next/no-html-link-for-pages": {
+      "count": 1
+    }
+  },
+  "app/[locale]/layout.tsx": {
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    }
+  },
+  "app/admin/AdminDashboard.tsx": {
+    "@next/next/no-location-assign-relative-destination": {
+      "count": 1
+    }
+  },
+  "app/admin/login/AdminLoginForm.tsx": {
+    "@next/next/no-location-assign-relative-destination": {
+      "count": 1
+    }
+  },
+  "app/login/LoginForm.tsx": {
+    "@next/next/no-location-assign-relative-destination": {
+      "count": 1
+    }
+  },
+  "components/animations/Reveal.tsx": {
+    "react-hooks/set-state-in-effect": {
+      "count": 1
+    }
+  },
+  "components/dashboard/DashSidebar.tsx": {
+    "react-hooks/set-state-in-effect": {
+      "count": 1
+    }
+  },
+  "components/dashboard/DashTopbar.tsx": {
+    "@next/next/no-location-assign-relative-destination": {
+      "count": 1
+    }
+  },
+  "components/dashboard/SubscriptionsTable.tsx": {
+    "react-hooks/set-state-in-effect": {
+      "count": 1
+    }
+  },
+  "components/dashboard/VaultProjects.tsx": {
+    "@typescript-eslint/no-unused-vars": {
+      "count": 1
+    },
+    "react-hooks/set-state-in-effect": {
+      "count": 1
+    }
+  }
+}

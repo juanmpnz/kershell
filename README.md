@@ -32,12 +32,14 @@ salidas de agentes o CI.
 | Comando | Uso |
 | --- | --- |
 | `pnpm dev` | Servidor local |
+| `pnpm run lint` | ESLint estricto para codigo nuevo |
+| `pnpm run test` | Tests automatizados con Vitest |
 | `pnpm run typecheck` | Comprobacion TypeScript |
 | `pnpm run build` | Build de produccion |
 | `pnpm audit --prod` | Auditoria de dependencias runtime |
 
-Todavia no existen scripts de lint ni tests. Ambos son requisitos del refactor,
-no pasos que puedan darse por cumplidos hoy.
+La deuda de lint previa queda cuantificada por archivo en
+`eslint-suppressions.json`; cualquier infraccion nueva hace fallar el comando.
 
 ## Mapa actual
 
