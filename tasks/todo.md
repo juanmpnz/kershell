@@ -43,8 +43,8 @@ demuestra el runner antes de implementar el primer contrato y despues queda GREE
 
 ## Task 4: Caracterizar rutas actuales
 
-**Status:** en progreso; localizacion, redirect privado y 401 de API estan
-cubiertos. Falta caracterizar la salida HTTP publica y verificar secretos.
+**Status:** completada el 2026-09-02; tests cubren localizacion, redirect privado
+y 401 de API. El smoke HTTP confirma landing 200 sin marcadores de secretos.
 
 **Acceptance:** tests cubren landing localizado, redirect privado, 401 de API y
 ausencia de secretos en pagina publica.
@@ -56,6 +56,9 @@ ausencia de secretos en pagina publica.
 **Files:** maximo cuatro archivos bajo `tests/characterization`.
 
 ## Task 5: Endurecer cabeceras y configuracion Next
+
+**Status:** completada el 2026-09-02; politica verificada contra el servidor de
+produccion local y documentada para el futuro endurecimiento con nonces.
 
 **Acceptance:** CSP gradual, HSTS en produccion, anti-framing, no-sniff y
 referrer policy aparecen; `X-Powered-By` y remote image wildcard desaparecen.
