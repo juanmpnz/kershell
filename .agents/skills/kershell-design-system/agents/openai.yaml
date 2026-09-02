@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kershell Design System"
+  short_description: "Diseño accesible y coherencia visual"
+  default_prompt: "Use $kershell-design-system para crear o revisar UI coherente con la marca Kershell."

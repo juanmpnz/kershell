@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kershell Quality"
+  short_description: "Pruebas, rendimiento y observabilidad"
+  default_prompt: "Use $kershell-quality para definir y verificar la calidad de un cambio en Kershell."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kershell Database"
+  short_description: "PostgreSQL, modelos y migraciones seguras"
+  default_prompt: "Use $kershell-database para diseñar o modificar la persistencia PostgreSQL de Kershell."

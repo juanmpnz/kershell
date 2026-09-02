@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kershell Security"
+  short_description: "Seguridad del admin y datos sensibles"
+  default_prompt: "Use $kershell-security para revisar o implementar una superficie sensible de Kershell."

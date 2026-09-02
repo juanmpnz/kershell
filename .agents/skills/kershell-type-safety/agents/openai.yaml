@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kershell Type Safety"
+  short_description: "Contratos TypeScript y validación runtime"
+  default_prompt: "Use $kershell-type-safety para diseñar o revisar contratos y validación en Kershell."

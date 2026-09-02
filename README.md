@@ -1,44 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kershell Platform
 
-## Getting Started
+Sitio publico bilingue y prototipos del administrador privado de Kershell.
 
-Configure contact form delivery:
+> Estado: el landing funciona, pero el administrador todavia no es una fuente de
+> verdad de produccion. Conviven un prototipo en `/admin` y otro en `/dashboard`.
+> No guardar credenciales reales hasta completar la migracion de seguridad y
+> persistencia descrita en la especificacion.
+
+## Stack actual
+
+- Next.js 16 App Router, React 19 y TypeScript estricto.
+- Tailwind CSS 4, Radix UI y Framer Motion.
+- `next-intl` para ingles y espanol.
+- Resend para el formulario de contacto.
+- Supabase REST como persistencia transitoria de un documento JSONB en `/admin`.
+- pnpm 9 como package manager.
+
+## Inicio rapido
 
 ```bash
-RESEND_API_KEY=your_resend_api_key
-CONTACT_EMAIL=info@heykershell.com
-CONTACT_FROM_EMAIL="Kershell Contact <info@heykershell.com>"
-```
-
-For production, use a Resend sender from a verified domain in `CONTACT_FROM_EMAIL`.
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install --ignore-scripts --frozen-lockfile
+cp .env.example .env.local
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+No copies valores reales a `.env.example` ni leas/imprimas `.env.local` en
+salidas de agentes o CI.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Comandos
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Comando | Uso |
+| --- | --- |
+| `pnpm dev` | Servidor local |
+| `pnpm run typecheck` | Comprobacion TypeScript |
+| `pnpm run build` | Build de produccion |
+| `pnpm audit --prod` | Auditoria de dependencias runtime |
 
-## Learn More
+Todavia no existen scripts de lint ni tests. Ambos son requisitos del refactor,
+no pasos que puedan darse por cumplidos hoy.
 
-To learn more about Next.js, take a look at the following resources:
+## Mapa actual
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `app/[locale]`: landing publico localizado.
+- `app/admin`: administrador antiguo con persistencia JSONB y fallback local.
+- `app/(dashboard)/dashboard`: administrador nuevo conectado a datos seed.
+- `lib/dashboard`: tipos y store mock en memoria.
+- `app/api`: contacto, login administrativo y estado JSONB.
+- `supabase/admin-records.sql`: tabla transitoria, no modelo relacional final.
+- `handoff`, `logo-handoff`, `app/admin/dashboard-handoff`: material de diseno
+  historico que debe archivarse fuera del runtime durante el refactor.
 
-## Deploy on Vercel
+## Arquitectura y trabajo futuro
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [Auditoria del repositorio](docs/repository-audit-2026-09-02.md)
+- [Especificacion propuesta](docs/spec-platform.md)
+- [Modelo de datos propuesto](docs/data-model-proposal.md)
+- [Decisiones de arquitectura](docs/decisions)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Las reglas persistentes para agentes viven en [AGENTS.md](AGENTS.md) y
+[CLAUDE.md](CLAUDE.md). Las skills canonicas estan en `.agents/skills`; las
+skills de Claude referencian esa misma fuente desde `.claude/skills`.

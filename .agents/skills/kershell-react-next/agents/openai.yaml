@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kershell React Next"
+  short_description: "React y Next.js para landing y admin"
+  default_prompt: "Use $kershell-react-next para implementar una pantalla o flujo Next.js de Kershell."

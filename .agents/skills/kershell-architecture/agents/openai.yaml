@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kershell Architecture"
+  short_description: "Arquitectura y límites del sistema Kershell"
+  default_prompt: "Use $kershell-architecture para diseñar o revisar una decisión arquitectónica de Kershell."
