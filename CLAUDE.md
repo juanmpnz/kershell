@@ -6,7 +6,6 @@ Project-specific skills are exposed under `.claude/skills`. Each Claude skill
 routes to the matching canonical skill under `.agents/skills`, so changes to
 engineering policy have one source of truth.
 
-Before implementing the platform refactor, read `docs/spec-platform.md` and stop
-for resolution of its open architecture questions. Do not treat the existing
-Google Workspace auth proposal as accepted merely because it exists in the
-working tree.
+Before implementing the platform refactor, read the approved
+`docs/spec-platform.md`. Treat `docs/spec-google-workspace-auth.md` as a
+superseded historical proposal; ADR-004 is the accepted auth decision.

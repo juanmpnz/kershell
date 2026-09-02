@@ -1,5 +1,8 @@
 # Spec: acceso administrativo con Google Workspace
 
+Estado: reemplazado por `docs/spec-platform.md` y ADR-004. Se conserva como
+registro historico de la propuesta Supabase descartada.
+
 ## Objetivo
 
 Sustituir el acceso administrativo por email y contraseña por Google OAuth,

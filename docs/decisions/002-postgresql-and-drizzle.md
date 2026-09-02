@@ -2,7 +2,7 @@
 
 ## Estado
 
-Propuesto parcialmente
+Aceptado
 
 ## Fecha
 
@@ -20,13 +20,15 @@ dispone de servidor propio y quiere PostgreSQL.
 Usar PostgreSQL como unica fuente de verdad. El propietario confirmo que base y
 aplicacion se alojaran en su servidor y que Supabase se retira.
 
-Drizzle ORM con migraciones SQL versionadas sigue pendiente de confirmacion. La
-conexion existira solo en modulos server-only. Un DAL autenticara al owner,
+Drizzle ORM con migraciones SQL versionadas esta aprobado. La conexion existira
+solo en modulos server-only. Un DAL autenticara al owner,
 ejecutara queries y devolvera DTOs minimos.
 
-La decision sobre hosting concreto de PostgreSQL queda pendiente del inventario
-del servidor. Aplicar migraciones en produccion requiere backup y prueba previa
-en una base equivalente.
+El VPS dispone de un recurso PostgreSQL 16 de Coolify usado por ediFlow y de la
+instancia interna PostgreSQL 15 `coolify-db`. Kershell no usara `coolify-db` ni
+la base `ediflow_demo`: tendra base y rol exclusivos. Compartir la instancia 16
+o crear otro recurso se decidira tras medir memoria y conexiones. Aplicar
+migraciones en produccion requiere backup y prueba previa en una base equivalente.
 
 ## Alternativas consideradas
 
@@ -51,4 +53,4 @@ en una base equivalente.
 - Cada cambio de datos tiene schema, migracion, pruebas y rollback/forward-fix.
 - Se elimina el fallback a `localStorage`.
 - Las metricas derivadas se calculan con queries, no se sincronizan manualmente.
-- Hay una dependencia nueva que debe aprobarse y auditarse antes de instalar.
+- La dependencia nueva se instalara con version fijada y auditoria previa.

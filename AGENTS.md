@@ -8,8 +8,7 @@ private admin have different trust boundaries even while they share a repo.
 
 ## Read first
 
-1. Read `docs/spec-platform.md` and confirm its open questions before beginning
-   the platform refactor.
+1. Read the approved `docs/spec-platform.md` before beginning a platform change.
 2. Read `docs/repository-audit-2026-09-02.md` for current risks and duplicate
    implementations.
 3. Load only the project skills relevant to the change:
@@ -45,8 +44,9 @@ refactor task; never report them as passing before they exist.
 - Validate every request payload at runtime; TypeScript casts are not validation.
 - Do not create a custom password manager. Until ADR-003 is accepted and
   implemented, store only secret metadata or references to an external manager.
-- Preserve the user's uncommitted work. The existing Google Workspace auth spec
-  is a proposal and must not be treated as accepted without confirmation.
+- Treat `docs/spec-google-workspace-auth.md` as historical. The accepted auth
+  decision is ADR-004: Better Auth, PostgreSQL sessions and two exact Google
+  identities mapped to one logical owner.
 
 ## Change discipline
 

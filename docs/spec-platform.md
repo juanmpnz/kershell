@@ -1,6 +1,6 @@
 # Spec propuesta: Kershell Platform
 
-Estado: direccion aprobada; decisiones de auth, secretos e infraestructura pendientes
+Estado: aprobado; implementacion en curso
 
 ## Decisiones confirmadas el 2026-09-02
 
@@ -9,9 +9,17 @@ Estado: direccion aprobada; decisiones de auth, secretos e infraestructura pendi
 - Aplicacion, sesiones y PostgreSQL se alojaran en infraestructura propia.
 - El admin sera accesible desde Internet, siempre mediante HTTPS y autenticacion.
 - No existen datos reales que migrar: los seeds sanitizados inicializaran la base.
+- Better Auth, Drizzle y PostgreSQL estan aprobados.
+- Una cuenta Google Workspace corporativa y una cuenta Google personal son las
+  dos identidades autorizadas para el mismo propietario logico. Sus emails
+  exactos se configuran en Coolify y no se guardan en Git.
+- Las credenciales se guardaran inicialmente solo como referencias externas; la
+  aplicacion no almacenara sus valores secretos.
 - El servidor actual ofrece 2 vCPU, 4 GB RAM y 40 GB de disco local. Es suficiente
   para una primera version de bajo trafico, pero los backups deben salir de esa
   maquina y el build de imagen no deberia competir con PostgreSQL en produccion.
+- El VPS usa Ubuntu 24.04.1 LTS x86_64, Docker 27.5.1, Compose v2, Coolify
+  4.3.14 y Traefik 3.6. PostgreSQL solo sera accesible por la red Docker interna.
 
 ## Objetivo
 
@@ -50,16 +58,14 @@ No incluye inicialmente:
 - TypeScript estricto y validacion runtime en cada frontera.
 - Tailwind CSS 4, componentes Radix existentes y tokens Kershell compartidos.
 - PostgreSQL en el servidor del propietario, sin publicar su puerto en Internet.
-- Drizzle ORM + migraciones SQL revisables como propuesta inicial; Prisma queda
-  como alternativa si se prioriza una consola/cliente mas opinado.
-- Better Auth con Google OIDC y sesiones PostgreSQL como propuesta de auth; debe
-  validar `sub`, `email_verified`, el claim Workspace `hd` y una allowlist exacta.
+- Drizzle ORM + migraciones SQL revisables.
+- Better Auth con Google OIDC y sesiones PostgreSQL. Debe validar `sub`,
+  `email_verified` y una allowlist exacta. Para la identidad Workspace tambien
+  debe exigir `hd=heykershell.com`; la identidad Gmail no presenta ese claim.
 - Node.js 24 LTS parcheado como runtime propuesto.
 - Vitest para unidad/integracion y Playwright para flujos criticos.
-- Contenedores y reverse proxy solo despues de conocer el servidor real.
-
-La biblioteca de autenticacion y la politica de secretos quedan abiertas: ver
-preguntas al final y ADR-004.
+- Contenedores desplegados por Coolify detras de Traefik; ningun puerto de base
+  de datos se publica.
 
 ## Comandos actuales
 
@@ -155,7 +161,6 @@ Reglas:
 
 ### Requiere confirmacion
 
-- Proveedor y flujo de autenticacion.
 - Cambios de schema o migraciones sobre el servidor real.
 - Nuevas dependencias, servicios externos o puertos publicos.
 - Almacenar valores secretos dentro de la aplicacion.
@@ -183,16 +188,12 @@ Reglas:
   alcanzables no mitigados.
 - Ningun secreto real esta en Git, logs, seeds, HTML ni bundles.
 
-## Preguntas abiertas que bloquean fases concretas
+## Configuracion pendiente de despliegue
 
-1. ¿Que sistema operativo y arquitectura usa el VPS? ¿Docker y Docker Compose
-   estan disponibles y existe ya Caddy, Traefik, Nginx u otro reverse proxy?
-2. ¿PostgreSQL ya esta instalado? Si existe, indicar solo version y topologia,
-   nunca passwords en el repositorio o chat.
-3. ¿Cual es el dominio Workspace exacto, el correo owner y el dominio/subdominio
-   canonico del admin?
-4. ¿Se aprueba Better Auth + Drizzle para Google OIDC y sesiones PostgreSQL?
-5. ¿Google Workspace obliga 2-Step Verification para la cuenta owner? Si no,
-   debe habilitarse antes de publicar el admin.
-6. Para credenciales: ¿se aprueba guardar inicialmente solo referencias, o se
-   solicita construir un vault propio con una fase de seguridad independiente?
+- Confirmar mediante acceso de solo lectura que los 4 GB de swap siguen activos
+  despues de reiniciar y medir el consumo base de Coolify.
+- Elegir en Coolify el hostname sslip.io inicial del admin y registrar las URLs
+  OAuth exactas antes de crear las credenciales Google.
+- Crear una base y un rol exclusivos de Kershell. No reutilizar `ediflow_demo` ni
+  la instancia interna `coolify-db`.
+- Elegir el destino externo y cifrado de los backups antes de desplegar datos.

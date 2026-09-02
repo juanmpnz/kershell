@@ -2,6 +2,9 @@
 
 ## Task 1: Confirmar configuracion de seguridad e infraestructura
 
+**Status:** completada el 2026-09-02; quedan verificaciones operativas de solo
+lectura antes del despliegue.
+
 **Acceptance:** dominio Workspace, owner, hostname, Better Auth/Drizzle, 2SV,
 politica de secretos, SO, Docker y reverse proxy quedan registrados sin secretos.
 

@@ -2,7 +2,7 @@
 
 ## Estado
 
-Propuesto
+Aceptado
 
 ## Fecha
 
@@ -44,4 +44,5 @@ reautenticacion, TTL de revelado, audit log append-only, rotacion y recuperacion
 - Menor alcance y riesgo para poner en marcha proyectos/suscripciones primero.
 - El dashboard enlaza al secreto sin recibir su valor.
 - Exportaciones, logs, seeds y backups de la app no contienen secretos reales.
-- Requiere seleccionar un gestor externo compatible con el flujo del propietario.
+- El gestor externo concreto puede seleccionarse mas adelante; hasta entonces la
+  referencia puede quedar vacia y nunca se guarda el valor secreto.

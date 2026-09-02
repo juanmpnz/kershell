@@ -1,6 +1,6 @@
 # Implementation Plan: Kershell Platform
 
-Estado: pendiente de revision humana
+Estado: aprobado; Checkpoint 1 en curso
 
 ## Overview
 
@@ -22,13 +22,12 @@ hasta completar inventario, backup y ensayo local/staging.
 - El servidor actual (2 vCPU, 4 GB RAM, 40 GB) sirve para el MVP de bajo trafico;
   imagenes y backups se construyen/guardan fuera del VPS.
 
-## Decisiones pendientes
+## Decisiones de despliegue pendientes
 
-- Better Auth + Drizzle como combinacion concreta.
-- Dominio Workspace, email owner y hostname del admin.
-- Sistema operativo, Docker/Compose, reverse proxy y PostgreSQL existentes.
-- Google Workspace 2-Step Verification obligatorio.
-- Referencias externas versus un futuro vault propio.
+- Hostname sslip.io exacto asignado por Coolify.
+- Instancia PostgreSQL 16 compartida con aislamiento o recurso Kershell separado,
+  despues de medir RAM, swap y conexiones.
+- Destino externo cifrado para backups.
 
 ## Dependency graph
 
@@ -165,6 +164,6 @@ En el VPS actual:
 
 ## Review gate
 
-No comenzar cambios de dependencias, estructura, schema ni servidor hasta que el
-propietario apruebe este plan y resuelva las decisiones pendientes aplicables al
-Checkpoint 1.
+El propietario aprobo el plan el 2026-09-02. Los cambios locales pueden avanzar
+por checkpoints. Ninguna migracion, eliminacion o cambio del VPS se ejecuta sin
+inventario de solo lectura, backup y verificacion especifica del objetivo.

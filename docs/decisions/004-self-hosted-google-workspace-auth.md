@@ -1,8 +1,8 @@
-# ADR-004: Google Workspace con autenticacion self-hosted
+# ADR-004: Identidades Google con autenticacion self-hosted
 
 ## Estado
 
-Propuesto
+Aceptado
 
 ## Fecha
 
@@ -15,27 +15,34 @@ Supabase y servir el administrador desde infraestructura propia accesible por
 Internet. Se necesitan sesiones revocables y una autorizacion estricta de un
 unico owner.
 
-## Decision propuesta
+## Decision
 
 Usar Better Auth con su adaptador Drizzle/PostgreSQL y proveedor Google. La base
 de datos propia almacenara usuarios, cuentas y sesiones revocables.
 
-La autorizacion exigira simultaneamente:
+Las identidades permitidas son una cuenta Workspace corporativa y una cuenta
+Google personal, configuradas mediante una allowlist privada en Coolify. Ambas
+representan al mismo propietario logico, aunque Better Auth mantenga cuentas
+externas distintas. La autorizacion exigira:
 
 - issuer y audience validos verificados por la biblioteca;
 - `sub` de Google como identificador externo estable;
 - `email_verified = true`;
-- claim `hd` exactamente igual al dominio Workspace configurado;
 - email normalizado incluido en `ADMIN_ALLOWED_EMAILS`;
 - usuario local activo.
+
+Para la identidad corporativa tambien se exige el claim `hd=heykershell.com`.
+La cuenta personal no pertenece a un hosted domain y no debe fallar por la
+ausencia de `hd`. Esta excepcion se vincula al email exacto de la allowlist y no
+permite cualquier cuenta personal.
 
 Solo se habilita Google; email/password, signup publico, account linking y otros
 providers permanecen desactivados. `trustedOrigins` contiene una lista explicita.
 Cada DAL/Route Handler/Server Action vuelve a verificar sesion y owner.
 
-Google Workspace debe exigir 2-Step Verification para el owner antes de exponer
-el admin. La funcionalidad TOTP de Better Auth no se asume como segunda capa para
-OAuth social, porque no bloquea esos flujos por defecto.
+Las dos cuentas autorizadas tienen 2-Step Verification. La funcionalidad TOTP de
+Better Auth no se asume como segunda capa para OAuth social, porque no bloquea
+esos flujos por defecto.
 
 ## Alternativas consideradas
 

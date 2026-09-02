@@ -1,7 +1,7 @@
 # Modelo PostgreSQL propuesto
 
-Estado: propuesta; PostgreSQL esta aprobado, pero el schema y Drizzle requieren
-aprobacion antes de aplicarse al servidor.
+Estado: direccion y Drizzle aprobados; el SQL exacto se revisara antes de aplicar
+la primera migracion al servidor.
 
 ## Principios
 
@@ -18,21 +18,35 @@ aprobacion antes de aplicarse al servidor.
 
 ## Entidades iniciales
 
-### `users`
+### `owners`
 
 - `id uuid primary key`
-- `email citext unique not null`
 - `display_name text not null`
 - `status text check (status in ('active', 'disabled'))`
 - timestamps
 
-La aplicacion impone un unico usuario activo inicialmente. No se modelan roles
-ni invitaciones hasta que exista un caso real.
+La aplicacion impone un unico owner activo inicialmente. No se modelan roles ni
+invitaciones hasta que exista un caso real.
+
+### `admin_identities`
+
+- `id uuid primary key`
+- `owner_id uuid references owners on delete cascade`
+- `auth_user_id text unique not null`
+- `provider text check (provider = 'google')`
+- `provider_subject text unique not null`
+- `email citext unique not null`
+- `hosted_domain text nullable`
+- `status text check (status in ('active', 'disabled'))`
+- timestamps
+
+Permite que las dos cuentas Google aprobadas representen al mismo propietario
+sin usar el email como identificador externo estable.
 
 ### `auth_sessions`
 
 - `id uuid primary key`
-- `user_id uuid references users on delete cascade`
+- `identity_id uuid references admin_identities on delete cascade`
 - `token_hash text unique not null`
 - `expires_at`, `revoked_at`, `last_seen_at`, timestamps
 - metadata minima de seguridad; nunca el token plano
