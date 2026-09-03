@@ -1,0 +1,28 @@
+{
+  "name": "@kershell/domain",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./credential-references": "./credential-references.ts",
+    "./projects": "./projects.ts",
+    "./subscriptions": "./subscriptions.ts",
+    "./vendors": "./vendors.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings=0",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "4.5.4"
+  },
+  "devDependencies": {
+    "eslint": "9.39.5",
+    "typescript": "^5",
+    "typescript-eslint": "8.69.0",
+    "vitest": "4.1.11"
+  }
+}

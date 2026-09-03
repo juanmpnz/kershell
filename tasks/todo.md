@@ -128,6 +128,9 @@ deshabilitada; `/admin` antiguo no se copia como segunda implementacion.
 
 ## Task 10: Definir contratos de dominio
 
+**Status:** completada el 2026-09-03 con schemas Zod estrictos y tests de
+proyectos, vendors, suscripciones y referencias externas de credenciales.
+
 **Acceptance:** proyectos, vendors, suscripciones y credential references tienen
 schemas runtime unicos, enums canonicos y DTOs sin valores secretos.
 

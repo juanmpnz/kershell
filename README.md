@@ -54,6 +54,7 @@ La deuda de lint previa queda cuantificada por app en sus archivos
 - `apps/admin/lib/dashboard`: tipos y store mock en memoria.
 - `apps/site/app/api/contact`: unica API del sitio publico.
 - `packages/config`: politica HTTP compartida por ambos despliegues.
+- `packages/domain`: contratos runtime estrictos y DTOs seguros del negocio.
 - `packages/ui`: tokens CSS compartidos.
 - `handoff` y `logo-handoff`: material de diseno historico fuera del runtime.
 
