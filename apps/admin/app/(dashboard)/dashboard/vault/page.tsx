@@ -1,12 +1,18 @@
 import { getDatabase } from "@kershell/db/client";
 import { listProjectOverviews } from "@kershell/db/repositories/projects";
 import Link from "next/link";
+import { ActionNotice } from "@/components/dashboard/ActionNotice";
 import { PageHeader } from "@/components/dashboard/PageHeader";
 import { VaultProjects } from "@/components/dashboard/VaultProjects";
 import { requireOwner } from "@/lib/auth/owner-session";
 
-export default async function VaultPage() {
+export default async function VaultPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ notice?: string | string[] }>;
+}) {
   const owner = await requireOwner();
+  const { notice } = await searchParams;
   const projects = await listProjectOverviews(getDatabase(), owner.ownerId);
 
   return (
@@ -26,6 +32,7 @@ export default async function VaultPage() {
         sub="Bóveda de credenciales por proyecto. Las claves se mantienen ocultas por defecto — un click revela, dos clicks copian."
         title="Vault de proyectos"
       />
+      <ActionNotice notice={typeof notice === "string" ? notice : undefined} />
       <VaultProjects projects={projects} />
     </>
   );
