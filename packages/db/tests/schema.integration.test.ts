@@ -261,6 +261,7 @@ describe("project data access", () => {
     expect(campos).toMatchObject({
       credentialReferenceCount: 5,
       monthlyAmountMinor: 6_500,
+      subscriptionCount: 3,
       technologies: ["Next.js", "Supabase", "Vercel", "Resend"],
     });
     expect(JSON.stringify(projects)).not.toMatch(

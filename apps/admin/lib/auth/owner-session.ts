@@ -4,6 +4,7 @@ import { getDatabase, type KershellDatabase } from "@kershell/db/client";
 import { getAuthorizedOwner } from "@kershell/db/repositories/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { cache } from "react";
 
 import { getAuth, type KershellAuth } from "./auth";
 
@@ -37,9 +38,9 @@ export async function resolveOwnerSession(
   };
 }
 
-export async function getOwnerSession(): Promise<OwnerSession | null> {
+export const getOwnerSession = cache(async (): Promise<OwnerSession | null> => {
   return resolveOwnerSession(getAuth(), getDatabase(), await headers());
-}
+});
 
 export async function requireOwner(): Promise<OwnerSession> {
   const ownerSession = await getOwnerSession();

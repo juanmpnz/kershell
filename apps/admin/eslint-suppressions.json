@@ -15,9 +15,6 @@
     }
   },
   "components/dashboard/VaultProjects.tsx": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 1
-    },
     "react-hooks/set-state-in-effect": {
       "count": 1
     }

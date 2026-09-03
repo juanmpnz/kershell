@@ -35,6 +35,7 @@ export type ProjectOverviewDto = Pick<
 > & {
   credentialReferenceCount: number;
   monthlyAmountMinor: number;
+  subscriptionCount: number;
   technologies: string[];
 };
 
@@ -88,6 +89,7 @@ export async function listProjectOverviews(
       db
         .select({
           projectId: projectSubscriptions.projectId,
+          subscriptionCount: count(projectSubscriptions.subscriptionId),
           monthlyAmountMinor: sql<string>`coalesce(sum(
             case ${subscriptions.billingInterval}
               when 'YEARLY' then ${subscriptions.amountMinor} / 12
@@ -121,10 +123,13 @@ export async function listProjectOverviews(
       )
       .map((row) => [row.projectId, row.total]),
   );
-  const subscriptionsByProject = new Map(
+  const subscriptionMetricsByProject = new Map(
     subscriptionRows.map((row) => [
       row.projectId,
-      Number(row.monthlyAmountMinor),
+      {
+        monthlyAmountMinor: Number(row.monthlyAmountMinor),
+        subscriptionCount: row.subscriptionCount,
+      },
     ]),
   );
 
@@ -135,6 +140,7 @@ export async function listProjectOverviews(
   }
 
   return projectRows.map((row) => {
+    const subscriptionMetrics = subscriptionMetricsByProject.get(row.id);
     const project = projectSchema.parse({
       ...row,
       archivedAt: row.archivedAt?.toISOString() ?? null,
@@ -156,7 +162,8 @@ export async function listProjectOverviews(
       updatedAt: project.updatedAt,
       technologies: project.technologies,
       credentialReferenceCount: credentialsByProject.get(project.id) ?? 0,
-      monthlyAmountMinor: subscriptionsByProject.get(project.id) ?? 0,
+      monthlyAmountMinor: subscriptionMetrics?.monthlyAmountMinor ?? 0,
+      subscriptionCount: subscriptionMetrics?.subscriptionCount ?? 0,
     };
   });
 }

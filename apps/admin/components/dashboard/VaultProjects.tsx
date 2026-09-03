@@ -1,41 +1,39 @@
 "use client";
 
+import type { ProjectOverviewDto } from "@kershell/db/repositories/projects";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { Badge, type BadgeTone } from "@/components/dashboard/ui/Badge";
 import { Icon } from "@/components/dashboard/ui/Icon";
 import { IconButton } from "@/components/dashboard/ui/IconButton";
 import { Input } from "@/components/dashboard/ui/Input";
-import type { Project, ProjectStatus, Subscription } from "@/lib/dashboard/schema";
 
 type VaultView = "grid" | "list";
 
 type VaultProjectsProps = {
-  projects: Project[];
-  subscriptions: Subscription[];
+  projects: ProjectOverviewDto[];
 };
 
-const STATUS_TONE: Record<ProjectStatus, BadgeTone> = {
-  live: "ok",
-  beta: "info",
-  paused: "neutral",
+const STATUS_TONE: Record<ProjectOverviewDto["status"], BadgeTone> = {
+  LIVE: "ok",
+  BETA: "info",
+  PAUSED: "neutral",
 };
 
-const STATUS_LABEL: Record<ProjectStatus, string> = {
-  live: "Producción",
-  beta: "Beta",
-  paused: "Pausado",
+const STATUS_LABEL: Record<ProjectOverviewDto["status"], string> = {
+  LIVE: "Producción",
+  BETA: "Beta",
+  PAUSED: "Pausado",
 };
 
-function formatMoney(value: number) {
-  return `$${Number(value).toLocaleString("es-ES", { maximumFractionDigits: 2 })}`;
+function formatMoney(amountMinor: number) {
+  return new Intl.NumberFormat("es-ES", {
+    currency: "USD",
+    style: "currency",
+  }).format(amountMinor / 100);
 }
 
-function projectSubscriptionCount(projectId: string, subscriptions: Subscription[]) {
-  return subscriptions.filter((subscription) => subscription.project === projectId).length;
-}
-
-export function VaultProjects({ projects, subscriptions }: VaultProjectsProps) {
+export function VaultProjects({ projects }: VaultProjectsProps) {
   const [query, setQuery] = useState("");
   const [view, setView] = useState<VaultView>("grid");
 
@@ -59,7 +57,7 @@ export function VaultProjects({ projects, subscriptions }: VaultProjectsProps) {
     }
 
     return projects.filter((project) =>
-      [project.name, project.code, project.summary, project.stack.join(" ")]
+      [project.name, project.code, project.summary, project.technologies.join(" ")]
         .join(" ")
         .toLowerCase()
         .includes(needle),
@@ -104,11 +102,11 @@ export function VaultProjects({ projects, subscriptions }: VaultProjectsProps) {
         view === "grid" ? (
           <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-4">
             {filteredProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} subscriptions={subscriptions} />
+              <ProjectCard key={project.id} project={project} />
             ))}
           </div>
         ) : (
-          <ProjectList projects={filteredProjects} subscriptions={subscriptions} />
+          <ProjectList projects={filteredProjects} />
         )
       ) : (
         <div className="grid place-items-center rounded-[10px] border border-border bg-surface px-6 py-16 text-center">
@@ -124,9 +122,7 @@ export function VaultProjects({ projects, subscriptions }: VaultProjectsProps) {
   );
 }
 
-function ProjectCard({ project, subscriptions }: { project: Project; subscriptions: Subscription[] }) {
-  const subscriptionCount = projectSubscriptionCount(project.id, subscriptions);
-
+function ProjectCard({ project }: { project: ProjectOverviewDto }) {
   return (
     <Link
       className="flex h-[340px] flex-col rounded-[10px] border border-border bg-surface p-5 transition hover:bg-surface-2"
@@ -149,7 +145,7 @@ function ProjectCard({ project, subscriptions }: { project: Project; subscriptio
       <p className="mt-4 line-clamp-2 text-[13px] leading-5 text-text-dim">{project.summary}</p>
 
       <div className="mt-5 flex max-h-[58px] flex-wrap gap-2 overflow-hidden">
-        {project.stack.map((item) => (
+        {project.technologies.map((item) => (
           <span className="rounded border border-border bg-[var(--ink-2)] px-[7px] py-[3px] font-mono text-[10.5px] text-text-dim" key={item}>
             {item}
           </span>
@@ -157,15 +153,15 @@ function ProjectCard({ project, subscriptions }: { project: Project; subscriptio
       </div>
 
       <div className="mt-auto grid grid-cols-3 gap-3 border-t border-border pt-4">
-        <ProjectMetric label="creds" value={project.credentialsCount.toString()} />
-        <ProjectMetric label="subs" value={subscriptionCount.toString()} />
-        <ProjectMetric label="mensual" value={formatMoney(project.monthly)} />
+        <ProjectMetric label="creds" value={project.credentialReferenceCount.toString()} />
+        <ProjectMetric label="subs" value={project.subscriptionCount.toString()} />
+        <ProjectMetric label="mensual" value={formatMoney(project.monthlyAmountMinor)} />
       </div>
     </Link>
   );
 }
 
-function ProjectList({ projects, subscriptions }: { projects: Project[]; subscriptions: Subscription[] }) {
+function ProjectList({ projects }: { projects: ProjectOverviewDto[] }) {
   return (
     <div className="overflow-hidden rounded-[10px] border border-border bg-surface">
       <div className="grid min-w-[760px] grid-cols-[2fr_1fr_1fr_1fr_80px] bg-[var(--ink-2)] px-[18px] py-3 font-mono text-[10.5px] uppercase tracking-[0.14em] text-muted">
@@ -194,8 +190,8 @@ function ProjectList({ projects, subscriptions }: { projects: Project[]; subscri
                 {STATUS_LABEL[project.status]}
               </Badge>
             </span>
-            <span className="font-mono text-sm text-text-dim">{project.credentialsCount}</span>
-            <span className="font-mono text-sm text-text">{formatMoney(project.monthly)}</span>
+            <span className="font-mono text-sm text-text-dim">{project.credentialReferenceCount}</span>
+            <span className="font-mono text-sm text-text">{formatMoney(project.monthlyAmountMinor)}</span>
             <span className="justify-self-end text-accent">
               <Icon name="arrowRight" size={16} />
             </span>
