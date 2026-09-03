@@ -228,10 +228,14 @@ caracterizacion del redirect sin cookie; build dinamico del administrador.
 **Dependencies:** Tasks 13, 14 y 15.
 
 **Files:** resolvedor server-only de sesion/owner, layout privado y tests de
-integracion. Todavia no existen acciones ni APIs de negocio; cada una debe entrar
-por `requireOwner` al implementarse en Tasks 17-20 y probar su invocacion directa.
+integracion. Las acciones de proyectos ya entran por `requireOwner` y prueban su
+invocacion directa; las futuras acciones y APIs deben conservar este limite.
 
 ## Task 17: Entregar proyectos CRUD
+
+**Status:** implementacion completada el 2026-09-03; pendiente validacion visual
+en navegador antes de cerrar la tarea. Lista, detalle, alta, edicion y archivo ya
+usan PostgreSQL y exigen owner activo; no existe borrado destructivo.
 
 **Acceptance:** owner lista, crea, edita y archiva proyectos persistidos; estados
 loading/empty/error/success y validacion estan visibles.

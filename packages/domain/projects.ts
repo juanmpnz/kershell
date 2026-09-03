@@ -10,6 +10,7 @@ import {
 
 export const projectStatuses = ["LIVE", "BETA", "PAUSED"] as const;
 export const projectStatusSchema = z.enum(projectStatuses);
+export const projectIdSchema = entityIdSchema;
 
 const technologiesSchema = z
   .array(z.string().trim().min(1).max(60))
@@ -39,7 +40,7 @@ export const createProjectSchema = z.strictObject({
 });
 
 export const projectSchema = z.strictObject({
-  id: entityIdSchema,
+  id: projectIdSchema,
   ownerId: entityIdSchema,
   ...createProjectSchema.shape,
   archivedAt: isoDateTimeSchema.nullable(),

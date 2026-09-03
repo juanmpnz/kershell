@@ -4,11 +4,25 @@ import Link from "next/link";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 
+import type { ProjectOverviewDto } from "@kershell/db/repositories/projects";
+
 import { createProjectAction } from "@/app/(dashboard)/dashboard/vault/actions";
 import { Field } from "@/components/dashboard/ui/Field";
 import { Input } from "@/components/dashboard/ui/Input";
 import { Select } from "@/components/dashboard/ui/Select";
-import { initialProjectActionState } from "@/lib/projects/project-form";
+import {
+  initialProjectActionState,
+  type ProjectActionState,
+} from "@/lib/projects/project-form";
+
+type ProjectFormProps = {
+  action?: (
+    previousState: ProjectActionState,
+    formData: FormData,
+  ) => Promise<ProjectActionState>;
+  cancelHref?: string;
+  project?: ProjectOverviewDto;
+};
 
 function FieldError({ messages }: { messages?: string[] }) {
   return messages?.length ? (
@@ -16,7 +30,7 @@ function FieldError({ messages }: { messages?: string[] }) {
   ) : null;
 }
 
-function SubmitButton() {
+function SubmitButton({ label }: { label: string }) {
   const { pending } = useFormStatus();
 
   return (
@@ -25,14 +39,18 @@ function SubmitButton() {
       disabled={pending}
       type="submit"
     >
-      {pending ? "Guardando…" : "Crear proyecto"}
+      {pending ? "Guardando…" : label}
     </button>
   );
 }
 
-export function ProjectForm() {
+export function ProjectForm({
+  action = createProjectAction,
+  cancelHref = "/dashboard/vault",
+  project,
+}: ProjectFormProps) {
   const [state, formAction] = useActionState(
-    createProjectAction,
+    action,
     initialProjectActionState,
   );
 
@@ -49,13 +67,14 @@ export function ProjectForm() {
 
       <div className="grid gap-5 rounded-[10px] border border-border bg-surface p-5 md:grid-cols-2">
         <Field label="Nombre">
-          <Input autoComplete="off" maxLength={120} name="name" required />
+          <Input autoComplete="off" defaultValue={project?.name} maxLength={120} name="name" required />
           <FieldError messages={state.fieldErrors?.name} />
         </Field>
         <Field label="Código">
           <Input
             autoCapitalize="characters"
             autoComplete="off"
+            defaultValue={project?.code}
             maxLength={32}
             name="code"
             pattern="[A-Za-z0-9][A-Za-z0-9_-]{1,31}"
@@ -65,7 +84,7 @@ export function ProjectForm() {
           <FieldError messages={state.fieldErrors?.code} />
         </Field>
         <Field label="Estado">
-          <Select defaultValue="BETA" name="status">
+          <Select defaultValue={project?.status ?? "BETA"} name="status">
             <option value="LIVE">Producción</option>
             <option value="BETA">Beta</option>
             <option value="PAUSED">Pausado</option>
@@ -73,20 +92,21 @@ export function ProjectForm() {
           <FieldError messages={state.fieldErrors?.status} />
         </Field>
         <Field label="Etapa">
-          <Input maxLength={120} name="stage" placeholder="Planning" required />
+          <Input defaultValue={project?.stage} maxLength={120} name="stage" placeholder="Planning" required />
           <FieldError messages={state.fieldErrors?.stage} />
         </Field>
         <Field label="Fecha de inicio">
-          <Input name="startedOn" type="date" />
+          <Input defaultValue={project?.startedOn ?? ""} name="startedOn" type="date" />
           <FieldError messages={state.fieldErrors?.startedOn} />
         </Field>
         <Field label="Color">
-          <Input defaultValue="#B4F23F" name="color" type="color" />
+          <Input defaultValue={project?.color ?? "#B4F23F"} name="color" type="color" />
           <FieldError messages={state.fieldErrors?.color} />
         </Field>
         <Field label="Tecnologías (separadas por coma)">
           <Input
             autoComplete="off"
+            defaultValue={project?.technologies.join(", ")}
             name="technologies"
             placeholder="Next.js, PostgreSQL"
           />
@@ -99,6 +119,7 @@ export function ProjectForm() {
               maxLength={2000}
               name="summary"
               required
+              defaultValue={project?.summary}
             />
             <FieldError messages={state.fieldErrors?.summary} />
           </Field>
@@ -108,11 +129,11 @@ export function ProjectForm() {
       <div className="flex justify-end gap-3">
         <Link
           className="rounded-md border border-border px-4 py-2 text-sm text-text-dim transition hover:bg-surface"
-          href="/dashboard/vault"
+          href={cancelHref}
         >
           Cancelar
         </Link>
-        <SubmitButton />
+        <SubmitButton label={project ? "Guardar cambios" : "Crear proyecto"} />
       </div>
     </form>
   );

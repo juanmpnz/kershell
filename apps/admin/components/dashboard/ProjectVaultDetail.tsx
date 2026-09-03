@@ -1,5 +1,6 @@
 "use client";
 
+import type { ProjectOverviewDto } from "@kershell/db/repositories/projects";
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { CredentialCard } from "@/components/dashboard/CredentialCard";
@@ -18,8 +19,6 @@ import type {
   CredentialEnv,
   CredentialField,
   CredentialType,
-  Project,
-  ProjectStatus,
   Subscription,
 } from "@/lib/dashboard/schema";
 
@@ -27,21 +26,21 @@ type ActiveTab = "credentials" | "subscriptions" | "notes";
 
 type ProjectVaultDetailProps = {
   credentials: Credential[];
-  project: Project;
+  project: ProjectOverviewDto;
   subscriptions: Subscription[];
   today: string;
 };
 
-const STATUS_TONE: Record<ProjectStatus, BadgeTone> = {
-  live: "ok",
-  beta: "info",
-  paused: "neutral",
+const STATUS_TONE: Record<ProjectOverviewDto["status"], BadgeTone> = {
+  LIVE: "ok",
+  BETA: "info",
+  PAUSED: "neutral",
 };
 
-const STATUS_LABEL: Record<ProjectStatus, string> = {
-  live: "Producción",
-  beta: "Beta",
-  paused: "Pausado",
+const STATUS_LABEL: Record<ProjectOverviewDto["status"], string> = {
+  LIVE: "Producción",
+  BETA: "Beta",
+  PAUSED: "Pausado",
 };
 
 const CREDENTIAL_TYPES: CredentialType[] = [
@@ -57,18 +56,22 @@ const CREDENTIAL_ENVS: CredentialEnv[] = ["prod", "staging", "dev", "shared"];
 const ROTATION_OPTIONS = ["30", "60", "90", "180", "never"] as const;
 
 function formatDate(iso: string) {
-  const [year, month, day] = iso.split("-").map(Number);
+  const date = new Date(iso.length === 10 ? `${iso}T00:00:00.000Z` : iso);
   return new Intl.DateTimeFormat("es-ES", {
     day: "2-digit",
     month: "short",
+    timeZone: "UTC",
     year: "numeric",
   })
-    .format(new Date(year, month - 1, day))
+    .format(date)
     .replaceAll(".", "");
 }
 
-function formatMoney(value: number) {
-  return `$${Number(value).toLocaleString("es-ES", { maximumFractionDigits: 2 })}`;
+function formatMoney(amountMinor: number) {
+  return new Intl.NumberFormat("es-ES", {
+    currency: "USD",
+    style: "currency",
+  }).format(amountMinor / 100);
 }
 
 function createEmptyCredential(today: string): Credential {
@@ -145,9 +148,9 @@ export function ProjectVaultDetail({ credentials, project, subscriptions, today 
       <PageHeader
         actions={
           <>
-            <button className="rounded-md border border-border px-3 py-2 text-sm text-text-dim transition hover:bg-surface" type="button">
+            <Link className="rounded-md border border-border px-3 py-2 text-sm text-text-dim transition hover:bg-surface" href={`/dashboard/vault/${project.id}/edit`}>
               Editar proyecto
-            </button>
+            </Link>
             <button className="rounded-md bg-accent px-3 py-2 text-sm font-semibold text-accent-ink transition hover:brightness-110" onClick={openNewCredential} type="button">
               Nueva credencial
             </button>
@@ -168,11 +171,11 @@ export function ProjectVaultDetail({ credentials, project, subscriptions, today 
                 {STATUS_LABEL[project.status]}
               </Badge>
             </MetaItem>
-            <MetaItem label="Stack">{project.stack.join(" · ")}</MetaItem>
+            <MetaItem label="Stack">{project.technologies.join(" · ")}</MetaItem>
             <MetaItem label="Credenciales">{items.length} items</MetaItem>
             <MetaItem label="Suscripciones">{subscriptions.length} servicios</MetaItem>
-            <MetaItem label="Gasto mensual">{formatMoney(project.monthly)}</MetaItem>
-            <MetaItem label="Creado">{formatDate(project.created)}</MetaItem>
+            <MetaItem label="Gasto mensual">{formatMoney(project.monthlyAmountMinor)}</MetaItem>
+            <MetaItem label="Creado">{formatDate(project.createdAt)}</MetaItem>
           </>
         }
         sub={project.summary}

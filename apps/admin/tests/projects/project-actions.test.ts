@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const mocks = vi.hoisted(() => ({
+  archiveProject: vi.fn(),
   createProject: vi.fn(),
   getDatabase: vi.fn(() => ({ kind: "database" })),
   redirect: vi.fn(() => {
@@ -8,11 +9,14 @@ const mocks = vi.hoisted(() => ({
   }),
   requireOwner: vi.fn(),
   revalidatePath: vi.fn(),
+  updateProject: vi.fn(),
 }));
 
 vi.mock("@kershell/db/client", () => ({ getDatabase: mocks.getDatabase }));
 vi.mock("@kershell/db/repositories/projects", () => ({
+  archiveProject: mocks.archiveProject,
   createProject: mocks.createProject,
+  updateProject: mocks.updateProject,
 }));
 vi.mock("next/cache", () => ({ revalidatePath: mocks.revalidatePath }));
 vi.mock("next/navigation", () => ({ redirect: mocks.redirect }));
@@ -20,7 +24,13 @@ vi.mock("@/lib/auth/owner-session", () => ({
   requireOwner: mocks.requireOwner,
 }));
 
-import { createProjectAction } from "@/app/(dashboard)/dashboard/vault/actions";
+import {
+  archiveProjectAction,
+  createProjectAction,
+  updateProjectAction,
+} from "@/app/(dashboard)/dashboard/vault/actions";
+
+const projectId = "20000000-0000-4000-8000-000000000001";
 
 function validFormData() {
   const formData = new FormData();
@@ -37,10 +47,12 @@ function validFormData() {
 
 describe("project server actions", () => {
   beforeEach(() => {
+    mocks.archiveProject.mockReset();
     mocks.createProject.mockReset();
     mocks.redirect.mockClear();
     mocks.requireOwner.mockReset();
     mocks.revalidatePath.mockClear();
+    mocks.updateProject.mockReset();
   });
 
   it("rejects direct invocation before touching the database", async () => {
@@ -79,5 +91,40 @@ describe("project server actions", () => {
       }),
     );
     expect(mocks.revalidatePath).toHaveBeenCalledWith("/dashboard/vault");
+    expect(mocks.redirect).toHaveBeenCalledWith(
+      "/dashboard/vault?notice=created",
+    );
+  });
+
+  it("scopes update and archive actions to the authenticated owner", async () => {
+    mocks.requireOwner.mockResolvedValue({ ownerId: "owner-one" });
+    mocks.updateProject.mockResolvedValue(true);
+    mocks.archiveProject.mockResolvedValue(true);
+
+    await expect(
+      updateProjectAction(projectId, {}, validFormData()),
+    ).rejects.toThrow("NEXT_REDIRECT");
+    expect(mocks.updateProject).toHaveBeenCalledWith(
+      { kind: "database" },
+      "owner-one",
+      projectId,
+      expect.objectContaining({ code: "PRIVATE_OPS" }),
+    );
+    expect(mocks.redirect).toHaveBeenCalledWith(
+      `/dashboard/vault/${projectId}?notice=updated`,
+    );
+
+    mocks.redirect.mockClear();
+    await expect(
+      archiveProjectAction(projectId),
+    ).rejects.toThrow("NEXT_REDIRECT");
+    expect(mocks.archiveProject).toHaveBeenCalledWith(
+      { kind: "database" },
+      "owner-one",
+      projectId,
+    );
+    expect(mocks.redirect).toHaveBeenCalledWith(
+      "/dashboard/vault?notice=archived",
+    );
   });
 });

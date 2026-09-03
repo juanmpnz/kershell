@@ -1,7 +1,12 @@
 "use server";
 
 import { getDatabase } from "@kershell/db/client";
-import { createProject } from "@kershell/db/repositories/projects";
+import {
+  archiveProject,
+  createProject,
+  updateProject,
+} from "@kershell/db/repositories/projects";
+import { projectIdSchema } from "@kershell/domain";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -45,5 +50,61 @@ export async function createProjectAction(
   }
 
   revalidatePath("/dashboard/vault");
-  redirect("/dashboard/vault");
+  redirect("/dashboard/vault?notice=created");
+}
+
+export async function updateProjectAction(
+  projectId: string,
+  _previousState: ProjectActionState,
+  formData: FormData,
+): Promise<ProjectActionState> {
+  const owner = await requireOwner();
+  const parsedProjectId = projectIdSchema.safeParse(projectId);
+  const parsed = parseProjectFormData(formData);
+
+  if (!parsedProjectId.success || !parsed.success) {
+    return {
+      fieldErrors: parsed.success
+        ? undefined
+        : parsed.error.flatten().fieldErrors,
+      message: "Revisá los campos marcados antes de guardar.",
+    };
+  }
+
+  try {
+    const updated = await updateProject(
+      getDatabase(),
+      owner.ownerId,
+      parsedProjectId.data,
+      parsed.data,
+    );
+
+    if (!updated) {
+      return { message: "El proyecto ya no está disponible." };
+    }
+  } catch (error) {
+    return {
+      message: isUniqueViolation(error)
+        ? "Ya existe un proyecto activo con ese código."
+        : "No se pudo actualizar el proyecto. Intentá nuevamente.",
+    };
+  }
+
+  revalidatePath("/dashboard/vault");
+  revalidatePath(`/dashboard/vault/${parsedProjectId.data}`);
+  redirect(`/dashboard/vault/${parsedProjectId.data}?notice=updated`);
+}
+
+export async function archiveProjectAction(
+  projectId: string,
+): Promise<void> {
+  const owner = await requireOwner();
+  const parsedProjectId = projectIdSchema.safeParse(projectId);
+
+  if (parsedProjectId.success) {
+    await archiveProject(getDatabase(), owner.ownerId, parsedProjectId.data);
+  }
+
+  revalidatePath("/dashboard/vault");
+  redirect("/dashboard/vault?notice=archived");
 }
