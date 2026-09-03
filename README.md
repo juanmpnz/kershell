@@ -44,6 +44,7 @@ No copies valores reales a ningun `.env.example` ni leas/imprimas archivos
 | `pnpm run build` | Build de produccion |
 | `pnpm db:generate` | Genera migraciones SQL revisables desde Drizzle |
 | `pnpm db:check` | Migra y prueba una base PostgreSQL 16 local desechable |
+| `pnpm db:seed` | Carga fixtures sanitizadas en una base ya migrada |
 | `pnpm audit --prod` | Auditoria de dependencias runtime |
 
 La deuda de lint previa queda cuantificada por app en sus archivos

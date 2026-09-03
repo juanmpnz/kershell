@@ -5,7 +5,7 @@ import type { DashboardData } from './schema';
 
 export const seed: DashboardData = {
   today: '2026-05-29',
-  user: { name: 'Jerónimo Cárdenas', email: 'jero@kershell.dev', role: 'Owner' },
+  user: { name: 'Kershell Owner', email: 'owner@example.invalid', role: 'Owner' },
 
   projects: [
     {
@@ -76,8 +76,8 @@ export const seed: DashboardData = {
         updated: '2026-05-12', addedBy: 'jero@kershell.dev',
         fields: [
           { k: 'URL',          v: 'https://campos-prod.supabase.co', secret: false },
-          { k: 'anon_key',     v: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.campos-anon', secret: true },
-          { k: 'service_role', v: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.campos-srv', secret: true },
+          { k: 'anon_key',     v: 'External reference pending', secret: true },
+          { k: 'service_role', v: 'External reference pending', secret: true },
         ],
       },
       {
@@ -85,7 +85,7 @@ export const seed: DashboardData = {
         type: 'Deploy token', service: 'Vercel', env: 'prod',
         updated: '2026-04-29', addedBy: 'jero@kershell.dev',
         fields: [
-          { k: 'token', v: 'vrcl_live_aB3xT1pZmqQ7Lk0RpvCe9N', secret: true },
+          { k: 'token', v: 'External reference pending', secret: true },
           { k: 'team',  v: 'kershell', secret: false },
         ],
       },
@@ -94,7 +94,7 @@ export const seed: DashboardData = {
         type: 'API key', service: 'Resend', env: 'prod',
         updated: '2026-05-02', addedBy: 'mateo@kershell.dev',
         fields: [
-          { k: 'api_key', v: 're_7f6Bm0LpXc91kQzVnTr2A', secret: true },
+          { k: 'api_key', v: 'External reference pending', secret: true },
           { k: 'from',    v: 'no-reply@campos.estate', secret: false },
         ],
       },
@@ -104,7 +104,7 @@ export const seed: DashboardData = {
         updated: '2026-03-17', addedBy: 'jero@kershell.dev',
         fields: [
           { k: 'user', v: 'team@kershell.dev', secret: false },
-          { k: 'pass', v: 'Q9!fmZ-tx72LbE#a', secret: true },
+          { k: 'pass', v: 'External reference pending', secret: true },
           { k: '2fa',  v: 'authenticator app', secret: false },
         ],
       },
@@ -114,7 +114,7 @@ export const seed: DashboardData = {
         updated: '2026-05-08', addedBy: 'mateo@kershell.dev',
         fields: [
           { k: 'email', v: 'admin@campos.staging', secret: false },
-          { k: 'pass',  v: 'staging-9bxLpRq4', secret: true },
+          { k: 'pass',  v: 'External reference pending', secret: true },
         ],
       },
     ],
@@ -128,7 +128,7 @@ export const seed: DashboardData = {
           { k: 'port', v: '14722', secret: false },
           { k: 'db',   v: 'specops_prod', secret: false },
           { k: 'user', v: 'specops_app', secret: false },
-          { k: 'pass', v: 'B7nQ-LpZ!42ftRq9Xw', secret: true },
+          { k: 'pass', v: 'External reference pending', secret: true },
         ],
       },
       {
@@ -137,7 +137,7 @@ export const seed: DashboardData = {
         updated: '2026-02-14', addedBy: 'jero@kershell.dev',
         fields: [
           { k: 'public_token', v: 'pk.eyJ1Ijoia2Vyc2hlbGwiLCJhIjoidGVzdCJ9.qaZ91Mw', secret: false },
-          { k: 'secret_token', v: 'sk.eyJ1Ijoia2Vyc2hlbGwiLCJhIjoidGVzdCJ9.aPmZ70x', secret: true },
+          { k: 'secret_token', v: 'External reference pending', secret: true },
         ],
       },
       {
@@ -145,7 +145,7 @@ export const seed: DashboardData = {
         type: 'DSN', service: 'Sentry', env: 'prod',
         updated: '2026-04-10', addedBy: 'mateo@kershell.dev',
         fields: [
-          { k: 'dsn', v: 'https://9f2bc1@o4509.ingest.sentry.io/4509187', secret: true },
+          { k: 'dsn', v: 'External reference pending', secret: true },
         ],
       },
     ],
@@ -156,7 +156,7 @@ export const seed: DashboardData = {
         updated: '2026-05-25', addedBy: 'jero@kershell.dev',
         fields: [
           { k: 'graph_id', v: 'live-match-analytics', secret: false },
-          { k: 'key',      v: 'service:lma:7BkXz9pQ-aRTm21Lo', secret: true },
+          { k: 'key',      v: 'External reference pending', secret: true },
         ],
       },
       {
@@ -164,7 +164,7 @@ export const seed: DashboardData = {
         type: 'API key', service: 'Anthropic', env: 'prod',
         updated: '2026-05-18', addedBy: 'mateo@kershell.dev',
         fields: [
-          { k: 'api_key', v: 'sk-ant-api03-9bxLpRq4-XyZ91MwBmN', secret: true },
+          { k: 'api_key', v: 'External reference pending', secret: true },
           { k: 'project', v: 'lma-prod', secret: false },
         ],
       },
@@ -175,7 +175,7 @@ export const seed: DashboardData = {
         fields: [
           { k: 'host', v: 'redis.rlwy.net', secret: false },
           { k: 'port', v: '6379', secret: false },
-          { k: 'pass', v: 'red!sLM4-77pxAqZ', secret: true },
+          { k: 'pass', v: 'External reference pending', secret: true },
         ],
       },
       {
@@ -183,7 +183,7 @@ export const seed: DashboardData = {
         type: 'API key', service: 'OpenAI', env: 'prod',
         updated: '2026-05-15', addedBy: 'mateo@kershell.dev',
         fields: [
-          { k: 'api_key', v: 'sk-proj-lma-aB3xT1pZmqQ7Lk0RpvCe9N', secret: true },
+          { k: 'api_key', v: 'External reference pending', secret: true },
           { k: 'org',     v: 'org-kershell', secret: false },
         ],
       },

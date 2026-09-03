@@ -18,6 +18,12 @@ pnpm db:check
 the container/network/test data on exit. It does not connect to Coolify or any
 remote database.
 
+After applying migrations to an explicitly selected database, `pnpm db:seed`
+loads the sanitized placeholder dataset. The command requires `DATABASE_URL`,
+does not print it, and is idempotent. Credential rows are metadata with
+`pending-reference-*` identifiers; they must be linked to an external secret
+manager before use.
+
 ## Sources
 
 - [Drizzle schema declaration](https://orm.drizzle.team/docs/sql-schema-declaration)

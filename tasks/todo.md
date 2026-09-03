@@ -156,6 +156,9 @@ una migracion SQL revisable; PostgreSQL no queda publicado.
 
 ## Task 12: Crear seed sanitizado e idempotente
 
+**Status:** completada el 2026-09-03; dos ejecuciones conservan conteos,
+asociaciones y total mensual, sin valores secretos ni emails reales.
+
 **Acceptance:** dos ejecuciones producen mismos conteos; no contiene tokens,
 passwords ni connection strings; asociaciones y totales coinciden con fixtures.
 

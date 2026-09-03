@@ -3,6 +3,9 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
+import * as schema from "../schema";
+import { seedDatabase, seedExpectations, seedFixture } from "../seed";
+
 const databaseUrl = process.env.DATABASE_URL;
 
 if (!databaseUrl) {
@@ -10,7 +13,7 @@ if (!databaseUrl) {
 }
 
 const client = postgres(databaseUrl, { max: 1 });
-const db = drizzle(client);
+const db = drizzle(client, { schema });
 
 beforeAll(async () => {
   await migrate(db, { migrationsFolder: "./drizzle" });
@@ -108,6 +111,87 @@ describe("initial PostgreSQL schema", () => {
     );
     expect(columns.map(({ column_name: name }) => name)).not.toEqual(
       expect.arrayContaining(["password", "token", "secret_value", "private_key"]),
+    );
+  });
+});
+
+describe("sanitized initial seed", () => {
+  it("is idempotent and preserves fixture counts and monthly totals", async () => {
+    await seedDatabase(db);
+    await seedDatabase(db);
+
+    const [counts] = await client<
+      [{
+        projects: number;
+        vendors: number;
+        subscriptions: number;
+        credentials: number;
+        projectSubscriptions: number;
+        technologies: number;
+      }]
+    >`
+      select
+        (select count(*)::int from projects where owner_id = ${seedFixture.owner.id}) as projects,
+        (select count(*)::int from vendors where owner_id = ${seedFixture.owner.id}) as vendors,
+        (select count(*)::int from subscriptions where owner_id = ${seedFixture.owner.id}) as subscriptions,
+        (select count(*)::int from credential_references where owner_id = ${seedFixture.owner.id}) as credentials,
+        (select count(*)::int from project_subscriptions where owner_id = ${seedFixture.owner.id}) as "projectSubscriptions",
+        (select count(*)::int from project_technologies where project_id in (
+          select id from projects where owner_id = ${seedFixture.owner.id}
+        )) as technologies
+    `;
+    const [totals] = await client<[{ monthly_total_minor: number }]>`
+      select sum(
+        case billing_interval
+          when 'YEARLY' then amount_minor / 12
+          else amount_minor
+        end
+      )::int as monthly_total_minor
+      from subscriptions
+      where owner_id = ${seedFixture.owner.id}
+        and archived_at is null
+    `;
+
+    expect(counts).toEqual({
+      projects: seedExpectations.projects,
+      vendors: seedExpectations.vendors,
+      subscriptions: seedExpectations.subscriptions,
+      credentials: seedExpectations.credentialReferences,
+      projectSubscriptions: seedExpectations.projectSubscriptions,
+      technologies: seedExpectations.technologies,
+    });
+    expect(totals.monthly_total_minor).toBe(
+      seedExpectations.monthlyTotalMinor,
+    );
+  });
+
+  it("contains no secret-bearing keys or token-like fixture values", () => {
+    const forbiddenKeys = new Set([
+      "connectionstring",
+      "fields",
+      "password",
+      "privatekey",
+      "secretvalue",
+      "token",
+    ]);
+
+    function visit(value: unknown): void {
+      if (Array.isArray(value)) {
+        value.forEach(visit);
+        return;
+      }
+
+      if (value && typeof value === "object") {
+        for (const [key, child] of Object.entries(value)) {
+          expect(forbiddenKeys.has(key.toLowerCase())).toBe(false);
+          visit(child);
+        }
+      }
+    }
+
+    visit(seedFixture);
+    expect(JSON.stringify(seedFixture)).not.toMatch(
+      /(eyJhbGciOi|postgres(?:ql)?:\/\/|redis:\/\/|sk-(?:ant|live|proj)-|-----BEGIN)/,
     );
   });
 });

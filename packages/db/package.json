@@ -4,11 +4,13 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./schema": "./schema.ts"
+    "./schema": "./schema.ts",
+    "./seed": "./seed/index.ts"
   },
   "scripts": {
     "generate": "drizzle-kit generate",
     "lint": "eslint . --max-warnings=0",
+    "seed": "jiti seed-command.ts",
     "test:integration": "vitest run --config vitest.integration.config.ts",
     "typecheck": "tsc --noEmit"
   },
@@ -21,6 +23,7 @@
     "@types/node": "24.13.3",
     "drizzle-kit": "0.31.10",
     "eslint": "9.39.5",
+    "jiti": "2.7.0",
     "typescript": "^5",
     "typescript-eslint": "8.69.0",
     "vitest": "4.1.11"
