@@ -17,6 +17,7 @@
   "dependencies": {
     "@kershell/config": "workspace:*",
     "@kershell/ui": "workspace:*",
+    "better-auth": "1.7.2",
     "lucide-react": "^0.577.0",
     "next": "16.3.4",
     "react": "19.2.8",
