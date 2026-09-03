@@ -1,35 +1,29 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { ArrowRight, LockKeyhole, Mail, ShieldCheck } from "lucide-react";
+import { useState } from "react";
+import { ShieldCheck } from "lucide-react";
 import { Eyebrow } from "@kershell/ui/eyebrow";
 import { Logo } from "@kershell/ui/logo";
+import { authClient } from "@/lib/auth/client";
 
-export function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+export function LoginForm({ initialError = "" }: { initialError?: string }) {
+  const [error, setError] = useState(initialError);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function handleGoogleLogin() {
     setError("");
     setIsSubmitting(true);
 
-    const response = await fetch("/api/admin/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+    const result = await authClient.signIn.social({
+      callbackURL: "/dashboard",
+      errorCallbackURL: "/login?error=oauth",
+      provider: "google",
     });
 
-    if (!response.ok) {
-      const body = (await response.json().catch(() => null)) as { error?: string } | null;
-      setError(body?.error ?? "No se pudo iniciar sesión.");
+    if (result.error) {
+      setError("No se pudo iniciar sesión con Google.");
       setIsSubmitting(false);
-      return;
     }
-
-    window.location.assign("/dashboard");
   }
 
   return (
@@ -46,66 +40,29 @@ export function LoginForm() {
             Entrar a la consola.
           </h1>
           <p className="mt-4 text-sm leading-6 text-text-dim">
-            Solo para el equipo Kershell. SSO con Google Workspace o credenciales del vault.
+            Acceso exclusivo del propietario mediante una identidad Google autorizada.
           </p>
 
-          <form className="mt-9 grid gap-4" onSubmit={handleSubmit}>
-            <label className="block">
-              <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-muted">Correo</span>
-              <span className="mt-2 flex items-center gap-3 rounded-md border border-border bg-surface px-3 py-3 transition focus-within:border-accent">
-                <Mail className="size-4 text-muted" aria-hidden="true" />
-                <input
-                  className="min-w-0 flex-1 bg-transparent text-sm text-text outline-none placeholder:text-muted"
-                  type="email"
-                  autoComplete="email"
-                  placeholder="jero@kershell.dev"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  required
-                />
-              </span>
-            </label>
-
-            <label className="block">
-              <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-muted">Contraseña</span>
-              <span className="mt-2 flex items-center gap-3 rounded-md border border-border bg-surface px-3 py-3 transition focus-within:border-accent">
-                <LockKeyhole className="size-4 text-muted" aria-hidden="true" />
-                <input
-                  className="min-w-0 flex-1 bg-transparent font-mono text-sm text-text outline-none placeholder:text-muted"
-                  type="password"
-                  autoComplete="current-password"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  required
-                />
-              </span>
-              <span className="mt-2 block text-xs text-muted">Token de hardware solicitado tras este paso.</span>
-            </label>
-
+          <div className="mt-9 grid gap-4">
             {error ? (
-              <p className="rounded-md border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-200">
+              <p aria-live="polite" className="rounded-md border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-200">
                 {error}
               </p>
             ) : null}
 
             <button
               className="mt-2 inline-flex h-12 items-center justify-center gap-2 rounded-md bg-accent px-4 text-sm font-semibold text-accent-ink transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
-              type="submit"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Validando..." : "Continuar"}
-              <ArrowRight className="size-4" aria-hidden="true" />
-            </button>
-
-            <button
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-border bg-transparent px-4 text-sm font-medium text-text transition hover:bg-surface"
               type="button"
-              onClick={() => setError("Google Workspace todavía no está conectado. Usá credenciales internas.")}
+              disabled={isSubmitting}
+              onClick={handleGoogleLogin}
             >
-              <ShieldCheck className="size-4 text-text-dim" aria-hidden="true" />
-              Continuar con Google Workspace
+              <ShieldCheck className="size-4" aria-hidden="true" />
+              {isSubmitting ? "Conectando con Google..." : "Continuar con Google"}
             </button>
-          </form>
+            <p className="text-center text-xs leading-5 text-muted">
+              Se solicitará elegir una cuenta. Solo las dos identidades configuradas pueden entrar.
+            </p>
+          </div>
         </div>
 
         <footer className="flex items-center justify-between border-t border-border pt-4 font-mono text-[11px] text-muted">

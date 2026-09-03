@@ -15,3 +15,4 @@ docker compose --project-name "$project_name" --file "$compose_file" up --detach
 
 DATABASE_URL="$test_database_url" pnpm --filter @kershell/db test:integration
 DATABASE_URL="$test_database_url" pnpm --filter @kershell/db seed
+DATABASE_URL="$test_database_url" pnpm --filter @kershell/admin test:integration

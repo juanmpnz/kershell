@@ -1,8 +1,7 @@
 import { NextRequest } from "next/server";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { POST as login } from "@/app/api/admin/login/route";
-import { POST as logout } from "@/app/api/admin/logout/route";
+import { GET as betterAuthGet } from "@/app/api/auth/[...all]/route";
 import { isAdminEnabled } from "@/lib/admin-availability";
 import proxy from "@/proxy";
 
@@ -42,16 +41,10 @@ describe("current admin access boundary", () => {
   it("returns not found for auth APIs unless explicitly enabled", async () => {
     vi.stubEnv("ADMIN_ENABLED", "false");
 
-    const loginResponse = await login(
-      new Request("https://admin.example/api/admin/login", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({}),
-      }),
+    const betterAuthResponse = await betterAuthGet(
+      new Request("https://admin.example/api/auth/get-session"),
     );
-    const logoutResponse = logout();
 
-    expect(loginResponse.status).toBe(404);
-    expect(logoutResponse.status).toBe(404);
+    expect(betterAuthResponse.status).toBe(404);
   });
 });

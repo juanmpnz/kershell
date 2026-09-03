@@ -184,6 +184,10 @@ desde cliente falla en build; errores DB no activan fallback.
 
 ## Task 14: Integrar Google Workspace auth
 
+**Status:** completada el 2026-09-03; Better Auth esta montado con Google como
+unico proveedor, sesiones y estado OAuth PostgreSQL, tokens OAuth cifrados e ID
+token no persistido. El login temporal por password fue retirado.
+
 **Acceptance:** Better Auth monta handler Google, usa sesiones PostgreSQL y solo
 origins configurados; password/signup publico estan desactivados.
 

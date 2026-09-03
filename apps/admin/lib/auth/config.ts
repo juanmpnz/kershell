@@ -109,7 +109,7 @@ export function parseAuthEnvironment(
 
 export function createAuthOptions(
   environment: AuthEnvironment,
-): BetterAuthOptions {
+) {
   return {
     account: {
       accountLinking: { enabled: false },
@@ -122,6 +122,20 @@ export function createAuthOptions(
     },
     appName: "Kershell Admin",
     baseURL: environment.baseUrl,
+    databaseHooks: {
+      account: {
+        create: {
+          before: async (account) => ({
+            data: { ...account, idToken: null },
+          }),
+        },
+        update: {
+          before: async (account) => ({
+            data: { ...account, idToken: null },
+          }),
+        },
+      },
+    },
     emailAndPassword: { enabled: false },
     secret: environment.secret,
     socialProviders: {
@@ -134,5 +148,5 @@ export function createAuthOptions(
     },
     telemetry: { enabled: false },
     trustedOrigins: environment.trustedOrigins,
-  };
+  } satisfies BetterAuthOptions;
 }

@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { Icon } from "@/components/dashboard/ui/Icon";
 import { IconButton } from "@/components/dashboard/ui/IconButton";
+import { authClient } from "@/lib/auth/client";
 
 const LABELS: Record<string, string> = {
   dashboard: "Overview",
@@ -23,8 +24,11 @@ export function DashTopbar() {
   const crumbs = getCrumbs(pathname);
 
   async function logout() {
-    await fetch("/api/admin/logout", { method: "POST" });
-    window.location.assign("/login");
+    const result = await authClient.signOut();
+
+    if (!result.error) {
+      window.location.assign("/login");
+    }
   }
 
   return (

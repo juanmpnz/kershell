@@ -1,9 +1,4 @@
 {
-  "app/login/LoginForm.tsx": {
-    "@next/next/no-location-assign-relative-destination": {
-      "count": 1
-    }
-  },
   "components/dashboard/DashSidebar.tsx": {
     "react-hooks/set-state-in-effect": {
       "count": 1
