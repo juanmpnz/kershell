@@ -14,6 +14,7 @@ import {
   type KershellAuth,
 } from "@/lib/auth/auth";
 import { parseAuthEnvironment } from "@/lib/auth/config";
+import { resolveOwnerSession } from "@/lib/auth/owner-session";
 
 const databaseUrl = process.env.DATABASE_URL;
 
@@ -216,6 +217,17 @@ describe("Better Auth Google flow", () => {
       providerSubject: "google-subject-integration",
       status: "ACTIVE",
     });
+    await expect(
+      resolveOwnerSession(
+        auth,
+        database,
+        new Headers({ cookie: sessionCookie }),
+      ),
+    ).resolves.toEqual({
+      authUserId: sessionBody.user.id,
+      name: "Kershell Owner",
+      ownerId: seedFixture.owner.id,
+    });
 
     await database.delete(authSessions);
 
@@ -226,6 +238,13 @@ describe("Better Auth Google flow", () => {
     );
 
     expect(await revokedResponse.json()).toBeNull();
+    await expect(
+      resolveOwnerSession(
+        auth,
+        database,
+        new Headers({ cookie: sessionCookie }),
+      ),
+    ).resolves.toBeNull();
   });
 
   it("rejects a Google profile outside the exact owner allowlist", async () => {
@@ -291,12 +310,23 @@ describe("Better Auth Google flow", () => {
   it("does not issue another session after the local identity is revoked", async () => {
     const auth = createAuthorizedAuth();
     const firstCallback = await completeGoogleCallback(auth);
+    const sessionCookie = readCookie(
+      firstCallback.headers.get("set-cookie"),
+      "session_token",
+    );
 
-    expect(
-      readCookie(firstCallback.headers.get("set-cookie"), "session_token"),
-    ).toContain("better-auth.session_token=");
+    expect(sessionCookie).toContain("better-auth.session_token=");
 
     await database.update(adminIdentities).set({ status: "DISABLED" });
+
+    await expect(
+      resolveOwnerSession(
+        auth,
+        database,
+        new Headers({ cookie: sessionCookie }),
+      ),
+    ).resolves.toBeNull();
+
     await database.delete(authSessions);
 
     const revokedCallback = await completeGoogleCallback(auth);

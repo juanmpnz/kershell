@@ -215,14 +215,21 @@ obligatorios en cada login; casos incorrectos no crean sesion valida.
 
 ## Task 16: Proteger todas las entradas del admin
 
+**Status:** completada el 2026-09-03 para todas las entradas existentes; el
+layout privado exige una sesion PostgreSQL valida y vuelve a comprobar que owner
+e identidad local sigan activos. Proxy conserva solo el redirect optimista.
+
 **Acceptance:** DAL, acciones y handlers verifican owner; Proxy solo optimiza
 redirect; logout/revocacion invalidan acceso directo.
 
-**Verify:** HTTP tests 401/403, direct action invocation y revoked session.
+**Verify:** integracion con cookie valida, sesion eliminada e identidad revocada;
+caracterizacion del redirect sin cookie; build dinamico del administrador.
 
-**Dependencies:** Tasks 13 y 15.
+**Dependencies:** Tasks 13, 14 y 15.
 
-**Files:** auth DAL, Proxy, una ruta/accion por incremento, tests.
+**Files:** resolvedor server-only de sesion/owner, layout privado y tests de
+integracion. Todavia no existen acciones ni APIs de negocio; cada una debe entrar
+por `requireOwner` al implementarse en Tasks 17-20 y probar su invocacion directa.
 
 ## Task 17: Entregar proyectos CRUD
 

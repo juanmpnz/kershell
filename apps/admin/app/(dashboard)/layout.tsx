@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AppShell } from "@/components/dashboard/AppShell";
-import { getSubscriptions, getUser } from "@/lib/dashboard/store";
+import { requireOwner } from "@/lib/auth/owner-session";
+import { getSubscriptions } from "@/lib/dashboard/store";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -23,13 +24,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function DashboardLayout({
+export const dynamic = "force-dynamic";
+
+export default async function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = getUser();
-  const [firstName = "Usuario", lastName = ""] = user.name.split(" ");
+  const owner = await requireOwner();
+  const [firstName = "Owner", lastName = ""] = owner.name.split(" ");
   const initials = `${firstName[0] ?? "U"}${lastName[0] ?? ""}`.toUpperCase();
   const trialsExpiring = getSubscriptions({ status: "trial", daysToEnd: 7 }).length;
 
@@ -40,7 +43,7 @@ export default function DashboardLayout({
           trialsExpiring={trialsExpiring}
           userInitials={initials}
           userName={firstName}
-          userRole={user.role}
+          userRole="Owner"
         >
           {children}
         </AppShell>
