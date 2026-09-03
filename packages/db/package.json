@@ -7,6 +7,7 @@
     "./client": "./client.ts",
     "./repositories/auth": "./repositories/auth.ts",
     "./repositories/projects": "./repositories/projects.ts",
+    "./repositories/subscriptions": "./repositories/subscriptions.ts",
     "./schema": "./schema.ts",
     "./seed": "./seed/index.ts"
   },

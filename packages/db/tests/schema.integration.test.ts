@@ -16,6 +16,14 @@ import {
   listProjectOverviews,
   updateProject,
 } from "../repositories/projects";
+import {
+  archiveSubscription,
+  createSubscription,
+  getSubscriptionOverview,
+  listSubscriptionOverviews,
+  listVendorOptions,
+  updateSubscription,
+} from "../repositories/subscriptions";
 import { seedDatabase, seedExpectations, seedFixture } from "../seed";
 
 const databaseUrl = process.env.DATABASE_URL;
@@ -378,6 +386,135 @@ describe("project data access", () => {
     for (const source of sources) {
       expect(source.startsWith('import "server-only";')).toBe(true);
     }
+  });
+});
+
+describe("subscription data access", () => {
+  it("lists subscriptions, vendors and multi-project associations by owner", async () => {
+    await seedDatabase(db);
+
+    const subscriptions = await listSubscriptionOverviews(
+      db,
+      seedFixture.owner.id,
+    );
+    const vendors = await listVendorOptions(db, seedFixture.owner.id);
+    const apollo = subscriptions.find(
+      (subscription) => subscription.name === "Apollo GraphOS",
+    );
+
+    expect(subscriptions).toHaveLength(seedExpectations.subscriptions);
+    expect(vendors).toHaveLength(seedExpectations.vendors);
+    expect(apollo).toMatchObject({
+      amountMinor: 8_900,
+      currency: "USD",
+      monthlyAmountMinor: 8_900,
+      status: "TRIAL",
+      vendorName: "Apollo",
+    });
+    expect(apollo?.projects.map(({ name }) => name)).toEqual([
+      "Live Match Analytics",
+    ]);
+  });
+
+  it("creates, updates and archives subscriptions only inside owner scope", async () => {
+    await seedDatabase(db);
+    const [otherOwner] = await client<[{ id: string }]>`
+      insert into owners (display_name)
+      values ('Subscription boundary owner')
+      returning id
+    `;
+    const [otherVendor] = await client<[{ id: string }]>`
+      insert into vendors (owner_id, name)
+      values (${otherOwner.id}, 'Other vendor')
+      returning id
+    `;
+    const subscriptionId = await createSubscription(db, seedFixture.owner.id, {
+      accountEmail: null,
+      amountMinor: 1_200,
+      billingInterval: "MONTHLY",
+      cancelledAt: null,
+      category: "DEVELOPER_TOOLS",
+      currency: "EUR",
+      name: "Private service",
+      nextChargeOn: "2026-10-03",
+      notes: null,
+      paymentMethodLabel: "Visa •• 4421",
+      plan: "Team",
+      projectIds: [seedFixture.projects[0].id, seedFixture.projects[1].id],
+      status: "ACTIVE",
+      trialEndsOn: null,
+      vendorId: seedFixture.vendors[0][0],
+      websiteUrl: "https://example.invalid",
+    });
+
+    await expect(
+      getSubscriptionOverview(db, otherOwner.id, subscriptionId),
+    ).resolves.toBeNull();
+    await expect(
+      updateSubscription(db, otherOwner.id, subscriptionId, {
+        accountEmail: null,
+        amountMinor: 99,
+        billingInterval: "MONTHLY",
+        cancelledAt: null,
+        category: "OTHER",
+        currency: "EUR",
+        name: "Cross-owner write",
+        nextChargeOn: null,
+        notes: null,
+        paymentMethodLabel: null,
+        plan: "Invalid",
+        projectIds: [],
+        status: "PAUSED",
+        trialEndsOn: null,
+        vendorId: otherVendor.id,
+        websiteUrl: null,
+      }),
+    ).resolves.toBe(false);
+    await expect(
+      archiveSubscription(db, otherOwner.id, subscriptionId),
+    ).resolves.toBe(false);
+
+    const existing = await getSubscriptionOverview(
+      db,
+      seedFixture.owner.id,
+      subscriptionId,
+    );
+    expect(existing?.projects).toHaveLength(2);
+
+    await expect(
+      updateSubscription(db, seedFixture.owner.id, subscriptionId, {
+        accountEmail: "billing@example.invalid",
+        amountMinor: 12_000,
+        billingInterval: "YEARLY",
+        cancelledAt: null,
+        category: "DEVELOPER_TOOLS",
+        currency: "EUR",
+        name: "Private service updated",
+        nextChargeOn: "2027-10-03",
+        notes: "Annual plan.",
+        paymentMethodLabel: "Visa •• 4421",
+        plan: "Annual",
+        projectIds: [seedFixture.projects[2].id],
+        status: "ACTIVE",
+        trialEndsOn: null,
+        vendorId: seedFixture.vendors[0][0],
+        websiteUrl: "https://example.invalid/billing",
+      }),
+    ).resolves.toBe(true);
+
+    await expect(
+      getSubscriptionOverview(db, seedFixture.owner.id, subscriptionId),
+    ).resolves.toMatchObject({
+      monthlyAmountMinor: 1_000,
+      name: "Private service updated",
+      projects: [{ name: "Live Match Analytics" }],
+    });
+    await expect(
+      archiveSubscription(db, seedFixture.owner.id, subscriptionId),
+    ).resolves.toBe(true);
+    await expect(
+      getSubscriptionOverview(db, seedFixture.owner.id, subscriptionId),
+    ).resolves.toBeNull();
   });
 });
 

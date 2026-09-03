@@ -7,6 +7,8 @@ import {
   webUrlSchema,
 } from "./shared";
 
+export const vendorIdSchema = entityIdSchema;
+
 export const createVendorSchema = z.strictObject({
   name: z.string().trim().min(1).max(120),
   websiteUrl: webUrlSchema.nullable(),
@@ -14,7 +16,7 @@ export const createVendorSchema = z.strictObject({
 });
 
 export const vendorSchema = z.strictObject({
-  id: entityIdSchema,
+  id: vendorIdSchema,
   ownerId: entityIdSchema,
   ...createVendorSchema.shape,
   ...timestampsShape,

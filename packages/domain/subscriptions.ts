@@ -21,6 +21,7 @@ export const subscriptionCategories = [
   "OTHER",
 ] as const;
 export const subscriptionCategorySchema = z.enum(subscriptionCategories);
+export const subscriptionIdSchema = entityIdSchema;
 export const subscriptionStatuses = [
   "ACTIVE",
   "TRIAL",
@@ -106,7 +107,7 @@ export const createSubscriptionSchema = subscriptionFieldsSchema.superRefine(
 
 export const subscriptionSchema = z
   .strictObject({
-    id: entityIdSchema,
+    id: subscriptionIdSchema,
     ownerId: entityIdSchema,
     ...subscriptionFieldsSchema.shape,
     archivedAt: isoDateTimeSchema.nullable(),
