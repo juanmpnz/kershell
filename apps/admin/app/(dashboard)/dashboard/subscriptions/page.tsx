@@ -1,35 +1,20 @@
-import { Suspense } from "react";
+import { getDatabase } from "@kershell/db/client";
+import { listSubscriptionOverviews } from "@kershell/db/repositories/subscriptions";
+import Link from "next/link";
+
+import { ActionNotice } from "@/components/dashboard/ActionNotice";
 import { PageHeader } from "@/components/dashboard/PageHeader";
 import { SubscriptionsTable } from "@/components/dashboard/SubscriptionsTable";
-import { getDashboardData } from "@/lib/dashboard/store";
+import { requireOwner } from "@/lib/auth/owner-session";
 
-export default function SubscriptionsPage() {
-  const data = getDashboardData();
+export default async function SubscriptionsPage({ searchParams }: { searchParams: Promise<{ notice?: string | string[] }> }) {
+  const owner = await requireOwner();
+  const { notice } = await searchParams;
+  const subscriptions = await listSubscriptionOverviews(getDatabase(), owner.ownerId);
 
-  return (
-    <>
-      <PageHeader
-        actions={
-          <>
-            {/* TODO: wire CSV export once persistence moves out of the in-memory store. */}
-            <button className="rounded-md border border-border px-3 py-2 text-sm text-text-dim transition hover:bg-surface" type="button">
-              Exportar CSV
-            </button>
-            <a
-              className="rounded-md bg-accent px-3 py-2 text-sm font-semibold text-accent-ink transition hover:brightness-110"
-              href="/dashboard/subscriptions?new=1"
-            >
-              Nueva
-            </a>
-          </>
-        }
-        eyebrow="Finanzas · suscripciones"
-        sub="Servicios de terceros y proveedores. Edita cualquier fila para ver detalle, próximos cobros y notas del equipo."
-        title="Suscripciones"
-      />
-      <Suspense fallback={<div className="p-8 text-sm text-text-dim">Cargando suscripciones...</div>}>
-        <SubscriptionsTable projects={data.projects} subscriptions={data.subs} today={data.today} />
-      </Suspense>
-    </>
-  );
+  return <>
+    <PageHeader actions={<Link className="rounded-md bg-accent px-3 py-2 text-sm font-semibold text-accent-ink" href="/dashboard/subscriptions/new">Nueva</Link>} eyebrow="Finanzas · suscripciones" sub="Servicios, proveedores, renovaciones y asociaciones a proyectos." title="Suscripciones" />
+    <ActionNotice entity="subscription" notice={typeof notice === "string" ? notice : undefined} />
+    <SubscriptionsTable subscriptions={subscriptions} />
+  </>;
 }

@@ -9,11 +9,6 @@
       "count": 1
     }
   },
-  "components/dashboard/SubscriptionsTable.tsx": {
-    "react-hooks/set-state-in-effect": {
-      "count": 1
-    }
-  },
   "components/dashboard/VaultProjects.tsx": {
     "react-hooks/set-state-in-effect": {
       "count": 1

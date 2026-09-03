@@ -1,13 +1,12 @@
 const MESSAGES = {
-  archived: "Proyecto archivado correctamente.",
-  created: "Proyecto creado correctamente.",
-  updated: "Proyecto actualizado correctamente.",
+  project: { archived: "Proyecto archivado correctamente.", created: "Proyecto creado correctamente.", updated: "Proyecto actualizado correctamente." },
+  subscription: { archived: "Suscripción archivada correctamente.", created: "Suscripción creada correctamente.", updated: "Suscripción actualizada correctamente." },
 } as const;
 
-export function ActionNotice({ notice }: { notice?: string }) {
+export function ActionNotice({ entity = "project", notice }: { entity?: keyof typeof MESSAGES; notice?: string }) {
   const message =
     notice === "archived" || notice === "created" || notice === "updated"
-      ? MESSAGES[notice]
+      ? MESSAGES[entity][notice]
       : null;
 
   return message ? (

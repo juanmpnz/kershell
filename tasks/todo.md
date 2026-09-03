@@ -248,6 +248,10 @@ loading/empty/error/success y validacion estan visibles.
 
 ## Task 18: Entregar suscripciones CRUD
 
+**Status:** implementacion completada el 2026-09-03; pendiente validacion visual
+en navegador. Listado, alta, edicion y archivo usan PostgreSQL, importes menores,
+proveedores existentes y asociaciones multiples owner-scoped.
+
 **Acceptance:** CRUD persistido con dinero/currency/fechas validos, vendor y
 proyectos multiples; totales se derivan de DB.
 
