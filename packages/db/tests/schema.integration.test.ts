@@ -1,9 +1,11 @@
 import { migrate } from "drizzle-orm/postgres-js/migrator";
 import { drizzle } from "drizzle-orm/postgres-js";
+import { readFile } from "node:fs/promises";
 import postgres from "postgres";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
 import * as schema from "../schema";
+import { listProjectOverviews } from "../repositories/projects";
 import { seedDatabase, seedExpectations, seedFixture } from "../seed";
 
 const databaseUrl = process.env.DATABASE_URL;
@@ -193,5 +195,66 @@ describe("sanitized initial seed", () => {
     expect(JSON.stringify(seedFixture)).not.toMatch(
       /(eyJhbGciOi|postgres(?:ql)?:\/\/|redis:\/\/|sk-(?:ant|live|proj)-|-----BEGIN)/,
     );
+  });
+});
+
+describe("project data access", () => {
+  it("requires an owner scope and derives project metrics without secrets", async () => {
+    await seedDatabase(db);
+
+    const [otherOwner] = await client<[{ id: string }]>`
+      insert into owners (display_name)
+      values ('Isolated owner')
+      returning id
+    `;
+    await client`
+      insert into projects (owner_id, name, code, summary, status, stage, color)
+      values (${otherOwner.id}, 'Isolated project', 'ISOLATED', 'Must stay isolated', 'LIVE', 'Production', '#FFFFFF')
+    `;
+
+    const projects = await listProjectOverviews(db, seedFixture.owner.id);
+    const isolatedProjects = await listProjectOverviews(db, otherOwner.id);
+    const campos = projects.find((project) => project.code === "CAMPOS");
+
+    expect(projects).toHaveLength(seedExpectations.projects);
+    expect(isolatedProjects.map(({ code }) => code)).toEqual(["ISOLATED"]);
+    expect(campos).toMatchObject({
+      credentialReferenceCount: 5,
+      monthlyAmountMinor: 6_500,
+      technologies: ["Next.js", "Supabase", "Vercel", "Resend"],
+    });
+    expect(JSON.stringify(projects)).not.toMatch(
+      /password|privateKey|secretValue|token/i,
+    );
+  });
+
+  it("propagates database outages instead of returning mock data", async () => {
+    const unavailableClient = postgres(
+      "postgres://unavailable:unavailable@127.0.0.1:1/unavailable",
+      { connect_timeout: 1, max: 1 },
+    );
+    const unavailableDb = drizzle(unavailableClient, { schema });
+
+    try {
+      await expect(
+        listProjectOverviews(unavailableDb, seedFixture.owner.id),
+      ).rejects.toBeDefined();
+    } finally {
+      await unavailableClient.end();
+    }
+  });
+
+  it("marks database clients and repositories as server-only", async () => {
+    const sources = await Promise.all([
+      readFile(new URL("../client.ts", import.meta.url), "utf8"),
+      readFile(
+        new URL("../repositories/projects.ts", import.meta.url),
+        "utf8",
+      ),
+    ]);
+
+    for (const source of sources) {
+      expect(source.startsWith('import "server-only";')).toBe(true);
+    }
   });
 });

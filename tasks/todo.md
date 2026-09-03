@@ -170,6 +170,9 @@ passwords ni connection strings; asociaciones y totales coinciden con fixtures.
 
 ## Task 13: Implementar DAL server-only
 
+**Status:** completada el 2026-09-03 para la primera entidad (proyectos): scope
+por owner obligatorio, metricas derivadas, DTO minimo y fallos DB visibles.
+
 **Acceptance:** queries requieren owner y devuelven DTOs minimos; importar el DAL
 desde cliente falla en build; errores DB no activan fallback.
 

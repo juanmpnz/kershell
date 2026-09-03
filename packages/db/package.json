@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "exports": {
+    "./client": "./client.ts",
+    "./repositories/projects": "./repositories/projects.ts",
     "./schema": "./schema.ts",
     "./seed": "./seed/index.ts"
   },
@@ -17,7 +19,8 @@
   "dependencies": {
     "@kershell/domain": "workspace:*",
     "drizzle-orm": "0.45.2",
-    "postgres": "3.4.9"
+    "postgres": "3.4.9",
+    "server-only": "0.0.1"
   },
   "devDependencies": {
     "@types/node": "24.13.3",
