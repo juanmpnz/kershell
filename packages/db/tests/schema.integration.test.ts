@@ -5,6 +5,7 @@ import postgres from "postgres";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
 import * as schema from "../schema";
+import { authorizeAndProvisionOwner } from "../repositories/auth";
 import { listProjectOverviews } from "../repositories/projects";
 import { seedDatabase, seedExpectations, seedFixture } from "../seed";
 
@@ -292,5 +293,70 @@ describe("project data access", () => {
     for (const source of sources) {
       expect(source.startsWith('import "server-only";')).toBe(true);
     }
+  });
+});
+
+describe("owner identity data access", () => {
+  it("maps an allowed Google user to the sole active owner and honors revocation", async () => {
+    await seedDatabase(db);
+    const [authUser] = await client<[{ id: string }]>`
+      insert into auth_users (name, email, email_verified)
+      values ('Personal Owner', 'personal-owner@example.invalid', true)
+      returning id
+    `;
+
+    await client`
+      insert into auth_accounts (issuer, account_id, provider_id, user_id)
+      values (
+        'https://accounts.google.com',
+        'personal-google-subject',
+        'google',
+        ${authUser.id}
+      )
+    `;
+
+    const admission = await authorizeAndProvisionOwner(db, {
+      allowedEmails: [
+        "owner@workspace.example.invalid",
+        "personal-owner@example.invalid",
+      ],
+      authUserId: authUser.id,
+      ownerId: seedFixture.owner.id,
+      workspaceDomain: "workspace.example.invalid",
+    });
+
+    expect(admission).toEqual({ ownerId: seedFixture.owner.id });
+
+    const [identity] = await client<
+      [{ email: string; hosted_domain: string | null; owner_id: string }]
+    >`
+      select email, hosted_domain, owner_id
+      from admin_identities
+      where auth_user_id = ${authUser.id}
+    `;
+
+    expect(identity).toEqual({
+      email: "personal-owner@example.invalid",
+      hosted_domain: null,
+      owner_id: seedFixture.owner.id,
+    });
+
+    await client`
+      update admin_identities
+      set status = 'DISABLED'
+      where auth_user_id = ${authUser.id}
+    `;
+
+    await expect(
+      authorizeAndProvisionOwner(db, {
+        allowedEmails: [
+          "owner@workspace.example.invalid",
+          "personal-owner@example.invalid",
+        ],
+        authUserId: authUser.id,
+        ownerId: seedFixture.owner.id,
+        workspaceDomain: "workspace.example.invalid",
+      }),
+    ).resolves.toBeNull();
   });
 });

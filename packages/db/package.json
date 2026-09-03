@@ -5,6 +5,7 @@
   "type": "module",
   "exports": {
     "./client": "./client.ts",
+    "./repositories/auth": "./repositories/auth.ts",
     "./repositories/projects": "./repositories/projects.ts",
     "./schema": "./schema.ts",
     "./seed": "./seed/index.ts"
