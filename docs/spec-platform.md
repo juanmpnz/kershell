@@ -81,12 +81,12 @@ Comandos todavia requeridos antes de considerar terminada la plataforma:
 
 ```bash
 pnpm test:e2e
-pnpm db:check
 pnpm db:migrate
 ```
 
-Estos ultimos aun no existen y no deben documentarse como operativos hasta ser
-implementados.
+`pnpm db:check` ya verifica la migracion desde cero y constraints contra un
+PostgreSQL 16 local desechable. Los comandos listados arriba aun no existen y no
+deben documentarse como operativos hasta ser implementados.
 
 ## Estructura objetivo
 

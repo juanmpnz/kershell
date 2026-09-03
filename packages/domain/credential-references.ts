@@ -7,13 +7,14 @@ import {
   timestampsShape,
 } from "./shared";
 
-export const credentialEnvironmentSchema = z.enum([
+export const credentialEnvironments = [
   "PRODUCTION",
   "STAGING",
   "DEVELOPMENT",
   "SHARED",
-]);
-export const credentialTypeSchema = z.enum([
+] as const;
+export const credentialEnvironmentSchema = z.enum(credentialEnvironments);
+export const credentialTypes = [
   "API_KEY",
   "LOGIN",
   "CONNECTION_STRING",
@@ -21,13 +22,15 @@ export const credentialTypeSchema = z.enum([
   "DSN",
   "OAUTH_CLIENT",
   "SSH_KEY",
-]);
-export const secretProviderSchema = z.enum([
+] as const;
+export const credentialTypeSchema = z.enum(credentialTypes);
+export const secretProviders = [
   "ONEPASSWORD",
   "BITWARDEN",
   "KEEPASSXC",
   "OTHER",
-]);
+] as const;
+export const secretProviderSchema = z.enum(secretProviders);
 
 const externalItemIdSchema = z
   .string()

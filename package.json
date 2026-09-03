@@ -11,6 +11,8 @@
     "dev": "pnpm --filter @kershell/site dev",
     "dev:admin": "pnpm --filter @kershell/admin dev",
     "dev:site": "pnpm --filter @kershell/site dev",
+    "db:check": "./scripts/db-check.sh",
+    "db:generate": "pnpm --filter @kershell/db generate",
     "lint": "pnpm --filter './apps/*' --filter './packages/*' --if-present run lint",
     "start": "pnpm --filter @kershell/site start",
     "start:admin": "pnpm --filter @kershell/admin start",

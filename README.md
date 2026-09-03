@@ -42,6 +42,8 @@ No copies valores reales a ningun `.env.example` ni leas/imprimas archivos
 | `pnpm run test` | Tests automatizados con Vitest |
 | `pnpm run typecheck` | Comprobacion TypeScript |
 | `pnpm run build` | Build de produccion |
+| `pnpm db:generate` | Genera migraciones SQL revisables desde Drizzle |
+| `pnpm db:check` | Migra y prueba una base PostgreSQL 16 local desechable |
 | `pnpm audit --prod` | Auditoria de dependencias runtime |
 
 La deuda de lint previa queda cuantificada por app en sus archivos
@@ -55,6 +57,7 @@ La deuda de lint previa queda cuantificada por app en sus archivos
 - `apps/site/app/api/contact`: unica API del sitio publico.
 - `packages/config`: politica HTTP compartida por ambos despliegues.
 - `packages/domain`: contratos runtime estrictos y DTOs seguros del negocio.
+- `packages/db`: esquema Drizzle, migraciones SQL y tests PostgreSQL reales.
 - `packages/ui`: tokens CSS compartidos.
 - `handoff` y `logo-handoff`: material de diseno historico fuera del runtime.
 

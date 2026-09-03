@@ -10,7 +10,7 @@ import {
   webUrlSchema,
 } from "./shared";
 
-export const subscriptionCategorySchema = z.enum([
+export const subscriptionCategories = [
   "HOSTING",
   "DEVELOPER_TOOLS",
   "AI",
@@ -19,14 +19,17 @@ export const subscriptionCategorySchema = z.enum([
   "MONITORING",
   "DESIGN",
   "OTHER",
-]);
-export const subscriptionStatusSchema = z.enum([
+] as const;
+export const subscriptionCategorySchema = z.enum(subscriptionCategories);
+export const subscriptionStatuses = [
   "ACTIVE",
   "TRIAL",
   "PAUSED",
   "CANCELLED",
-]);
-export const billingIntervalSchema = z.enum(["MONTHLY", "YEARLY", "USAGE"]);
+] as const;
+export const subscriptionStatusSchema = z.enum(subscriptionStatuses);
+export const billingIntervals = ["MONTHLY", "YEARLY", "USAGE"] as const;
+export const billingIntervalSchema = z.enum(billingIntervals);
 
 const paymentMethodLabelSchema = z
   .string()

@@ -1,7 +1,7 @@
 # Modelo PostgreSQL propuesto
 
-Estado: direccion y Drizzle aprobados; el SQL exacto se revisara antes de aplicar
-la primera migracion al servidor.
+Estado: direccion y Drizzle aprobados; el esquema inicial se implementa y prueba
+localmente antes de aplicar cualquier migracion al servidor.
 
 ## Principios
 
@@ -51,7 +51,9 @@ sin usar el email como identificador externo estable.
 - `expires_at`, `revoked_at`, `last_seen_at`, timestamps
 - metadata minima de seguridad; nunca el token plano
 
-Puede omitirse si el proveedor de auth elegido gestiona sesiones revocables.
+Se omite de la migracion inicial: Better Auth creara sus propias tablas de sesion
+revocable en la fase de autenticacion. No se mantendra una segunda tabla de
+sesiones Kershell en paralelo.
 
 ### `projects`
 
@@ -87,10 +89,11 @@ datos completos de pago.
 
 ### `project_subscriptions`
 
-- `project_id`, `subscription_id`
+- `owner_id`, `project_id`, `subscription_id`
 - primary key compuesta
 
 Permite que una suscripcion compartida sirva a varios proyectos sin duplicarla.
+Las claves foraneas compuestas `(id, owner_id)` impiden asociaciones entre owners.
 
 ### `credential_references`
 
@@ -127,6 +130,8 @@ seguridad.
 - Checks para status, intervalos, currency y montos no negativos.
 - Indices por `owner_id`, fechas de renovacion, status y claves foraneas.
 - Unique parciales para codigos activos por owner cuando corresponda.
+- FKs compuestas en relaciones operativas para que vendor, proyecto, suscripcion
+  y referencia pertenezcan siempre al mismo owner.
 - `updated_at` controlado de forma consistente por la capa de persistencia.
 - Version optimista (`version integer`) en entidades editables si las pruebas
   confirman riesgo de sobrescritura concurrente.

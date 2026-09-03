@@ -142,6 +142,9 @@ schemas runtime unicos, enums canonicos y DTOs sin valores secretos.
 
 ## Task 11: Crear schema PostgreSQL y migracion inicial
 
+**Status:** completada el 2026-09-03; migracion Drizzle inicial revisada y
+probada desde cero contra PostgreSQL 16.15 local, limitado a loopback.
+
 **Acceptance:** tablas, claves, checks e indices del modelo aprobado existen en
 una migracion SQL revisable; PostgreSQL no queda publicado.
 

@@ -1,0 +1,28 @@
+{
+  "name": "@kershell/db",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./schema": "./schema.ts"
+  },
+  "scripts": {
+    "generate": "drizzle-kit generate",
+    "lint": "eslint . --max-warnings=0",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@kershell/domain": "workspace:*",
+    "drizzle-orm": "0.45.2",
+    "postgres": "3.4.9"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.3",
+    "drizzle-kit": "0.31.10",
+    "eslint": "9.39.5",
+    "typescript": "^5",
+    "typescript-eslint": "8.69.0",
+    "vitest": "4.1.11"
+  }
+}

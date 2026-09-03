@@ -8,7 +8,8 @@ import {
   timestampsShape,
 } from "./shared";
 
-export const projectStatusSchema = z.enum(["LIVE", "BETA", "PAUSED"]);
+export const projectStatuses = ["LIVE", "BETA", "PAUSED"] as const;
+export const projectStatusSchema = z.enum(projectStatuses);
 
 const technologiesSchema = z
   .array(z.string().trim().min(1).max(60))
