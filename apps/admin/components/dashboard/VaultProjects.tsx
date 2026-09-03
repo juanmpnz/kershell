@@ -113,9 +113,9 @@ export function VaultProjects({ projects }: VaultProjectsProps) {
           <Icon className="mb-3 text-muted" name="box" size={28} />
           <p className="text-sm font-medium text-text">Sin proyectos todavía</p>
           <p className="mt-1 max-w-[360px] text-sm text-text-dim">Creá tu primer proyecto para empezar a guardar credenciales.</p>
-          <button className="mt-5 rounded-md bg-accent px-3 py-2 text-sm font-semibold text-accent-ink" type="button">
+          <Link className="mt-5 rounded-md bg-accent px-3 py-2 text-sm font-semibold text-accent-ink" href="/dashboard/vault/new">
             Nuevo proyecto
-          </button>
+          </Link>
         </div>
       )}
     </div>
