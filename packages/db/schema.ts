@@ -139,7 +139,10 @@ export const authAccounts = pgTable(
     ),
     index("auth_accounts_user_idx").on(table.userId),
     check("auth_accounts_google_only", sql`${table.providerId} = 'google'`),
-    check("auth_accounts_issuer_google", sql`${table.issuer} = 'local:oauth:google'`),
+    check(
+      "auth_accounts_issuer_google",
+      sql`${table.issuer} = 'https://accounts.google.com'`,
+    ),
     check("auth_accounts_no_password", sql`${table.password} is null`),
     check("auth_accounts_subject_not_blank", sql`btrim(${table.accountId}) <> ''`),
     check("auth_accounts_timestamps_ordered", sql`${table.updatedAt} >= ${table.createdAt}`),

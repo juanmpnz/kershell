@@ -1,0 +1,2 @@
+ALTER TABLE "auth_accounts" DROP CONSTRAINT "auth_accounts_issuer_google";--> statement-breakpoint
+ALTER TABLE "auth_accounts" ADD CONSTRAINT "auth_accounts_issuer_google" CHECK ("auth_accounts"."issuer" = 'https://accounts.google.com');

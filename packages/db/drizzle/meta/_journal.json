@@ -15,6 +15,13 @@
       "when": 1788423558231,
       "tag": "0001_simple_sentinels",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1788423885975,
+      "tag": "0002_faithful_terror",
+      "breakpoints": true
     }
   ]
 }

@@ -40,13 +40,13 @@ describe("initial PostgreSQL schema", () => {
     `;
     await client`
       insert into auth_accounts (issuer, account_id, provider_id, user_id)
-      values ('local:oauth:google', 'google-subject-one', 'google', ${authUser.id})
+      values ('https://accounts.google.com', 'google-subject-one', 'google', ${authUser.id})
     `;
 
     await expect(
       client`
         insert into auth_accounts (issuer, account_id, provider_id, user_id)
-        values ('local:oauth:google', 'google-subject-one', 'google', ${authUser.id})
+        values ('https://accounts.google.com', 'google-subject-one', 'google', ${authUser.id})
       `,
     ).rejects.toMatchObject({ code: "23505" });
 
