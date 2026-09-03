@@ -1,5 +1,6 @@
 import { createHash, timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
+import { isAdminEnabled } from "@/lib/admin-availability";
 import { ADMIN_SESSION_COOKIE, signAdminSession } from "@/lib/admin-session";
 
 function sha256(value: string) {
@@ -30,6 +31,10 @@ function getConfiguredPasswordHash() {
 }
 
 export async function POST(request: Request) {
+  if (!isAdminEnabled()) {
+    return NextResponse.json({ error: "Not found." }, { status: 404 });
+  }
+
   const { email, password } = (await request.json()) as {
     email?: string;
     password?: string;

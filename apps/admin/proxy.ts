@@ -1,7 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { isAdminEnabled } from "./lib/admin-availability";
 import { ADMIN_SESSION_COOKIE, verifyAdminSession } from "./lib/admin-session";
 
 export default async function proxy(request: NextRequest) {
+  if (!isAdminEnabled()) {
+    return new NextResponse(null, { status: 404 });
+  }
+
   const { pathname } = request.nextUrl;
   const isLoginRoute = pathname === "/admin/login" || pathname === "/login";
   const token = request.cookies.get(ADMIN_SESSION_COOKIE)?.value;

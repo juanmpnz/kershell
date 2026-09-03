@@ -113,8 +113,9 @@ assets), verificado despues de cada movimiento.
 
 ## Task 9: Crear y extraer `apps/admin`
 
-**Status:** en progreso; el dashboard y auth temporal compilan de forma aislada,
-y el administrador legado fue sustituido por redirecciones de compatibilidad.
+**Status:** completada el 2026-09-03; el dashboard y auth temporal compilan de
+forma aislada, el administrador legado fue sustituido por redirecciones y la
+app responde `404` salvo que `ADMIN_ENABLED=true` se configure explicitamente.
 
 **Acceptance:** dashboard nuevo compila como app independiente tras una bandera
 deshabilitada; `/admin` antiguo no se copia como segunda implementacion.

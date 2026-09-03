@@ -24,7 +24,8 @@ pnpm dev
 ```
 
 El administrador usa `pnpm dev:admin` y su configuracion local vive en
-`apps/admin/.env.local`.
+`apps/admin/.env.local`. Permanece cerrado con `404` hasta configurar
+`ADMIN_ENABLED=true`; cualquier otro valor mantiene cerradas la UI y las APIs.
 
 No copies valores reales a ningun `.env.example` ni leas/imprimas archivos
 `.env.local` en salidas de agentes o CI.
