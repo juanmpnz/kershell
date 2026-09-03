@@ -1,6 +1,11 @@
 import "server-only";
 
-import { projectSchema, type Project } from "@kershell/domain";
+import {
+  createProjectSchema,
+  projectSchema,
+  type CreateProject,
+  type Project,
+} from "@kershell/domain";
 import {
   and,
   asc,
@@ -38,6 +43,118 @@ export type ProjectOverviewDto = Pick<
   subscriptionCount: number;
   technologies: string[];
 };
+
+function toProjectValues(input: CreateProject) {
+  const project = createProjectSchema.parse(input);
+
+  return {
+    project,
+    values: {
+      code: project.code,
+      color: project.color,
+      name: project.name,
+      stage: project.stage,
+      startedOn: project.startedOn,
+      status: project.status,
+      summary: project.summary,
+    },
+  };
+}
+
+export async function createProject(
+  db: KershellDatabase,
+  ownerId: string,
+  input: CreateProject,
+): Promise<string> {
+  const { project, values } = toProjectValues(input);
+
+  return db.transaction(async (transaction) => {
+    const [created] = await transaction
+      .insert(projects)
+      .values({ ownerId, ...values })
+      .returning({ id: projects.id });
+
+    if (!created) {
+      throw new Error("Project insert did not return an identifier.");
+    }
+
+    if (project.technologies.length > 0) {
+      await transaction.insert(projectTechnologies).values(
+        project.technologies.map((name, position) => ({
+          name,
+          position,
+          projectId: created.id,
+        })),
+      );
+    }
+
+    return created.id;
+  });
+}
+
+export async function updateProject(
+  db: KershellDatabase,
+  ownerId: string,
+  projectId: string,
+  input: CreateProject,
+): Promise<boolean> {
+  const { project, values } = toProjectValues(input);
+
+  return db.transaction(async (transaction) => {
+    const [updated] = await transaction
+      .update(projects)
+      .set({ ...values, updatedAt: new Date() })
+      .where(
+        and(
+          eq(projects.id, projectId),
+          eq(projects.ownerId, ownerId),
+          isNull(projects.archivedAt),
+        ),
+      )
+      .returning({ id: projects.id });
+
+    if (!updated) {
+      return false;
+    }
+
+    await transaction
+      .delete(projectTechnologies)
+      .where(eq(projectTechnologies.projectId, updated.id));
+
+    if (project.technologies.length > 0) {
+      await transaction.insert(projectTechnologies).values(
+        project.technologies.map((name, position) => ({
+          name,
+          position,
+          projectId: updated.id,
+        })),
+      );
+    }
+
+    return true;
+  });
+}
+
+export async function archiveProject(
+  db: KershellDatabase,
+  ownerId: string,
+  projectId: string,
+): Promise<boolean> {
+  const now = new Date();
+  const archived = await db
+    .update(projects)
+    .set({ archivedAt: now, updatedAt: now })
+    .where(
+      and(
+        eq(projects.id, projectId),
+        eq(projects.ownerId, ownerId),
+        isNull(projects.archivedAt),
+      ),
+    )
+    .returning({ id: projects.id });
+
+  return archived.length === 1;
+}
 
 export async function listProjectOverviews(
   db: KershellDatabase,

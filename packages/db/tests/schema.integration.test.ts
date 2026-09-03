@@ -9,7 +9,12 @@ import {
   authorizeAndProvisionOwner,
   getAuthorizedOwner,
 } from "../repositories/auth";
-import { listProjectOverviews } from "../repositories/projects";
+import {
+  archiveProject,
+  createProject,
+  listProjectOverviews,
+  updateProject,
+} from "../repositories/projects";
 import { seedDatabase, seedExpectations, seedFixture } from "../seed";
 
 const databaseUrl = process.env.DATABASE_URL;
@@ -267,6 +272,74 @@ describe("project data access", () => {
     expect(JSON.stringify(projects)).not.toMatch(
       /password|privateKey|secretValue|token/i,
     );
+  });
+
+  it("creates, updates and archives projects only inside the owner scope", async () => {
+    await seedDatabase(db);
+    const [otherOwner] = await client<[{ id: string }]>`
+      insert into owners (display_name)
+      values ('Project mutation boundary')
+      returning id
+    `;
+    const projectId = await createProject(db, seedFixture.owner.id, {
+      code: "private_ops",
+      color: "#123ABC",
+      name: "Private Operations",
+      stage: "Planning",
+      startedOn: null,
+      status: "BETA",
+      summary: "Owner-scoped project mutation test.",
+      technologies: ["Next.js", "PostgreSQL"],
+    });
+
+    await expect(
+      updateProject(db, otherOwner.id, projectId, {
+        code: "HIJACKED",
+        color: "#FFFFFF",
+        name: "Hijacked",
+        stage: "Unknown",
+        startedOn: null,
+        status: "PAUSED",
+        summary: "Must never be written.",
+        technologies: [],
+      }),
+    ).resolves.toBe(false);
+    await expect(archiveProject(db, otherOwner.id, projectId)).resolves.toBe(
+      false,
+    );
+
+    await expect(
+      updateProject(db, seedFixture.owner.id, projectId, {
+        code: "private_ops",
+        color: "#ABC123",
+        name: "Private Operations Updated",
+        stage: "Production",
+        startedOn: "2026-09-03",
+        status: "LIVE",
+        summary: "Updated through the owner-scoped repository.",
+        technologies: ["PostgreSQL", "Next.js"],
+      }),
+    ).resolves.toBe(true);
+
+    const updated = (
+      await listProjectOverviews(db, seedFixture.owner.id)
+    ).find((project) => project.id === projectId);
+
+    expect(updated).toMatchObject({
+      code: "PRIVATE_OPS",
+      color: "#ABC123",
+      name: "Private Operations Updated",
+      status: "LIVE",
+      technologies: ["PostgreSQL", "Next.js"],
+    });
+    await expect(
+      archiveProject(db, seedFixture.owner.id, projectId),
+    ).resolves.toBe(true);
+    expect(
+      (await listProjectOverviews(db, seedFixture.owner.id)).some(
+        (project) => project.id === projectId,
+      ),
+    ).toBe(false);
   });
 
   it("propagates database outages instead of returning mock data", async () => {
