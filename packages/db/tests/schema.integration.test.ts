@@ -12,6 +12,7 @@ import {
 import {
   archiveProject,
   createProject,
+  getProjectOverview,
   listProjectOverviews,
   updateProject,
 } from "../repositories/projects";
@@ -291,6 +292,13 @@ describe("project data access", () => {
       summary: "Owner-scoped project mutation test.",
       technologies: ["Next.js", "PostgreSQL"],
     });
+
+    await expect(
+      getProjectOverview(db, otherOwner.id, projectId),
+    ).resolves.toBeNull();
+    await expect(
+      getProjectOverview(db, seedFixture.owner.id, projectId),
+    ).resolves.toMatchObject({ code: "PRIVATE_OPS" });
 
     await expect(
       updateProject(db, otherOwner.id, projectId, {

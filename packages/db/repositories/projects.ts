@@ -156,10 +156,16 @@ export async function archiveProject(
   return archived.length === 1;
 }
 
-export async function listProjectOverviews(
+async function queryProjectOverviews(
   db: KershellDatabase,
   ownerId: string,
+  projectId?: string,
 ): Promise<ProjectOverviewDto[]> {
+  const activeProjectScope = and(
+    eq(projects.ownerId, ownerId),
+    isNull(projects.archivedAt),
+    projectId ? eq(projects.id, projectId) : undefined,
+  );
   const [projectRows, technologyRows, credentialRows, subscriptionRows] =
     await Promise.all([
       db
@@ -178,7 +184,7 @@ export async function listProjectOverviews(
           updatedAt: projects.updatedAt,
         })
         .from(projects)
-        .where(and(eq(projects.ownerId, ownerId), isNull(projects.archivedAt)))
+        .where(activeProjectScope)
         .orderBy(asc(projects.name)),
       db
         .select({
@@ -190,7 +196,7 @@ export async function listProjectOverviews(
           projects,
           eq(projectTechnologies.projectId, projects.id),
         )
-        .where(and(eq(projects.ownerId, ownerId), isNull(projects.archivedAt)))
+        .where(activeProjectScope)
         .orderBy(
           asc(projectTechnologies.projectId),
           asc(projectTechnologies.position),
@@ -201,7 +207,14 @@ export async function listProjectOverviews(
           total: count(credentialReferences.id),
         })
         .from(credentialReferences)
-        .where(eq(credentialReferences.ownerId, ownerId))
+        .where(
+          and(
+            eq(credentialReferences.ownerId, ownerId),
+            projectId
+              ? eq(credentialReferences.projectId, projectId)
+              : undefined,
+          ),
+        )
         .groupBy(credentialReferences.projectId),
       db
         .select({
@@ -225,6 +238,9 @@ export async function listProjectOverviews(
         .where(
           and(
             eq(projectSubscriptions.ownerId, ownerId),
+            projectId
+              ? eq(projectSubscriptions.projectId, projectId)
+              : undefined,
             isNull(subscriptions.archivedAt),
             notInArray(subscriptions.status, ["PAUSED", "CANCELLED"]),
           ),
@@ -283,4 +299,20 @@ export async function listProjectOverviews(
       subscriptionCount: subscriptionMetrics?.subscriptionCount ?? 0,
     };
   });
+}
+
+export async function listProjectOverviews(
+  db: KershellDatabase,
+  ownerId: string,
+): Promise<ProjectOverviewDto[]> {
+  return queryProjectOverviews(db, ownerId);
+}
+
+export async function getProjectOverview(
+  db: KershellDatabase,
+  ownerId: string,
+  projectId: string,
+): Promise<ProjectOverviewDto | null> {
+  const matches = await queryProjectOverviews(db, ownerId, projectId);
+  return matches.length === 1 ? matches[0] : null;
 }
