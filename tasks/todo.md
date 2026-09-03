@@ -113,8 +113,8 @@ assets), verificado despues de cada movimiento.
 
 ## Task 9: Crear y extraer `apps/admin`
 
-**Status:** en progreso; el dashboard y auth temporal compilan de forma aislada.
-El administrador legado se retiro del site pero aun debe eliminarse del admin.
+**Status:** en progreso; el dashboard y auth temporal compilan de forma aislada,
+y el administrador legado fue sustituido por redirecciones de compatibilidad.
 
 **Acceptance:** dashboard nuevo compila como app independiente tras una bandera
 deshabilitada; `/admin` antiguo no se copia como segunda implementacion.

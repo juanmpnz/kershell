@@ -1,4 +1,4 @@
-// dashboard-handoff/data/schema.ts
+// Temporary UI types. Canonical contracts will live in packages/domain.
 // Tipos canónicos del dashboard. Copiar a lib/dashboard/schema.ts en el repo.
 
 export type ProjectStatus = 'live' | 'beta' | 'paused';

@@ -1,4 +1,4 @@
-// dashboard-handoff/data/seed.ts
+// Temporary mock data. Replace with database-backed repositories.
 // Datos demo del dashboard. Mismos del canvas. Copiar a lib/dashboard/seed.ts.
 
 import type { DashboardData } from './schema';

@@ -3,10 +3,9 @@
 Sitio publico bilingue y administrador privado de Kershell en un workspace.
 
 > Estado: el landing funciona, pero el administrador todavia no es una fuente de
-> verdad de produccion. Conviven temporalmente un prototipo legado en `/admin`
-> y el administrador canonico en `/dashboard`, ambos aislados en `apps/admin`.
-> No guardar credenciales reales hasta completar la migracion de seguridad y
-> persistencia descrita en la especificacion.
+> verdad de produccion. `/dashboard` es la unica interfaz administrativa; las
+> rutas `/admin` antiguas solo redirigen por compatibilidad. No guardar
+> credenciales reales hasta completar la migracion de seguridad y persistencia.
 
 ## Stack actual
 
@@ -14,8 +13,6 @@ Sitio publico bilingue y administrador privado de Kershell en un workspace.
 - Tailwind CSS 4, Radix UI y Framer Motion.
 - `next-intl` para ingles y espanol.
 - Resend para el formulario de contacto.
-- Supabase REST como persistencia transitoria del `/admin` legado, pendiente de
-  eliminacion.
 - Workspace pnpm 9 con builds independientes.
 
 ## Inicio rapido
@@ -52,15 +49,12 @@ La deuda de lint previa queda cuantificada por app en sus archivos
 ## Mapa actual
 
 - `apps/site/app/[locale]`: landing publico localizado.
-- `apps/admin/app/admin`: administrador legado con persistencia JSONB y fallback local.
 - `apps/admin/app/(dashboard)/dashboard`: administrador canonico conectado aun a seeds.
 - `apps/admin/lib/dashboard`: tipos y store mock en memoria.
 - `apps/site/app/api/contact`: unica API del sitio publico.
-- `supabase/admin-records.sql`: tabla transitoria, no modelo relacional final.
 - `packages/config`: politica HTTP compartida por ambos despliegues.
 - `packages/ui`: tokens CSS compartidos.
-- `handoff`, `logo-handoff`, `apps/admin/app/admin/dashboard-handoff`: material de diseno
-  historico que debe archivarse fuera del runtime durante el refactor.
+- `handoff` y `logo-handoff`: material de diseno historico fuera del runtime.
 
 ## Arquitectura y trabajo futuro
 

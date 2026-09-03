@@ -1,14 +1,4 @@
 {
-  "app/admin/AdminDashboard.tsx": {
-    "@next/next/no-location-assign-relative-destination": {
-      "count": 1
-    }
-  },
-  "app/admin/login/AdminLoginForm.tsx": {
-    "@next/next/no-location-assign-relative-destination": {
-      "count": 1
-    }
-  },
   "app/login/LoginForm.tsx": {
     "@next/next/no-location-assign-relative-destination": {
       "count": 1

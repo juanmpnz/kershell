@@ -65,8 +65,7 @@ suppression when its underlying issue is fixed.
 
 ## Known temporary code
 
-- `/admin` and `/dashboard` are competing prototypes, not two supported admins.
+- `/dashboard` is the only supported admin; `/admin` is a compatibility redirect.
 - `apps/admin/lib/dashboard/store.ts` is a mock and must not be extended as persistence.
-- `supabase/admin-records.sql` is a transition mechanism, not the target schema.
 - Token-like values in seed files are fictional examples; replace them with
   obvious placeholders before enabling any vault workflow.
