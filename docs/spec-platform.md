@@ -20,6 +20,9 @@ Estado: aprobado; implementacion en curso
   maquina y el build de imagen no deberia competir con PostgreSQL en produccion.
 - El VPS usa Ubuntu 24.04.1 LTS x86_64, Docker 27.5.1, Compose v2, Coolify
   4.3.14 y Traefik 3.6. PostgreSQL solo sera accesible por la red Docker interna.
+- No habra un staging remoto inicialmente. El unico entorno remoto sera
+  produccion y solo recibira imagenes y migraciones verificadas previamente con
+  contenedores y PostgreSQL efimero locales, segun ADR-005.
 
 ## Objetivo
 

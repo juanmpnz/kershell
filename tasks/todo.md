@@ -295,7 +295,8 @@ base vacia reproduce conteos; disco/logs tienen limites.
 ## Task 24: CI y despliegue
 
 **Acceptance:** CI construye imagen fuera del VPS y ejecuta lint, types, tests,
-build, audit y secret scan; staging pasa E2E antes de produccion.
+build, audit y secret scan; la imagen candidata pasa E2E contra PostgreSQL local
+efimero antes de promoverse al unico entorno remoto, produccion.
 
 **Verify:** pipeline verde, smoke HTTPS y rollback probado.
 
