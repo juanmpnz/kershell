@@ -13,6 +13,9 @@ importers:
       '@kershell/config':
         specifier: workspace:*
         version: link:../../packages/config
+      '@kershell/db':
+        specifier: workspace:^
+        version: link:../../packages/db
       '@kershell/ui':
         specifier: workspace:*
         version: link:../../packages/ui
