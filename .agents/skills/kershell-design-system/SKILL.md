@@ -5,8 +5,8 @@ description: Preserve and extend Kershell's visual language, components, accessi
 
 # Kershell Design System
 
-Inspect `apps/site/app/globals.css`, `apps/site/components/ui`,
-`apps/site/components/dashboard/ui` and an
+Inspect `packages/ui/styles.css`, the relevant app's `components/ui`,
+`apps/admin/components/dashboard/ui` and an
 existing nearby screen before editing. Treat handoff directories as historical
 references, not runtime component sources.
 

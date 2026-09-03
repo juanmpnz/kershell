@@ -77,11 +77,9 @@ pnpm audit --prod
 pnpm dev
 ```
 
-Comandos requeridos antes de considerar terminada la primera fase:
+Comandos todavia requeridos antes de considerar terminada la plataforma:
 
 ```bash
-pnpm lint
-pnpm test
 pnpm test:e2e
 pnpm db:check
 pnpm db:migrate

@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Eyebrow } from "@kershell/ui/eyebrow";
 
 type Answer = {
   question: string;

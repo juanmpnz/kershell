@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
-import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Eyebrow } from "@kershell/ui/eyebrow";
 import { Icon } from "@/components/dashboard/ui/Icon";
 import { IconButton } from "@/components/dashboard/ui/IconButton";
 

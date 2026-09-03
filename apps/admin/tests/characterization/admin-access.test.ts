@@ -1,12 +1,8 @@
 import { NextRequest } from "next/server";
-import { describe, expect, it, vi } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import { GET as getAdminState } from "@/app/api/admin/state/route";
 import proxy from "@/proxy";
-
-vi.mock("next-intl/middleware", () => ({
-  default: () => () => new Response(null, { status: 204 }),
-}));
 
 describe("current admin access boundary", () => {
   it("redirects an unauthenticated dashboard request to login", async () => {

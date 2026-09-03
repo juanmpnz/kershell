@@ -1,9 +1,10 @@
 # Kershell Platform
 
-Sitio publico bilingue y prototipos del administrador privado de Kershell.
+Sitio publico bilingue y administrador privado de Kershell en un workspace.
 
 > Estado: el landing funciona, pero el administrador todavia no es una fuente de
-> verdad de produccion. Conviven un prototipo en `/admin` y otro en `/dashboard`.
+> verdad de produccion. Conviven temporalmente un prototipo legado en `/admin`
+> y el administrador canonico en `/dashboard`, ambos aislados en `apps/admin`.
 > No guardar credenciales reales hasta completar la migracion de seguridad y
 > persistencia descrita en la especificacion.
 
@@ -13,8 +14,9 @@ Sitio publico bilingue y prototipos del administrador privado de Kershell.
 - Tailwind CSS 4, Radix UI y Framer Motion.
 - `next-intl` para ingles y espanol.
 - Resend para el formulario de contacto.
-- Supabase REST como persistencia transitoria de un documento JSONB en `/admin`.
-- pnpm 9 como package manager.
+- Supabase REST como persistencia transitoria del `/admin` legado, pendiente de
+  eliminacion.
+- Workspace pnpm 9 con builds independientes.
 
 ## Inicio rapido
 
@@ -24,33 +26,40 @@ cp apps/site/.env.example apps/site/.env.local
 pnpm dev
 ```
 
-No copies valores reales a `apps/site/.env.example` ni leas/imprimas
-`apps/site/.env.local` en salidas de agentes o CI.
+El administrador usa `pnpm dev:admin` y su configuracion local vive en
+`apps/admin/.env.local`.
+
+No copies valores reales a ningun `.env.example` ni leas/imprimas archivos
+`.env.local` en salidas de agentes o CI.
 
 ## Comandos
 
 | Comando | Uso |
 | --- | --- |
 | `pnpm dev` | Servidor local |
+| `pnpm dev:admin` | Administrador local en el puerto 3001 |
+| `pnpm build:site` | Build aislado del landing |
+| `pnpm build:admin` | Build aislado del administrador |
 | `pnpm run lint` | ESLint estricto para codigo nuevo |
 | `pnpm run test` | Tests automatizados con Vitest |
 | `pnpm run typecheck` | Comprobacion TypeScript |
 | `pnpm run build` | Build de produccion |
 | `pnpm audit --prod` | Auditoria de dependencias runtime |
 
-La deuda de lint previa queda cuantificada por archivo en
-`apps/site/eslint-suppressions.json`; cualquier infraccion nueva hace fallar el
-comando.
+La deuda de lint previa queda cuantificada por app en sus archivos
+`eslint-suppressions.json`; cualquier infraccion nueva hace fallar el comando.
 
 ## Mapa actual
 
 - `apps/site/app/[locale]`: landing publico localizado.
-- `apps/site/app/admin`: administrador antiguo con persistencia JSONB y fallback local.
-- `apps/site/app/(dashboard)/dashboard`: administrador nuevo conectado a datos seed.
-- `apps/site/lib/dashboard`: tipos y store mock en memoria.
-- `apps/site/app/api`: contacto, login administrativo y estado JSONB.
+- `apps/admin/app/admin`: administrador legado con persistencia JSONB y fallback local.
+- `apps/admin/app/(dashboard)/dashboard`: administrador canonico conectado aun a seeds.
+- `apps/admin/lib/dashboard`: tipos y store mock en memoria.
+- `apps/site/app/api/contact`: unica API del sitio publico.
 - `supabase/admin-records.sql`: tabla transitoria, no modelo relacional final.
-- `handoff`, `logo-handoff`, `apps/site/app/admin/dashboard-handoff`: material de diseno
+- `packages/config`: politica HTTP compartida por ambos despliegues.
+- `packages/ui`: tokens CSS compartidos.
+- `handoff`, `logo-handoff`, `apps/admin/app/admin/dashboard-handoff`: material de diseno
   historico que debe archivarse fuera del runtime durante el refactor.
 
 ## Arquitectura y trabajo futuro

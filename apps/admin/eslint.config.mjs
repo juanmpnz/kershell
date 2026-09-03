@@ -17,7 +17,6 @@ export default defineConfig([
     "build/**",
     "next-env.d.ts",
     "coverage/**",
-    "handoff/**",
-    "logo-handoff/**",
+    "app/admin/dashboard-handoff/**",
   ]),
 ]);

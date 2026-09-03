@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { Logo } from "@/components/brand/Logo";
+import { Logo } from "@kershell/ui/logo";
 import { Button } from "@/components/ui/button";
 
 const NAV_LINKS = [

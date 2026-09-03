@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { AlertCircle, CheckCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Eyebrow } from "@kershell/ui/eyebrow";
 
 export default function Contact() {
   const t = useTranslations("contact");

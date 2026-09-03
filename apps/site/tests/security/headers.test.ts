@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { createSecurityHeaders } from "@/lib/security/headers";
+import { createSecurityHeaders } from "@kershell/config/security-headers";
 
 function headerRecord(isProduction: boolean) {
   return Object.fromEntries(

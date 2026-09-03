@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Logo } from "@/components/brand/Logo";
-import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Eyebrow } from "@kershell/ui/eyebrow";
+import { Logo } from "@kershell/ui/logo";
 import { Icon, type IconName } from "@/components/dashboard/ui/Icon";
 
 const NAV: Array<{

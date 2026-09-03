@@ -98,6 +98,9 @@ movimiento es mecanico y la salida caracterizada no cambia.
 
 ## Task 8: Mover landing publico
 
+**Status:** completada el 2026-09-03; el build publico contiene solo landing,
+i18n, SEO y contacto. La API administrativa responde 404 en este despliegue.
+
 **Acceptance:** rutas localizadas, mensajes, componentes y public assets estan en
 `apps/site`; no hay imports de dashboard/auth/DB.
 
@@ -109,6 +112,9 @@ movimiento es mecanico y la salida caracterizada no cambia.
 assets), verificado despues de cada movimiento.
 
 ## Task 9: Crear y extraer `apps/admin`
+
+**Status:** en progreso; el dashboard y auth temporal compilan de forma aislada.
+El administrador legado se retiro del site pero aun debe eliminarse del admin.
 
 **Acceptance:** dashboard nuevo compila como app independiente tras una bandera
 deshabilitada; `/admin` antiguo no se copia como segunda implementacion.

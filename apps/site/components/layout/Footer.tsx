@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { Linkedin, Mail } from "lucide-react";
-import { Logo } from "@/components/brand/Logo";
+import { Logo } from "@kershell/ui/logo";
 
 export default function Footer() {
   const t = useTranslations("footer");

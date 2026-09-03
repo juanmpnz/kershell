@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { KMonogram } from "@/components/brand/KMonogram";
-import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Eyebrow } from "@kershell/ui/eyebrow";
 
 type CompareRow = {
   aspect: string;

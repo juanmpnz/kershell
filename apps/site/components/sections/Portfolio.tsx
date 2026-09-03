@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { ExternalLink, Lock } from "lucide-react";
 import Reveal from "@/components/animations/Reveal";
 import { KMonogram } from "@/components/brand/KMonogram";
-import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Eyebrow } from "@kershell/ui/eyebrow";
 
 type PortfolioItem = {
   title: string;

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Eyebrow } from "@kershell/ui/eyebrow";
 import { Icon, type IconName } from "@/components/dashboard/ui/Icon";
 
 type KPIProps = {

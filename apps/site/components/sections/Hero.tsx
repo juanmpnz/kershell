@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import Reveal from "@/components/animations/Reveal";
 import { Button } from "@/components/ui/button";
-import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Eyebrow } from "@kershell/ui/eyebrow";
 
 function TerminalBlock({ lines }: { lines: string[] }) {
   const terminalLines = [

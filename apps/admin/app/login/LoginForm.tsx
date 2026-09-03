@@ -2,8 +2,8 @@
 
 import { FormEvent, useState } from "react";
 import { ArrowRight, LockKeyhole, Mail, ShieldCheck } from "lucide-react";
-import { Logo } from "@/components/brand/Logo";
-import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Eyebrow } from "@kershell/ui/eyebrow";
+import { Logo } from "@kershell/ui/logo";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");

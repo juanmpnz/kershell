@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Eyebrow } from "@/components/ui/Eyebrow";
+import { Eyebrow } from "@kershell/ui/eyebrow";
 
 type PageHeaderProps = {
   actions?: ReactNode;

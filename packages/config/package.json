@@ -1,0 +1,8 @@
+{
+  "name": "@kershell/config",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./security-headers": "./security-headers.ts"
+  }
+}
