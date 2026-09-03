@@ -8,6 +8,13 @@
       "when": 1788419245911,
       "tag": "0000_deep_franklin_storm",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1788423558231,
+      "tag": "0001_simple_sentinels",
+      "breakpoints": true
     }
   ]
 }

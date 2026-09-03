@@ -11,6 +11,7 @@ import { sql } from "drizzle-orm";
 import {
   bigint,
   bigserial,
+  boolean,
   char,
   check,
   date,
@@ -64,6 +65,112 @@ export const secretProvider = pgEnum(
   secretProviders,
 );
 
+export const authUsers = pgTable(
+  "auth_users",
+  {
+    id: uuid().defaultRandom().primaryKey(),
+    name: text().notNull(),
+    email: text().notNull(),
+    emailVerified: boolean("email_verified").default(false).notNull(),
+    image: text(),
+    createdAt,
+    updatedAt,
+  },
+  (table) => [
+    unique("auth_users_email_unique").on(table.email),
+    check("auth_users_name_not_blank", sql`btrim(${table.name}) <> ''`),
+    check("auth_users_email_lowercase", sql`${table.email} = lower(${table.email})`),
+    check("auth_users_email_not_blank", sql`btrim(${table.email}) <> ''`),
+    check("auth_users_timestamps_ordered", sql`${table.updatedAt} >= ${table.createdAt}`),
+  ],
+);
+
+export const authSessions = pgTable(
+  "auth_sessions",
+  {
+    id: uuid().defaultRandom().primaryKey(),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    token: text().notNull(),
+    ipAddress: text("ip_address"),
+    userAgent: text("user_agent"),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => authUsers.id, { onDelete: "cascade" }),
+    createdAt,
+    updatedAt,
+  },
+  (table) => [
+    unique("auth_sessions_token_unique").on(table.token),
+    index("auth_sessions_user_idx").on(table.userId),
+    index("auth_sessions_expires_idx").on(table.expiresAt),
+    check("auth_sessions_token_not_blank", sql`btrim(${table.token}) <> ''`),
+    check("auth_sessions_timestamps_ordered", sql`${table.updatedAt} >= ${table.createdAt}`),
+  ],
+);
+
+export const authAccounts = pgTable(
+  "auth_accounts",
+  {
+    id: uuid().defaultRandom().primaryKey(),
+    issuer: text().notNull(),
+    accountId: text("account_id").notNull(),
+    providerId: text("provider_id").notNull(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => authUsers.id, { onDelete: "cascade" }),
+    accessToken: text("access_token"),
+    refreshToken: text("refresh_token"),
+    idToken: text("id_token"),
+    accessTokenExpiresAt: timestamp("access_token_expires_at", {
+      withTimezone: true,
+    }),
+    refreshTokenExpiresAt: timestamp("refresh_token_expires_at", {
+      withTimezone: true,
+    }),
+    scope: text(),
+    password: text(),
+    createdAt,
+    updatedAt,
+  },
+  (table) => [
+    unique("auth_accounts_issuer_account_unique").on(
+      table.issuer,
+      table.accountId,
+    ),
+    index("auth_accounts_user_idx").on(table.userId),
+    check("auth_accounts_google_only", sql`${table.providerId} = 'google'`),
+    check("auth_accounts_issuer_google", sql`${table.issuer} = 'local:oauth:google'`),
+    check("auth_accounts_no_password", sql`${table.password} is null`),
+    check("auth_accounts_subject_not_blank", sql`btrim(${table.accountId}) <> ''`),
+    check("auth_accounts_timestamps_ordered", sql`${table.updatedAt} >= ${table.createdAt}`),
+  ],
+);
+
+export const authVerifications = pgTable(
+  "auth_verifications",
+  {
+    id: uuid().defaultRandom().primaryKey(),
+    identifier: text().notNull(),
+    value: text().notNull(),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    createdAt,
+    updatedAt,
+  },
+  (table) => [
+    index("auth_verifications_identifier_idx").on(table.identifier),
+    index("auth_verifications_expires_idx").on(table.expiresAt),
+    check(
+      "auth_verifications_identifier_not_blank",
+      sql`btrim(${table.identifier}) <> ''`,
+    ),
+    check("auth_verifications_value_not_blank", sql`btrim(${table.value}) <> ''`),
+    check(
+      "auth_verifications_timestamps_ordered",
+      sql`${table.updatedAt} >= ${table.createdAt}`,
+    ),
+  ],
+);
+
 export const owners = pgTable(
   "owners",
   {
@@ -86,7 +193,9 @@ export const adminIdentities = pgTable(
     ownerId: uuid("owner_id")
       .notNull()
       .references(() => owners.id, { onDelete: "cascade" }),
-    authUserId: text("auth_user_id").notNull(),
+    authUserId: uuid("auth_user_id")
+      .notNull()
+      .references(() => authUsers.id, { onDelete: "cascade" }),
     provider: identityProvider().default("GOOGLE").notNull(),
     providerSubject: text("provider_subject").notNull(),
     email: text().notNull(),

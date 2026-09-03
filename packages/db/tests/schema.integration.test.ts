@@ -27,6 +27,42 @@ afterAll(async () => {
 });
 
 describe("initial PostgreSQL schema", () => {
+  it("stores revocable Better Auth sessions with constrained Google accounts", async () => {
+    const [authUser] = await client<[{ id: string }]>`
+      insert into auth_users (name, email, email_verified)
+      values ('Kershell Owner', 'owner@example.invalid', true)
+      returning id
+    `;
+
+    await client`
+      insert into auth_sessions (token, expires_at, user_id)
+      values ('opaque-session-one', now() + interval '1 hour', ${authUser.id})
+    `;
+    await client`
+      insert into auth_accounts (issuer, account_id, provider_id, user_id)
+      values ('local:oauth:google', 'google-subject-one', 'google', ${authUser.id})
+    `;
+
+    await expect(
+      client`
+        insert into auth_accounts (issuer, account_id, provider_id, user_id)
+        values ('local:oauth:google', 'google-subject-one', 'google', ${authUser.id})
+      `,
+    ).rejects.toMatchObject({ code: "23505" });
+
+    await client`delete from auth_users where id = ${authUser.id}`;
+
+    const [remaining] = await client<
+      [{ accounts: number; sessions: number }]
+    >`
+      select
+        (select count(*)::int from auth_accounts where user_id = ${authUser.id}) as accounts,
+        (select count(*)::int from auth_sessions where user_id = ${authUser.id}) as sessions
+    `;
+
+    expect(remaining).toEqual({ accounts: 0, sessions: 0 });
+  });
+
   it("enforces money, ownership and active project code invariants", async () => {
     const [ownerA, ownerB] = await client<[{ id: string }, { id: string }]>`
       insert into owners (display_name)
