@@ -3,8 +3,11 @@ import "server-only";
 import type { BetterAuthOptions } from "better-auth";
 import { z } from "zod";
 
+import { authorizeGoogleIdentity } from "./google-identity";
+
 const rawEnvironmentSchema = z.object({
   ADMIN_ALLOWED_EMAILS: z.string().min(1),
+  ADMIN_OWNER_ID: z.uuid(),
   ADMIN_WORKSPACE_DOMAIN: z.string().trim().min(1).max(253),
   BETTER_AUTH_SECRET: z.string().min(32),
   BETTER_AUTH_TRUSTED_ORIGINS: z.string().min(1),
@@ -20,6 +23,7 @@ export type AuthEnvironment = {
   databaseUrl: string;
   googleClientId: string;
   googleClientSecret: string;
+  ownerId: string;
   secret: string;
   trustedOrigins: string[];
   workspaceDomain: string;
@@ -98,6 +102,7 @@ export function parseAuthEnvironment(
       databaseUrl: parseDatabaseUrl(raw.DATABASE_URL),
       googleClientId: raw.GOOGLE_CLIENT_ID,
       googleClientSecret: raw.GOOGLE_CLIENT_SECRET,
+      ownerId: raw.ADMIN_OWNER_ID,
       secret: raw.BETTER_AUTH_SECRET,
       trustedOrigins,
       workspaceDomain,
@@ -110,6 +115,17 @@ export function parseAuthEnvironment(
 export function createAuthOptions(
   environment: AuthEnvironment,
 ) {
+  const workspaceEmail = environment.allowedEmails.find((email) =>
+    email.endsWith(`@${environment.workspaceDomain}`),
+  );
+  const personalEmail = environment.allowedEmails.find(
+    (email) => email !== workspaceEmail,
+  );
+
+  if (!workspaceEmail || !personalEmail) {
+    throw new Error("Invalid admin authentication configuration.");
+  }
+
   return {
     account: {
       accountLinking: { enabled: false },
@@ -148,5 +164,28 @@ export function createAuthOptions(
     },
     telemetry: { enabled: false },
     trustedOrigins: environment.trustedOrigins,
+    user: {
+      validateUserInfo: ({ source, user }) => {
+        const identity =
+          source.oauth?.providerId === "google"
+            ? authorizeGoogleIdentity(source.oauth.profile, {
+                personalEmail,
+                workspaceDomain: environment.workspaceDomain,
+                workspaceEmail,
+              })
+            : null;
+
+        if (
+          !identity ||
+          user.email?.toLowerCase() !== identity.email ||
+          user.emailVerified !== true
+        ) {
+          return {
+            error: "access_denied",
+            errorDescription: "This Google identity is not authorized.",
+          };
+        }
+      },
+    },
   } satisfies BetterAuthOptions;
 }

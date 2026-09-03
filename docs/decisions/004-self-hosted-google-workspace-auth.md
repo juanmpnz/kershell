@@ -50,6 +50,12 @@ Las dos cuentas autorizadas tienen 2-Step Verification. La funcionalidad TOTP de
 Better Auth no se asume como segunda capa para OAuth social, porque no bloquea
 esos flujos por defecto.
 
+`ADMIN_OWNER_ID` fija el propietario logico esperado. En el primer login valido,
+la identidad Google se vincula a ese owner; los siguientes logins exigen que el
+owner y la identidad local continuen activos y que email, issuer y `sub`
+coincidan con el vinculo persistido. Deshabilitar la identidad impide emitir una
+nueva sesion sin borrar su historial.
+
 ## Alternativas consideradas
 
 ### Auth.js

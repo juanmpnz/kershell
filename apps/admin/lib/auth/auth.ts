@@ -1,6 +1,7 @@
 import "server-only";
 
 import { getDatabase, type KershellDatabase } from "@kershell/db/client";
+import { authorizeAndProvisionOwner } from "@kershell/db/repositories/auth";
 import {
   authAccounts,
   authSessions,
@@ -39,6 +40,23 @@ export function createKershellAuth(
       provider: "pg",
       schema: authSchema,
     }),
+    databaseHooks: {
+      ...options.databaseHooks,
+      session: {
+        create: {
+          before: async (session) => {
+            const owner = await authorizeAndProvisionOwner(database, {
+              allowedEmails: environment.allowedEmails,
+              authUserId: session.userId,
+              ownerId: environment.ownerId,
+              workspaceDomain: environment.workspaceDomain,
+            });
+
+            return owner ? { data: session } : false;
+          },
+        },
+      },
+    },
     socialProviders: {
       google: {
         ...options.socialProviders.google,

@@ -5,6 +5,7 @@ import { createAuthOptions, parseAuthEnvironment } from "@/lib/auth/config";
 const validEnvironment = {
   ADMIN_ALLOWED_EMAILS:
     "owner@heykershell.com,personal-owner@example.invalid",
+  ADMIN_OWNER_ID: "10000000-0000-4000-8000-000000000001",
   ADMIN_WORKSPACE_DOMAIN: "heykershell.com",
   BETTER_AUTH_SECRET: "x".repeat(32),
   BETTER_AUTH_TRUSTED_ORIGINS:
@@ -22,6 +23,7 @@ describe("Better Auth environment", () => {
         "owner@heykershell.com",
         "personal-owner@example.invalid",
       ],
+      ownerId: "10000000-0000-4000-8000-000000000001",
       baseUrl: "https://admin.example.invalid",
       databaseUrl:
         "postgres://app:placeholder@database.internal/kershell",
@@ -51,6 +53,7 @@ describe("Better Auth environment", () => {
       ...validEnvironment,
       ADMIN_ALLOWED_EMAILS: "owner@heykershell.com",
     },
+    { ...validEnvironment, ADMIN_OWNER_ID: "not-a-uuid" },
   ])("rejects an unsafe or incomplete environment", (environment) => {
     expect(() => parseAuthEnvironment(environment)).toThrow(
       "Invalid admin authentication configuration.",

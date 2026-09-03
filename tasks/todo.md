@@ -199,6 +199,11 @@ origins configurados; password/signup publico estan desactivados.
 
 ## Task 15: Aplicar allowlist y owner authorization
 
+**Status:** completada el 2026-09-03; callback y creacion de sesion exigen
+issuer Google verificado por la biblioteca, `sub`, `email_verified`, regla `hd`,
+dos emails exactos, owner configurado e identidad local activa. Ambas identidades
+se vinculan al mismo owner y la revocacion bloquea nuevas sesiones.
+
 **Acceptance:** `sub`, `email_verified`, `hd`, email exacto y usuario activo son
 obligatorios en cada login; casos incorrectos no crean sesion valida.
 
