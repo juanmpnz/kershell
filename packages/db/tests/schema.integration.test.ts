@@ -5,7 +5,10 @@ import postgres from "postgres";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
 import * as schema from "../schema";
-import { authorizeAndProvisionOwner } from "../repositories/auth";
+import {
+  authorizeAndProvisionOwner,
+  getAuthorizedOwner,
+} from "../repositories/auth";
 import { listProjectOverviews } from "../repositories/projects";
 import { seedDatabase, seedExpectations, seedFixture } from "../seed";
 
@@ -340,6 +343,9 @@ describe("owner identity data access", () => {
       hosted_domain: null,
       owner_id: seedFixture.owner.id,
     });
+    await expect(getAuthorizedOwner(db, authUser.id)).resolves.toEqual({
+      ownerId: seedFixture.owner.id,
+    });
 
     await client`
       update admin_identities
@@ -358,5 +364,6 @@ describe("owner identity data access", () => {
         workspaceDomain: "workspace.example.invalid",
       }),
     ).resolves.toBeNull();
+    await expect(getAuthorizedOwner(db, authUser.id)).resolves.toBeNull();
   });
 });

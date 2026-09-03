@@ -21,6 +21,26 @@ export type OwnerAdmissionInput = {
   workspaceDomain: string;
 };
 
+export async function getAuthorizedOwner(
+  database: KershellDatabase,
+  authUserId: string,
+): Promise<OwnerAdmission | null> {
+  const matches = await database
+    .select({ ownerId: owners.id })
+    .from(adminIdentities)
+    .innerJoin(owners, eq(owners.id, adminIdentities.ownerId))
+    .where(
+      and(
+        eq(adminIdentities.authUserId, authUserId),
+        eq(adminIdentities.status, "ACTIVE"),
+        eq(owners.status, "ACTIVE"),
+      ),
+    )
+    .limit(2);
+
+  return matches.length === 1 ? matches[0] : null;
+}
+
 export async function authorizeAndProvisionOwner(
   database: KershellDatabase,
   input: OwnerAdmissionInput,
