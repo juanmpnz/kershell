@@ -40,6 +40,12 @@ Solo se habilita Google; email/password, signup publico, account linking y otros
 providers permanecen desactivados. `trustedOrigins` contiene una lista explicita.
 Cada DAL/Route Handler/Server Action vuelve a verificar sesion y owner.
 
+La version fijada `better-auth@1.7.2` crea el namespace sintetico
+`local:oauth:google` para la identidad de cuenta directamente en su runtime. Los
+tipos publicados por esa version no exponen la opcion documental
+`account.identityStrategy`; no se fuerza mediante cast y el namespace requerido
+queda protegido por constraint y prueba de integracion PostgreSQL.
+
 Las dos cuentas autorizadas tienen 2-Step Verification. La funcionalidad TOTP de
 Better Auth no se asume como segunda capa para OAuth social, porque no bloquea
 esos flujos por defecto.
