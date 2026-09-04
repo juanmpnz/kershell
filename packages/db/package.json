@@ -6,6 +6,7 @@
   "exports": {
     "./client": "./client.ts",
     "./repositories/auth": "./repositories/auth.ts",
+    "./repositories/credential-references": "./repositories/credential-references.ts",
     "./repositories/projects": "./repositories/projects.ts",
     "./repositories/subscriptions": "./repositories/subscriptions.ts",
     "./schema": "./schema.ts",

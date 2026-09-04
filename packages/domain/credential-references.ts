@@ -31,6 +31,7 @@ export const secretProviders = [
   "OTHER",
 ] as const;
 export const secretProviderSchema = z.enum(secretProviders);
+export const credentialReferenceIdSchema = entityIdSchema;
 
 const externalItemIdSchema = z
   .string()
@@ -54,7 +55,7 @@ export const createCredentialReferenceSchema = z.strictObject({
 });
 
 export const credentialReferenceSchema = z.strictObject({
-  id: entityIdSchema,
+  id: credentialReferenceIdSchema,
   ownerId: entityIdSchema,
   ...createCredentialReferenceSchema.shape,
   ...timestampsShape,

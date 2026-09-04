@@ -6,6 +6,12 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
 import * as schema from "../schema";
 import {
+  createCredentialReference,
+  deleteCredentialReference,
+  listCredentialReferences,
+  updateCredentialReference,
+} from "../repositories/credential-references";
+import {
   authorizeAndProvisionOwner,
   getAuthorizedOwner,
 } from "../repositories/auth";
@@ -515,6 +521,94 @@ describe("subscription data access", () => {
     await expect(
       getSubscriptionOverview(db, seedFixture.owner.id, subscriptionId),
     ).resolves.toBeNull();
+  });
+});
+
+describe("credential reference data access", () => {
+  it("persists only owner-scoped external references", async () => {
+    await seedDatabase(db);
+    const id = await createCredentialReference(db, seedFixture.owner.id, {
+      credentialType: "LOGIN",
+      environment: "PRODUCTION",
+      externalItemId: "vault-item-test-01",
+      lastRotatedAt: null,
+      name: "Production login",
+      notes: null,
+      projectId: seedFixture.projects[0].id,
+      rotationIntervalDays: 90,
+      secretProvider: "ONEPASSWORD",
+      service: "Coolify",
+    });
+    const references = await listCredentialReferences(
+      db,
+      seedFixture.owner.id,
+      seedFixture.projects[0].id,
+    );
+    expect(
+      references.find((reference) => reference.id === id),
+    ).toMatchObject({
+      externalItemId: "vault-item-test-01",
+      secretProvider: "ONEPASSWORD",
+    });
+    for (const reference of references) {
+      expect(Object.keys(reference)).not.toEqual(
+        expect.arrayContaining(["password", "secretValue", "tokenValue"]),
+      );
+    }
+    await expect(
+      updateCredentialReference(
+        db,
+        "10000000-0000-4000-8000-000000000099",
+        id,
+        {
+          credentialType: "LOGIN",
+          environment: "SHARED",
+          externalItemId: "hijack-item",
+          lastRotatedAt: null,
+          name: "Hijack",
+          notes: null,
+          projectId: null,
+          rotationIntervalDays: null,
+          secretProvider: "OTHER",
+          service: "Unknown",
+        },
+      ),
+    ).resolves.toBe(false);
+    await expect(
+      deleteCredentialReference(db, seedFixture.owner.id, id),
+    ).resolves.toBe(true);
+  });
+
+  it("rejects references to archived projects", async () => {
+    await seedDatabase(db);
+    const projectId = await createProject(db, seedFixture.owner.id, {
+      code: "ARCHIVED_CREDENTIAL_TARGET",
+      color: "#B4F23F",
+      name: "Archived credential target",
+      stage: "Archived",
+      startedOn: null,
+      status: "PAUSED",
+      summary: "Disposable project for credential reference validation.",
+      technologies: [],
+    });
+
+    await expect(
+      archiveProject(db, seedFixture.owner.id, projectId),
+    ).resolves.toBe(true);
+    await expect(
+      createCredentialReference(db, seedFixture.owner.id, {
+        credentialType: "LOGIN",
+        environment: "PRODUCTION",
+        externalItemId: "archived-project-item",
+        lastRotatedAt: null,
+        name: "Archived project login",
+        notes: null,
+        projectId,
+        rotationIntervalDays: null,
+        secretProvider: "OTHER",
+        service: "Archived service",
+      }),
+    ).rejects.toThrow("outside owner scope");
   });
 });
 
