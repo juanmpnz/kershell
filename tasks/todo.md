@@ -263,6 +263,10 @@ proyectos multiples; totales se derivan de DB.
 
 ## Task 19: Entregar referencias de credenciales
 
+**Status:** implementacion completada el 2026-09-04; pendiente validacion visual.
+El flujo activo solo maneja metadata e IDs opacos externos, con CRUD owner-scoped;
+no ofrece campos para valores secretos, revelar o copiar secretos.
+
 **Acceptance:** CRUD solo de metadata/referencia opaca; HTML, RSC, APIs, logs y
 exportaciones no contienen valores secretos.
 
