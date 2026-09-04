@@ -75,6 +75,9 @@ describe("credential reference server actions", () => {
     expect(Object.keys(mocks.create.mock.calls[0][2])).not.toEqual(
       expect.arrayContaining(["password", "secretValue", "tokenValue"]),
     );
+    expect(mocks.redirect).toHaveBeenCalledWith(
+      `/dashboard/vault/${projectId}?notice=credential-created`,
+    );
   });
 
   it("scopes updates and deletes to the authenticated owner", async () => {
@@ -91,7 +94,11 @@ describe("credential reference server actions", () => {
       referenceId,
       expect.objectContaining({ projectId }),
     );
+    expect(mocks.redirect).toHaveBeenCalledWith(
+      `/dashboard/vault/${projectId}?notice=credential-updated`,
+    );
 
+    mocks.redirect.mockClear();
     await expect(deleteCredentialAction(projectId, referenceId)).rejects.toThrow(
       "NEXT_REDIRECT",
     );
@@ -99,6 +106,9 @@ describe("credential reference server actions", () => {
       "db",
       "owner-one",
       referenceId,
+    );
+    expect(mocks.redirect).toHaveBeenCalledWith(
+      `/dashboard/vault/${projectId}?notice=credential-deleted`,
     );
   });
 });

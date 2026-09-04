@@ -20,7 +20,9 @@ solo lectura antes del primer despliegue.
 - Configuracion del proxy en `/data/coolify/proxy/docker-compose.yml`.
 - IPv6 desactivado en `/etc/docker/daemon.json` por compatibilidad operativa con
   Coolify en este host.
-- Certificados Let's Encrypt y hostname sslip.io; no hay dominio propio todavia.
+- Certificados Let's Encrypt gestionados por Coolify. El dominio propio
+  seleccionado es `heykershell.com`; su resolucion hacia este servidor debe
+  verificarse antes de emitir el certificado definitivo.
 
 Coolify ejecuta `coolify`, `coolify-db`, `coolify-redis`, `coolify-realtime` y
 `coolify-proxy`. Antes de añadir servicios se mediran memoria, swap, disco,

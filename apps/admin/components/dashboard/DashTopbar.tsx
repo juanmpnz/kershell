@@ -4,6 +4,10 @@ import { usePathname } from "next/navigation";
 import { Icon } from "@/components/dashboard/ui/Icon";
 import { IconButton } from "@/components/dashboard/ui/IconButton";
 import { authClient } from "@/lib/auth/client";
+import {
+  ADMIN_LOGIN_PATH,
+  withoutAdminBasePath,
+} from "@/lib/routing/admin-paths";
 
 const LABELS: Record<string, string> = {
   dashboard: "Overview",
@@ -21,13 +25,13 @@ function getCrumbs(pathname: string) {
 
 export function DashTopbar() {
   const pathname = usePathname();
-  const crumbs = getCrumbs(pathname);
+  const crumbs = getCrumbs(withoutAdminBasePath(pathname));
 
   async function logout() {
     const result = await authClient.signOut();
 
     if (!result.error) {
-      window.location.assign("/login");
+      window.location.assign(ADMIN_LOGIN_PATH);
     }
   }
 

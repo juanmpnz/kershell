@@ -5,6 +5,10 @@ import { ShieldCheck } from "lucide-react";
 import { Eyebrow } from "@kershell/ui/eyebrow";
 import { Logo } from "@kershell/ui/logo";
 import { authClient } from "@/lib/auth/client";
+import {
+  ADMIN_DASHBOARD_PATH,
+  ADMIN_OAUTH_ERROR_PATH,
+} from "@/lib/routing/admin-paths";
 
 export function LoginForm({ initialError = "" }: { initialError?: string }) {
   const [error, setError] = useState(initialError);
@@ -15,8 +19,8 @@ export function LoginForm({ initialError = "" }: { initialError?: string }) {
     setIsSubmitting(true);
 
     const result = await authClient.signIn.social({
-      callbackURL: "/dashboard",
-      errorCallbackURL: "/login?error=oauth",
+      callbackURL: ADMIN_DASHBOARD_PATH,
+      errorCallbackURL: ADMIN_OAUTH_ERROR_PATH,
       provider: "google",
     });
 

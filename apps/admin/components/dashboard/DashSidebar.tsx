@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Eyebrow } from "@kershell/ui/eyebrow";
 import { Logo } from "@kershell/ui/logo";
 import { Icon, type IconName } from "@/components/dashboard/ui/Icon";
+import { withoutAdminBasePath } from "@/lib/routing/admin-paths";
 
 const NAV: Array<{
   id: string;
@@ -32,7 +33,7 @@ export function DashSidebar({
   userName = "Jerónimo",
   userRole = "Owner",
 }: DashSidebarProps) {
-  const pathname = usePathname();
+  const pathname = withoutAdminBasePath(usePathname());
   const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {

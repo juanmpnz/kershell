@@ -3,8 +3,8 @@
 Sitio publico bilingue y administrador privado de Kershell en un workspace.
 
 > Estado: el landing funciona, pero el administrador todavia no es una fuente de
-> verdad de produccion. `/dashboard` es la unica interfaz administrativa; las
-> rutas `/admin` antiguas solo redirigen por compatibilidad. No guardar
+> verdad de produccion. El administrador vive bajo `/admin` y su interfaz
+> canonica es `/admin/dashboard`. No guardar
 > credenciales reales hasta completar la migracion de seguridad y persistencia.
 
 ## Stack actual
@@ -53,7 +53,8 @@ La deuda de lint previa queda cuantificada por app en sus archivos
 ## Mapa actual
 
 - `apps/site/app/[locale]`: landing publico localizado.
-- `apps/admin/app/(dashboard)/dashboard`: administrador canonico conectado aun a seeds.
+- `apps/admin/app/(dashboard)/dashboard`: administrador canonico, publicado bajo
+  `/admin/dashboard` mediante `basePath` y conectado aun a seeds.
 - `apps/admin/lib/dashboard`: tipos y store mock en memoria.
 - `apps/site/app/api/contact`: unica API del sitio publico.
 - `packages/config`: politica HTTP compartida por ambos despliegues.

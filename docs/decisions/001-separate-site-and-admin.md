@@ -49,3 +49,15 @@ Seguir siendo un monolito modular: no introducir microservicios ni colas.
 ## Confirmacion
 
 El propietario aprobo el renombrado y la separacion el 2026-09-02.
+
+## Actualizacion: un dominio, dos deployments
+
+El 2026-09-04 el propietario confirmo `heykershell.com` como unico hostname y
+`/admin` como entrada historica y canonica del administrador. La separacion de
+aplicaciones se conserva: Coolify envia la raiz a `apps/site` y el prefijo
+`/admin` a `apps/admin`, con eliminacion de prefijo desactivada.
+
+El admin usa `basePath: "/admin"`; por ello HTML, assets, Route Handlers y OAuth
+permanecen dentro de esa ruta. La URI de callback Google canonica pasa a ser
+`https://heykershell.com/admin/api/auth/callback/google`. Esta decision comparte
+origen publico, pero no fusiona builds, procesos, variables ni acceso a datos.

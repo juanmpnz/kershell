@@ -4,11 +4,6 @@
       "count": 1
     }
   },
-  "components/dashboard/DashTopbar.tsx": {
-    "@next/next/no-location-assign-relative-destination": {
-      "count": 1
-    }
-  },
   "components/dashboard/VaultProjects.tsx": {
     "react-hooks/set-state-in-effect": {
       "count": 1

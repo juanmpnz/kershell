@@ -28,8 +28,8 @@ const environment = parseAuthEnvironment({
   ADMIN_OWNER_ID: seedFixture.owner.id,
   ADMIN_WORKSPACE_DOMAIN: "workspace.example.invalid",
   BETTER_AUTH_SECRET: "integration-test-secret-value-only".repeat(2),
-  BETTER_AUTH_TRUSTED_ORIGINS: "https://admin.example.invalid",
-  BETTER_AUTH_URL: "https://admin.example.invalid",
+  BETTER_AUTH_TRUSTED_ORIGINS: "https://example.invalid",
+  BETTER_AUTH_URL: "https://example.invalid",
   DATABASE_URL: databaseUrl,
   GOOGLE_CLIENT_ID: "integration-client-id.apps.googleusercontent.com",
   GOOGLE_CLIENT_SECRET: "integration-client-secret",
@@ -50,15 +50,15 @@ function readCookie(setCookie: string | null, suffix: string): string {
 
 async function completeGoogleCallback(auth: KershellAuth) {
   const startResponse = await auth.handler(
-    new Request("https://admin.example.invalid/api/auth/sign-in/social", {
+    new Request("https://example.invalid/admin/api/auth/sign-in/social", {
       body: JSON.stringify({
-        callbackURL: "/dashboard",
-        errorCallbackURL: "/login",
+        callbackURL: "/admin/dashboard",
+        errorCallbackURL: "/admin/login",
         provider: "google",
       }),
       headers: {
         "content-type": "application/json",
-        origin: "https://admin.example.invalid",
+        origin: "https://example.invalid",
       },
       method: "POST",
     }),
@@ -70,7 +70,7 @@ async function completeGoogleCallback(auth: KershellAuth) {
 
   return auth.handler(
     new Request(
-      `https://admin.example.invalid/api/auth/callback/google?code=stub-code&state=${encodeURIComponent(state ?? "")}`,
+      `https://example.invalid/admin/api/auth/callback/google?code=stub-code&state=${encodeURIComponent(state ?? "")}`,
       { headers: { cookie: stateCookie } },
     ),
   );
@@ -160,14 +160,14 @@ describe("Better Auth Google flow", () => {
       }),
     });
     const startResponse = await auth.handler(
-      new Request("https://admin.example.invalid/api/auth/sign-in/social", {
+      new Request("https://example.invalid/admin/api/auth/sign-in/social", {
         body: JSON.stringify({
-          callbackURL: "/dashboard",
+          callbackURL: "/admin/dashboard",
           provider: "google",
         }),
         headers: {
           "content-type": "application/json",
-          origin: "https://admin.example.invalid",
+          origin: "https://example.invalid",
         },
         method: "POST",
       }),
@@ -183,7 +183,7 @@ describe("Better Auth Google flow", () => {
 
     const callbackResponse = await auth.handler(
       new Request(
-        `https://admin.example.invalid/api/auth/callback/google?code=stub-code&state=${encodeURIComponent(state ?? "")}`,
+        `https://example.invalid/admin/api/auth/callback/google?code=stub-code&state=${encodeURIComponent(state ?? "")}`,
         { headers: { cookie: stateCookie } },
       ),
     );
@@ -193,10 +193,10 @@ describe("Better Auth Google flow", () => {
     );
 
     expect(callbackResponse.status).toBe(302);
-    expect(callbackResponse.headers.get("location")).toBe("/dashboard");
+    expect(callbackResponse.headers.get("location")).toBe("/admin/dashboard");
 
     const sessionResponse = await auth.handler(
-      new Request("https://admin.example.invalid/api/auth/get-session", {
+      new Request("https://example.invalid/admin/api/auth/get-session", {
         headers: { cookie: sessionCookie },
       }),
     );
@@ -232,7 +232,7 @@ describe("Better Auth Google flow", () => {
     await database.delete(authSessions);
 
     const revokedResponse = await auth.handler(
-      new Request("https://admin.example.invalid/api/auth/get-session", {
+      new Request("https://example.invalid/admin/api/auth/get-session", {
         headers: { cookie: sessionCookie },
       }),
     );
@@ -272,15 +272,15 @@ describe("Better Auth Google flow", () => {
       }),
     });
     const startResponse = await auth.handler(
-      new Request("https://admin.example.invalid/api/auth/sign-in/social", {
+      new Request("https://example.invalid/admin/api/auth/sign-in/social", {
         body: JSON.stringify({
-          callbackURL: "/dashboard",
-          errorCallbackURL: "/login",
+          callbackURL: "/admin/dashboard",
+          errorCallbackURL: "/admin/login",
           provider: "google",
         }),
         headers: {
           "content-type": "application/json",
-          origin: "https://admin.example.invalid",
+          origin: "https://example.invalid",
         },
         method: "POST",
       }),
@@ -294,14 +294,14 @@ describe("Better Auth Google flow", () => {
     const state = authorizationUrl.searchParams.get("state");
     const callbackResponse = await auth.handler(
       new Request(
-        `https://admin.example.invalid/api/auth/callback/google?code=stub-code&state=${encodeURIComponent(state ?? "")}`,
+        `https://example.invalid/admin/api/auth/callback/google?code=stub-code&state=${encodeURIComponent(state ?? "")}`,
         { headers: { cookie: stateCookie } },
       ),
     );
 
     expect(callbackResponse.status).toBe(302);
     expect(callbackResponse.headers.get("location")).toContain(
-      "/login?error=",
+      "/admin/login?error=",
     );
     expect(await database.select().from(authUsers)).toHaveLength(0);
     expect(await database.select().from(authSessions)).toHaveLength(0);
@@ -333,7 +333,7 @@ describe("Better Auth Google flow", () => {
 
     expect(revokedCallback.status).toBe(302);
     expect(revokedCallback.headers.get("location")).toContain(
-      "/login?error=",
+      "/admin/login?error=",
     );
     expect(await database.select().from(authSessions)).toHaveLength(0);
   });

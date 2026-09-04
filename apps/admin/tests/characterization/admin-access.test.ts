@@ -12,19 +12,21 @@ describe("current admin access boundary", () => {
 
   it("redirects an unauthenticated dashboard request to login", async () => {
     vi.stubEnv("ADMIN_ENABLED", "true");
-    const request = new NextRequest("https://admin.example/dashboard");
+    const request = new NextRequest("https://example.invalid/admin/dashboard");
 
     const response = await proxy(request);
 
     expect(response.status).toBe(307);
-    expect(response.headers.get("location")).toBe("https://admin.example/login");
+    expect(response.headers.get("location")).toBe(
+      "https://example.invalid/admin/login",
+    );
   });
 
   it("returns not found for UI routes unless explicitly enabled", async () => {
     vi.stubEnv("ADMIN_ENABLED", "false");
 
     const response = await proxy(
-      new NextRequest("https://admin.example/dashboard"),
+      new NextRequest("https://example.invalid/admin/dashboard"),
     );
 
     expect(response.status).toBe(404);
@@ -42,7 +44,7 @@ describe("current admin access boundary", () => {
     vi.stubEnv("ADMIN_ENABLED", "false");
 
     const betterAuthResponse = await betterAuthGet(
-      new Request("https://admin.example/api/auth/get-session"),
+      new Request("https://example.invalid/admin/api/auth/get-session"),
     );
 
     expect(betterAuthResponse.status).toBe(404);

@@ -81,6 +81,9 @@ nueva sesion sin borrar su historial.
   pruebas de callback/session revocation.
 - Se requieren credenciales OAuth en Google Cloud y URLs finales antes de probar
   produccion.
+- Con el administrador montado bajo el dominio canonico, la URI Google es
+  `https://heykershell.com/admin/api/auth/callback/google`; `BETTER_AUTH_URL` y
+  `trustedOrigins` siguen siendo origenes sin ruta.
 - El identificador interno nunca sera el email; el email sigue siendo una barrera
   adicional y dato actualizable.
 - La politica de 2-Step Verification se administra en Google Workspace.

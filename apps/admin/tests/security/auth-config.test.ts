@@ -9,8 +9,8 @@ const validEnvironment = {
   ADMIN_WORKSPACE_DOMAIN: "heykershell.com",
   BETTER_AUTH_SECRET: "x".repeat(32),
   BETTER_AUTH_TRUSTED_ORIGINS:
-    "https://admin.example.invalid,http://localhost:3001",
-  BETTER_AUTH_URL: "https://admin.example.invalid",
+    "https://example.invalid,http://localhost:3001",
+  BETTER_AUTH_URL: "https://example.invalid",
   DATABASE_URL: "postgres://app:placeholder@database.internal/kershell",
   GOOGLE_CLIENT_ID: "test-client-id.apps.googleusercontent.com",
   GOOGLE_CLIENT_SECRET: "test-only-client-secret",
@@ -24,14 +24,14 @@ describe("Better Auth environment", () => {
         "personal-owner@example.invalid",
       ],
       ownerId: "10000000-0000-4000-8000-000000000001",
-      baseUrl: "https://admin.example.invalid",
+      baseUrl: "https://example.invalid",
       databaseUrl:
         "postgres://app:placeholder@database.internal/kershell",
       googleClientId: "test-client-id.apps.googleusercontent.com",
       googleClientSecret: "test-only-client-secret",
       secret: "x".repeat(32),
       trustedOrigins: [
-        "https://admin.example.invalid",
+        "https://example.invalid",
         "http://localhost:3001",
       ],
       workspaceDomain: "heykershell.com",
@@ -40,10 +40,10 @@ describe("Better Auth environment", () => {
 
   it.each([
     { ...validEnvironment, BETTER_AUTH_SECRET: "too-short" },
-    { ...validEnvironment, BETTER_AUTH_URL: "http://admin.example.invalid" },
+    { ...validEnvironment, BETTER_AUTH_URL: "http://example.invalid" },
     {
       ...validEnvironment,
-      BETTER_AUTH_TRUSTED_ORIGINS: "https://admin.example.invalid/path",
+      BETTER_AUTH_TRUSTED_ORIGINS: "https://example.invalid/path",
     },
     {
       ...validEnvironment,
@@ -65,9 +65,10 @@ describe("Better Auth options", () => {
   it("enables only encrypted Google OAuth with database-backed state", () => {
     const options = createAuthOptions(parseAuthEnvironment(validEnvironment));
 
+    expect(options.basePath).toBe("/admin/api/auth");
     expect(options.emailAndPassword).toEqual({ enabled: false });
     expect(options.trustedOrigins).toEqual([
-      "https://admin.example.invalid",
+      "https://example.invalid",
       "http://localhost:3001",
     ]);
     expect(options.socialProviders).toEqual({

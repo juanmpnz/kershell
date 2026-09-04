@@ -3,6 +3,7 @@ import "server-only";
 import type { BetterAuthOptions } from "better-auth";
 import { z } from "zod";
 
+import { ADMIN_AUTH_BASE_PATH } from "@/lib/routing/admin-paths";
 import { authorizeGoogleIdentity } from "./google-identity";
 
 const rawEnvironmentSchema = z.object({
@@ -137,6 +138,7 @@ export function createAuthOptions(
       database: { generateId: "uuid" },
     },
     appName: "Kershell Admin",
+    basePath: ADMIN_AUTH_BASE_PATH,
     baseURL: environment.baseUrl,
     databaseHooks: {
       account: {

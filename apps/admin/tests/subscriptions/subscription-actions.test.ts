@@ -44,6 +44,9 @@ describe("subscription server actions", () => {
     mocks.create.mockResolvedValue("subscription-one");
     await expect(createSubscriptionAction({}, payload())).rejects.toThrow("NEXT_REDIRECT");
     expect(mocks.create).toHaveBeenCalledWith("db", "owner-one", expect.objectContaining({ amountMinor: 549, currency: "EUR" }));
+    expect(mocks.redirect).toHaveBeenCalledWith(
+      "/dashboard/subscriptions?notice=created",
+    );
   });
 
   it("scopes updates and archives to the authenticated owner", async () => {
@@ -53,8 +56,15 @@ describe("subscription server actions", () => {
 
     await expect(updateSubscriptionAction(subscriptionId, {}, payload())).rejects.toThrow("NEXT_REDIRECT");
     expect(mocks.update).toHaveBeenCalledWith("db", "owner-one", subscriptionId, expect.objectContaining({ amountMinor: 549 }));
+    expect(mocks.redirect).toHaveBeenCalledWith(
+      "/dashboard/subscriptions?notice=updated",
+    );
 
+    mocks.redirect.mockClear();
     await expect(archiveSubscriptionAction(subscriptionId)).rejects.toThrow("NEXT_REDIRECT");
     expect(mocks.archive).toHaveBeenCalledWith("db", "owner-one", subscriptionId);
+    expect(mocks.redirect).toHaveBeenCalledWith(
+      "/dashboard/subscriptions?notice=archived",
+    );
   });
 });

@@ -65,7 +65,9 @@ suppression when its underlying issue is fixed.
 
 ## Known temporary code
 
-- `/dashboard` is the only supported admin; `/admin` is a compatibility redirect.
+- The admin application is mounted at `/admin`; its canonical dashboard is
+  `/admin/dashboard`. Internal Next.js links keep their unprefixed app paths so
+  `basePath` can add the prefix exactly once.
 - `apps/admin/lib/dashboard/store.ts` is a mock and must not be extended as persistence.
 - Token-like values in seed files are fictional examples; replace them with
   obvious placeholders before enabling any vault workflow.

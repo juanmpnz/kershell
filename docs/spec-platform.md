@@ -23,6 +23,9 @@ Estado: aprobado; implementacion en curso
 - No habra un staging remoto inicialmente. El unico entorno remoto sera
   produccion y solo recibira imagenes y migraciones verificadas previamente con
   contenedores y PostgreSQL efimero locales, segun ADR-005.
+- El dominio canonico es `heykershell.com`. El landing responde en la raiz y el
+  deployment separado del administrador se monta completo bajo `/admin`, sin
+  retirar el prefijo en Traefik/Coolify.
 
 ## Objetivo
 
@@ -193,8 +196,10 @@ Reglas:
 
 - Confirmar mediante acceso de solo lectura que los 4 GB de swap siguen activos
   despues de reiniciar y medir el consumo base de Coolify.
-- Elegir en Coolify el hostname sslip.io inicial del admin y registrar las URLs
-  OAuth exactas antes de crear las credenciales Google.
+- Configurar en Coolify `https://heykershell.com` para el site y
+  `https://heykershell.com/admin` para el admin con `Strip Prefixes` desactivado.
+- Registrar `https://heykershell.com/admin/api/auth/callback/google` como URI de
+  redireccion autorizada en Google OAuth.
 - Crear una base y un rol exclusivos de Kershell. No reutilizar `ediflow_demo` ni
   la instancia interna `coolify-db`.
 - Elegir el destino externo y cifrado de los backups antes de desplegar datos.
