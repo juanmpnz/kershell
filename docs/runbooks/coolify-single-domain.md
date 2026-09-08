@@ -26,13 +26,20 @@ Cloud es:
 https://heykershell.com/admin/api/auth/callback/google
 ```
 
+Next.js retira su `basePath` antes de invocar el Route Handler. La ruta de
+autenticacion restaura `/admin` en la URL que entrega a Better Auth, sin duplicar
+el prefijo ni perder cuerpo, cookies o parametros del callback. Esto no cambia
+la configuracion de Coolify: `Strip Prefixes` debe seguir desactivado.
+
 ## Comprobacion posterior al despliegue
 
 ```bash
 curl -I https://heykershell.com/
 curl -I https://heykershell.com/admin/login
 curl -I https://heykershell.com/admin/dashboard
+curl -i https://heykershell.com/admin/api/auth/get-session
 ```
 
 La raiz debe servir el landing, login debe responder y dashboard sin sesion debe
-redirigir a `/admin/login`.
+redirigir a `/admin/login`. `get-session` sin cookies debe devolver `200` con
+cuerpo JSON `null`. Que el login cargue no basta para verificar la API de auth.
