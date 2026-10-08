@@ -18,6 +18,6 @@
   }
 
   .site-starfield > section {
-    background-color: transparent;
+    background-color: transparent !important;
   }
 }
