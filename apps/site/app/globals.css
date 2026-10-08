@@ -1,3 +1,23 @@
 @import "tailwindcss";
 @import "@kershell/ui/styles.css";
 @source "../../../packages/ui";
+
+@layer components {
+  .site-starfield {
+    isolation: isolate;
+    background-color: var(--ink);
+    background-image:
+      radial-gradient(circle at 15% 12%, rgba(180, 242, 63, 0.72) 0 1px, transparent 1.6px),
+      radial-gradient(circle at 76% 8%, rgba(236, 238, 240, 0.72) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 88% 38%, rgba(180, 242, 63, 0.42) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 32% 61%, rgba(236, 238, 240, 0.5) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 8% 86%, rgba(180, 242, 63, 0.38) 0 1px, transparent 1.5px),
+      radial-gradient(ellipse at 54% 4%, rgba(37, 57, 35, 0.52), transparent 44%);
+    background-size: 173px 191px, 251px 227px, 293px 307px, 211px 263px, 331px 281px, 100% 100%;
+    background-attachment: fixed;
+  }
+
+  .site-starfield > section {
+    background-color: transparent;
+  }
+}
