@@ -4,7 +4,9 @@
 
 @layer components {
   .site-starfield {
+    position: relative;
     isolation: isolate;
+    overflow: hidden;
     background-color: var(--ink);
     background-image:
       radial-gradient(circle at 15% 12%, rgba(180, 242, 63, 0.72) 0 1px, transparent 1.6px),
@@ -17,7 +19,130 @@
     background-attachment: fixed;
   }
 
+  .site-starfield::before,
+  .site-starfield::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .site-starfield::before {
+    inset: -12%;
+    opacity: 0.7;
+    background-image:
+      radial-gradient(circle, rgba(236, 238, 240, 0.7) 0 1px, transparent 1.7px),
+      radial-gradient(circle, rgba(180, 242, 63, 0.42) 0 1px, transparent 1.9px),
+      radial-gradient(circle, rgba(122, 208, 255, 0.34) 0 1px, transparent 1.8px);
+    background-position: 23px 41px, 119px 83px, 71px 149px;
+    background-size: 301px 331px, 449px 401px, 587px 613px;
+    filter: blur(0.15px);
+    animation: starfield-drift 26s var(--ease-out) infinite alternate;
+  }
+
+  .site-starfield::after {
+    top: 54svh;
+    right: -35%;
+    left: -35%;
+    height: 48rem;
+    opacity: 0.26;
+    background-image:
+      linear-gradient(rgba(180, 242, 63, 0.2) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(180, 242, 63, 0.16) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, transparent, black 32%, transparent 88%);
+    transform: perspective(720px) rotateX(67deg) translateZ(-80px);
+    transform-origin: top center;
+    animation: horizon-pulse 18s ease-in-out infinite alternate;
+  }
+
   .site-starfield > section {
+    position: relative;
+    z-index: 1;
     background-color: transparent !important;
   }
+
+  .hero-constellation::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 77% 43%, rgba(180, 242, 63, 0.13), transparent 18%),
+      radial-gradient(circle at 81% 37%, rgba(122, 208, 255, 0.1), transparent 31%);
+  }
+
+  .hero-depth-field {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    perspective: 900px;
+  }
+
+  .hero-orbit {
+    position: absolute;
+    display: block;
+    width: 35rem;
+    height: 13rem;
+    border: 1px solid rgba(180, 242, 63, 0.19);
+    border-radius: 50%;
+    box-shadow: inset 0 0 55px rgba(180, 242, 63, 0.04), 0 0 34px rgba(122, 208, 255, 0.05);
+    transform-style: preserve-3d;
+  }
+
+  .hero-orbit-one {
+    top: 17%;
+    right: -13rem;
+    transform: rotateX(66deg) rotateZ(-17deg);
+    animation: orbit-one 22s linear infinite;
+  }
+
+  .hero-orbit-two {
+    right: -7rem;
+    bottom: 13%;
+    width: 27rem;
+    height: 10rem;
+    border-color: rgba(122, 208, 255, 0.16);
+    transform: rotateX(70deg) rotateZ(18deg);
+    animation: orbit-two 29s linear infinite reverse;
+  }
+
+  .hero-beacon {
+    position: absolute;
+    top: 40%;
+    right: 18%;
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--accent);
+    box-shadow: 0 0 0 8px rgba(180, 242, 63, 0.06), 0 0 24px rgba(180, 242, 63, 0.52);
+    animation: beacon-float 8s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes starfield-drift {
+  from { transform: translate3d(-1.5%, -1%, 0) scale(1); }
+  to { transform: translate3d(1.5%, 1%, 36px) scale(1.035); }
+}
+
+@keyframes horizon-pulse {
+  from { opacity: 0.16; transform: perspective(720px) rotateX(67deg) translate3d(0, 0, -80px); }
+  to { opacity: 0.31; transform: perspective(720px) rotateX(67deg) translate3d(0, -18px, -30px); }
+}
+
+@keyframes orbit-one {
+  from { transform: rotateX(66deg) rotateZ(-17deg) rotateY(0deg); }
+  to { transform: rotateX(66deg) rotateZ(-17deg) rotateY(360deg); }
+}
+
+@keyframes orbit-two {
+  from { transform: rotateX(70deg) rotateZ(18deg) rotateY(0deg); }
+  to { transform: rotateX(70deg) rotateZ(18deg) rotateY(360deg); }
+}
+
+@keyframes beacon-float {
+  from { transform: translate3d(-8px, -12px, 0) scale(0.9); opacity: 0.58; }
+  to { transform: translate3d(11px, 13px, 50px) scale(1.18); opacity: 1; }
 }

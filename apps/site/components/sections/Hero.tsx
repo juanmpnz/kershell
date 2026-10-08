@@ -48,8 +48,13 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-[calc(100svh-1px)] overflow-hidden bg-ink pt-16">
+    <section className="hero-constellation relative min-h-[calc(100svh-1px)] overflow-hidden bg-ink pt-16">
       <div aria-hidden className="console-grid-bg absolute inset-0 opacity-70" />
+      <div aria-hidden className="hero-depth-field">
+        <span className="hero-orbit hero-orbit-one" />
+        <span className="hero-orbit hero-orbit-two" />
+        <span className="hero-beacon" />
+      </div>
       <div className="console-container relative grid min-h-[calc(100svh-4rem)] grid-cols-1 items-center gap-12 py-16 md:grid-cols-[1.4fr_1fr] md:py-24">
         <div className="max-w-4xl">
           <Eyebrow variant="accent">{t("badge")}</Eyebrow>
