@@ -32,6 +32,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: "/api/",
       },
     ],
-    sitemap: "https://kershell.io/sitemap.xml",
+    sitemap: "https://www.heykershell.com/sitemap.xml",
   };
 }

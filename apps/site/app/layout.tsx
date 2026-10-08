@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const siteUrl = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://kershell.io");
+const siteUrl = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.heykershell.com");
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,

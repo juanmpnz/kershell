@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const siteUrl = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://kershell.io");
+const siteUrl = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.heykershell.com");
 
 export async function generateMetadata({
   params,
@@ -216,11 +216,11 @@ function JsonLd({ locale }: { locale: string }) {
       {
         "@type": "CreativeWork",
         position: 1,
-        name: "SpecOps",
-        url: "https://specops.kershell.dev/",
+        name: "Ediflow",
+        url: `${siteUrl.origin}/${locale}#portfolio`,
         description: isEs
-          ? "Plataforma interna de desarrollo orquestada por IA con análisis de código, PRs automáticos y streaming en tiempo real."
-          : "Internal AI-orchestrated development operations platform with code analysis, automated PRs, and real-time streaming.",
+          ? "Plataforma de gestión para administradores de fincas y comunidades: incidencias, presupuestos, decisiones, votaciones y derramas en un único flujo."
+          : "Management platform for property managers and residential communities: incidents, quotes, decisions, votes, and assessments in one connected flow.",
       },
       {
         "@type": "CreativeWork",

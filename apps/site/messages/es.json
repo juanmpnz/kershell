@@ -5,15 +5,15 @@
     "process": "Proceso",
     "why": "Por Qué",
     "contact": "Contacto",
-    "cta": "Propuesta Gratis"
+    "cta": "Evaluar mi proyecto"
   },
   "hero": {
     "badge": "Software acelerado por IA, revisado por seniors",
-    "title1": "Ingeniería de Sistemas",
-    "title2": "Que Operan Tu Negocio",
-    "subtitle": "Dos senior developers. Siete años en banca, logística y operaciones críticas. Diseñamos y construimos productos SaaS, motores de IA y plataformas internas — con arquitectura que escala y código 100% revisado por humanos.",
-    "differential": "Usamos IA como acelerador interno — cada decisión técnica pasa por juicio de ingeniería senior.",
-    "cta_primary": "Diseñar una Solución",
+    "title1": "Software que ordena",
+    "title2": "operaciones complejas",
+    "subtitle": "Construimos SaaS, plataformas internas e IA aplicada para empresas que ya no pueden seguir operando entre hojas de cálculo, correos y procesos desconectados.",
+    "differential": "Dos ingenieros senior: entendemos el problema, definimos la arquitectura y entregamos un sistema que tu equipo puede operar y evolucionar.",
+    "cta_primary": "Contarnos el problema",
     "cta_secondary": "Ver Casos Públicos",
     "typing": ["SaaS Empresariales", "Sistemas Internos", "IA en Tiempo Real", "Automatización Operativa", "Arquitectura Técnica"]
   },
@@ -140,16 +140,16 @@
     "items": [
       {
         "category": "internal",
-        "visual": "specops",
+        "visual": "ediflow",
         "badge": "Built by Kershell",
-        "title": "SpecOps",
-        "subtitle": "AI-Powered Development Operations Platform",
-        "description": "Nuestra plataforma interna de desarrollo orquestada por IA. Tareas, análisis de código asistido por IA, PRs automáticos, deploy en tiempo real con streaming SSE, y un motor cerrado de IA donde reglas de ingeniería senior gobiernan cada generación de código.",
-        "tags": ["Internal Platform", "Applied AI", "Developer Tools"],
-        "tech": ["NestJS + Clean Architecture", "React + TanStack Query", "Claude API + RAG", "OAuth + Automated PRs", "SSE Real-Time Streaming", "SQLite + Turbo Monorepo"],
+        "title": "Ediflow",
+        "subtitle": "Gestión operativa para comunidades y administradores de fincas",
+        "description": "Plataforma que conecta incidencias, presupuestos comparables, decisiones, votaciones, derramas y ejecución. Un expediente único para que administradores, propietarios y proveedores sigan el proceso sin perder contexto.",
+        "tags": ["PropTech", "SaaS B2B", "Operaciones"],
+        "tech": ["React + TypeScript", "PostgreSQL", "Roles y permisos", "Flujos auditables", "Notificaciones", "Arquitectura multi-tenant"],
         "url": "#",
-        "urlLabel": "specops.kershell.dev",
-        "cta": "Deploy pending"
+        "urlLabel": "Producto propio de Kershell",
+        "cta": "Caso de producto"
       },
       {
         "category": "internal",
@@ -248,14 +248,14 @@
   },
   "contact": {
     "badge": "Hablemos",
-    "title": "Hablemos de tu Sistema",
-    "subtitle": "Cuéntanos qué sistema necesitas construir y qué problema debe resolver.",
+    "title": "Contanos el problema operativo",
+    "subtitle": "En una primera conversación de 20 minutos entendemos el contexto, el alcance y si tiene sentido construir una solución.",
     "name": "Tu Nombre",
     "email": "Email Corporativo",
     "company": "Nombre de la Empresa",
     "project_type": "Tipo de Sistema",
     "message": "Cuéntanos qué sistema necesitas construir",
-    "submit": "Enviar Consulta",
+    "submit": "Solicitar primera conversación",
     "submitting": "Enviando...",
     "success": "¡Mensaje enviado! Nos pondremos en contacto pronto.",
     "types": ["SaaS Profesional", "IA en Tiempo Real", "Sistema Interno con IA", "Automatización Operativa", "Arquitectura TI", "Marketplace / Portal", "Otro"]
