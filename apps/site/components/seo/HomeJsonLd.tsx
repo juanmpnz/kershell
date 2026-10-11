@@ -1,7 +1,11 @@
+import { getTranslations } from "next-intl/server";
+
 const siteUrl = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.heykershell.com");
 
-export default function HomeJsonLd({ locale }: { locale: string }) {
+export default async function HomeJsonLd({ locale }: { locale: string }) {
   const isEs = locale === "es";
+  const translations = await getTranslations({ locale, namespace: "aeo" });
+  const answers = translations.raw("answers") as Array<{ question: string; answer: string }>;
 
   const organizationSchema = {
     "@context": "https://schema.org",
@@ -151,44 +155,14 @@ export default function HomeJsonLd({ locale }: { locale: string }) {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "@id": `${siteUrl.origin}/${locale}#faq`,
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: isEs
-          ? "¿Qué es Kershell TI?"
-          : "What is Kershell TI?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: isEs
-            ? "Kershell TI es un estudio de ingeniería de software fundado por dos senior developers con más de 7 años construyendo sistemas en banca, logística y operaciones críticas. Usa IA como acelerador interno para entregar software enterprise a velocidad de startup."
-            : "Kershell TI is a software engineering studio founded by two senior developers with 7+ years building systems in banking, logistics, and critical operations. It uses AI as an internal accelerator to deliver enterprise-grade software at startup speed.",
-        },
+    mainEntity: answers.map(({ question, answer }) => ({
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: answer,
       },
-      {
-        "@type": "Question",
-        name: isEs
-          ? "¿Para qué tipo de empresa es Kershell TI?"
-          : "What type of company is Kershell TI for?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: isEs
-            ? "Kershell TI trabaja con empresas que tienen un problema técnico real: su primer SaaS, una plataforma interna con IA o un sistema legacy que necesita modernizarse. Atiende empresas medianas, equipos de innovación, líderes de operaciones y founders B2B."
-            : "Kershell TI works with companies that have a real technical problem to solve: a first SaaS product, an internal AI platform, or a legacy system that needs modernization. It serves mid-market companies, innovation teams, operations leaders, and B2B founders.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: isEs
-          ? "¿Qué diferencia a Kershell TI de una agencia tradicional?"
-          : "How is Kershell TI different from a traditional agency?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: isEs
-            ? "Kershell TI no vende pantallas: construye productos que operan. Trabaja sin capas de account managers o coordinadores, con dos ingenieros senior tomando decisiones técnicas directas e IA acelerando la ejecución."
-            : "Kershell TI does not sell screens: it builds operating products. It works without account-manager layers or project coordinators, with two senior engineers making direct technical decisions and AI accelerating execution.",
-        },
-      },
-    ],
+    })),
   };
 
   return (
