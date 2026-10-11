@@ -1,4 +1,23 @@
+import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const isSpanish = locale === "es";
+  const pagePath = `/${locale}/privacy`;
+
+  return {
+    title: isSpanish ? "Política de privacidad | Kershell TI" : "Privacy policy | Kershell TI",
+    description: isSpanish ? "Conocé cómo Kershell TI recopila, utiliza y protege la información." : "Learn how Kershell TI collects, uses, and protects information.",
+    alternates: {
+      canonical: pagePath,
+      languages: {
+        en: "/en/privacy",
+        es: "/es/privacy",
+      },
+    },
+  };
+}
 
 export default function PrivacyPage() {
   const t = useTranslations("legal");
