@@ -1,4 +1,23 @@
+import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const isSpanish = locale === "es";
+  const pagePath = `/${locale}/terms`;
+
+  return {
+    title: isSpanish ? "Términos del servicio | Kershell TI" : "Terms of service | Kershell TI",
+    description: isSpanish ? "Condiciones que regulan el uso del sitio web y los servicios de Kershell TI." : "Terms governing the use of Kershell TI's website and services.",
+    alternates: {
+      canonical: pagePath,
+      languages: {
+        en: "/en/terms",
+        es: "/es/terms",
+      },
+    },
+  };
+}
 
 export default function TermsPage() {
   const t = useTranslations("legal");
