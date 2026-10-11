@@ -1,3 +1,4 @@
+import HomeJsonLd from "@/components/seo/HomeJsonLd";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
@@ -11,9 +12,11 @@ import Testimonials from "@/components/sections/Testimonials";
 import WhyKershell from "@/components/sections/WhyKershell";
 import Contact from "@/components/sections/Contact";
 
-export default function HomePage() {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   return (
     <>
+      <HomeJsonLd locale={locale} />
       <Navbar />
       <main className="site-starfield">
         <Hero />
