@@ -111,7 +111,7 @@ export default async function HomeJsonLd({ locale }: { locale: string }) {
         "@type": "CreativeWork",
         name: project.title,
         description: project.description,
-        url: project.url ?? `${siteUrl.origin}/${locale}#portfolio`,
+        url: project.url ?? `${siteUrl.origin}/${locale}#project-${project.id}`,
       },
     })),
   };

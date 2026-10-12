@@ -321,7 +321,8 @@
       "IT Architecture",
       "Marketplace / Portal",
       "Other"
-    ]
+    ],
+    "error": "We couldn't send your message. Try again or email info@heykershell.com."
   },
   "footer": {
     "tagline": "Enterprise systems, SaaS, and applied AI for complex problems.",
@@ -359,5 +360,27 @@
     "title2": "We imagine beyond.",
     "description": "We are two senior engineers with experience in banking, logistics and digital products. We work closely on every project, combining technical judgment, design and AI to build systems worth making.",
     "cta": "Let's explore your idea"
+  },
+  "experience": {
+    "home": "Home",
+    "project": "Work",
+    "services": "Capabilities",
+    "studio": "Studio",
+    "approach": "Approach",
+    "faq": "Questions",
+    "contact": "Let's talk",
+    "navigation": "Main navigation",
+    "more": "More sections",
+    "menu": "Open menu",
+    "close_menu": "Close menu",
+    "previous": "Previous",
+    "next": "Next",
+    "back": "Back",
+    "continue": "Continue",
+    "step": "Step",
+    "choose_type": "Choose an option",
+    "drag": "Drag the scene to explore the model",
+    "loading": "Entering the 3D studio…",
+    "fallback": "This browser could not enable 3D. Compatibility view."
   }
 }

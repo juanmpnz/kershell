@@ -321,7 +321,8 @@
       "Arquitectura TI",
       "Marketplace / Portal",
       "Otro"
-    ]
+    ],
+    "error": "No pudimos enviar el mensaje. Intentá de nuevo o escribinos a info@heykershell.com."
   },
   "footer": {
     "tagline": "Sistemas empresariales, SaaS e IA aplicada para problemas complejos.",
@@ -359,5 +360,27 @@
     "title2": "Imaginamos más allá.",
     "description": "Somos dos ingenieros senior con experiencia en banca, logística y productos digitales. Trabajamos cerca de cada proyecto, combinando criterio técnico, diseño e IA para construir sistemas que merecen existir.",
     "cta": "Conversemos sobre tu idea"
+  },
+  "experience": {
+    "home": "Inicio",
+    "project": "Proyectos",
+    "services": "Servicios",
+    "studio": "Estudio",
+    "approach": "Proceso",
+    "faq": "Preguntas",
+    "contact": "Hablemos",
+    "navigation": "Navegación principal",
+    "more": "Más secciones",
+    "menu": "Abrir menú",
+    "close_menu": "Cerrar menú",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "continue": "Continuar",
+    "step": "Paso",
+    "choose_type": "Elegí una opción",
+    "drag": "Arrastrá la escena para explorar el modelo",
+    "loading": "Entrando al estudio 3D…",
+    "fallback": "Este navegador no pudo activar el 3D. Vista de compatibilidad."
   }
 }
