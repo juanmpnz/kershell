@@ -64,3 +64,12 @@ Run site lint, typecheck, tests and production build. Publish to the existing
 main branch under the user's earlier authorization. Verify remote file/tree
 hashes; do not overwrite concurrent commits. Rollback is the previous main
 commit. No database migrations or admin changes.
+
+Validation completed: site lint, typecheck, 20 tests and production build pass.
+The deployed homepage's document height equals the 936px browser viewport;
+project navigation, all seven views, menu and required contact field validation
+were exercised without submitting mail. This cloud browser has WebGL disabled
+(GL_VENDOR/GL_RENDERER Disabled), so its compatibility view was observed.
+GPU rendering, camera flights, reflections and model drag remain unverified
+visually in a WebGL-capable browser. Do not present the fallback screenshot as
+proof of the native 3D render.

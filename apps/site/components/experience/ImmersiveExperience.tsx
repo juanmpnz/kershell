@@ -105,7 +105,7 @@ export default function ImmersiveExperience() {
           <p className="experience-eyebrow">{item.category}</p><h2>{item.title}</h2><p className="experience-description">{item.description}</p>
           <ul className="experience-tags">{item.tags.map(tag=><li key={tag}>{tag}</li>)}</ul>
           {item.url?<a href={item.url} target="_blank" rel="noopener noreferrer" className="experience-link">{item.cta}<ArrowUpRight size={18}/></a>:<span className="experience-project-status">{portfolio("in_development")}</span>}
-          <p hidden={paused || Boolean(reduced)} className="experience-drag-hint">{e("drag")}</p>
+          <p hidden={renderStatus!=="ready" || paused || Boolean(reduced)} className="experience-drag-hint">{e("drag")}</p>
         </article>)}
         {view==="services"&&<div className="experience-info-layout"><div><p className="experience-eyebrow">{services("badge")}</p><h2>{services("title")}</h2><div className="experience-selector">{capabilities.map((item,index)=><button key={item.title} aria-pressed={serviceIndex===index} onClick={()=>setServiceIndex(index)}>{item.title}</button>)}</div></div>
           <div className="experience-detail">{capabilities.map((item,index)=><article key={item.title} hidden={index!==serviceIndex}><p className="experience-eyebrow">{item.tag}</p><h3>{item.title}</h3><p>{item.description}</p></article>)}</div></div>}
