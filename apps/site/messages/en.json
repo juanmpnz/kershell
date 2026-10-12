@@ -14,7 +14,7 @@
     "badge": "Engineering meets imagination",
     "title1": "From complexity",
     "title2": "to the",
-    "subtitle": "Custom software, applied AI and platforms that transform how your business operates.",
+    "subtitle": "Software, artificial intelligence and digital experiences.",
     "differential": "Two senior engineers who understand the problem, define the architecture, and deliver a system your team can run and evolve.",
     "cta_primary": "Tell us the problem",
     "cta_secondary": "Explore our work",
@@ -30,7 +30,9 @@
     "scroll": "Scroll to discover",
     "location": "Barcelona · Worldwide",
     "pause": "Pause motion",
-    "play": "Resume motion"
+    "play": "Resume motion",
+    "work_label": "What we build",
+    "project_navigation": "Explore our projects"
   },
   "proof_bar": {
     "label": "Technologies we master"

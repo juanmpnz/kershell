@@ -14,7 +14,7 @@
     "badge": "Ingeniería con imaginación",
     "title1": "De la complejidad",
     "title2": "a lo",
-    "subtitle": "Software a medida, inteligencia artificial y plataformas que transforman cómo opera tu empresa.",
+    "subtitle": "Software, inteligencia artificial y experiencias digitales.",
     "differential": "Dos ingenieros senior: entendemos el problema, definimos la arquitectura y entregamos un sistema que tu equipo puede operar y evolucionar.",
     "cta_primary": "Contarnos el problema",
     "cta_secondary": "Explorar proyectos",
@@ -30,7 +30,9 @@
     "scroll": "Seguí explorando",
     "location": "Barcelona · Sin fronteras",
     "pause": "Pausar movimiento",
-    "play": "Reanudar movimiento"
+    "play": "Reanudar movimiento",
+    "work_label": "Lo que construimos",
+    "project_navigation": "Explorar nuestros proyectos"
   },
   "proof_bar": {
     "label": "Tecnologías que dominamos"

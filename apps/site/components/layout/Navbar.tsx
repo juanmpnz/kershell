@@ -7,7 +7,6 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Logo } from "@kershell/ui/logo";
 
 const NAV_LINKS = [
-  { key: "services", href: "#services" },
   { key: "portfolio", href: "#portfolio" },
   { key: "why", href: "#why" },
 ] as const;

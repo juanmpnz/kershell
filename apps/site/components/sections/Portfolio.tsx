@@ -26,7 +26,7 @@ export default function Portfolio() {
       </div>
       <div className="cinema-container">
         {items.map((item, index) => (
-          <article key={item.id} className={`cinema-project project-${item.id}`}>
+          <article id={`project-${item.id}`} key={item.id} className={`cinema-project project-${item.id}`}>
             <div className="project-art">
               <Image src={`/art/${item.id}.webp`} alt="" fill sizes="(max-width: 767px) 100vw, 65vw" />
               <span className="project-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
