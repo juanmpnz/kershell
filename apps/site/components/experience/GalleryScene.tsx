@@ -30,18 +30,17 @@ export default function GalleryScene({ location, paused, onStatus }: { location:
       try { gallery = await buildGallery(T,renderer,compact.matches); } catch { renderer.dispose(); onStatus("fallback"); return; }
       if (cancelled) { gallery.dispose(); renderer.dispose(); return; }
       const camera = new T.PerspectiveCamera(45,1,.1,100);
-      camera.position.set(0,4.1,15);
+      camera.position.set(0,3.4,15);
       const controls = new OrbitControls(camera,renderer.domElement);
       controls.enableZoom = false; controls.enablePan = false;
       controls.enableDamping = true; controls.dampingFactor = .065;
       controls.minPolarAngle = .4; controls.maxPolarAngle = 1.5;
       controls.minAzimuthAngle = -1.4; controls.maxAzimuthAngle = 1.4;
-      controls.target.set(0,3,-8);
+      controls.target.set(0,3.3,-5);
       controls.enabled = false;
       host.appendChild(renderer.domElement);
       const desiredCamera = camera.position.clone();
       const desiredTarget = controls.target.clone();
-      const homeCamera = new T.Vector3(0,4.1,15);
       const pointer = { x:0,y:0 };
       let activeView: View = "home";
       let transitioning = true;
@@ -55,6 +54,7 @@ export default function GalleryScene({ location, paused, onStatus }: { location:
         const key = `${host.dataset.view}:${host.dataset.project}:${compact.matches}`;
         if (key === currentKey) return;
         currentKey = key; activeView = (host.dataset.view ?? "home") as View;
+        gallery.setView(activeView==="project");
         transitioning = true; controls.enabled = false;
         const project = (host.dataset.project ?? "ediflow") as ProjectId;
         if (activeView === "project") {
@@ -63,10 +63,10 @@ export default function GalleryScene({ location, paused, onStatus }: { location:
           desiredCamera.set(exhibit.position.x+3.8*scale,exhibit.position.y+(project==="futscan"?4:2.5)*scale,exhibit.position.z+7.6*scale);
           desiredTarget.set(exhibit.position.x-(compact.matches?0:1.3),exhibit.position.y+1.1,exhibit.position.z);
         } else if (activeView === "home") {
-          desiredCamera.copy(homeCamera); desiredTarget.set(0,3,-8);
+          desiredCamera.set(0,3.4,compact.matches?20:15); desiredTarget.set(0,3.3,-5);
         } else {
-          desiredCamera.set(activeView==="studio"?-2.5:2,4.5,7);
-          desiredTarget.set(0,3.2,-12);
+          desiredCamera.set(activeView==="studio"?-2:1.5,3.8,compact.matches?20:13);
+          desiredTarget.set(0,3.3,-5);
         }
       };
       const tick = (now: number) => {
@@ -80,7 +80,7 @@ export default function GalleryScene({ location, paused, onStatus }: { location:
           if (camera.position.distanceTo(desiredCamera)<.015 && controls.target.distanceTo(desiredTarget)<.015) transitioning=false;
         } else if (activeView === "home" && !immobile) {
           camera.position.x += (pointer.x*.14-camera.position.x)*.025;
-          camera.position.y += (4.1+pointer.y*.06-camera.position.y)*.025;
+          camera.position.y += (3.4+pointer.y*.06-camera.position.y)*.025;
         }
         controls.enabled = activeView==="project" && !transitioning && !immobile;
         controls.update();
@@ -99,6 +99,7 @@ export default function GalleryScene({ location, paused, onStatus }: { location:
         const { width,height } = host.getBoundingClientRect();
         if (!width || !height) return;
         renderer.setPixelRatio(Math.min(devicePixelRatio,compact.matches?1:1.5));
+        gallery.resize(compact.matches);
         renderer.setSize(width,height,false); camera.aspect=width/height;
         camera.fov=compact.matches?52:45; camera.updateProjectionMatrix(); synchronize();
       };

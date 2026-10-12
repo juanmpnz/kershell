@@ -1,5 +1,6 @@
 import type * as Three from "three";
 import type { ProjectId } from "@/lib/experience/navigation";
+import { buildSpatial } from "./buildSpatial";
 
 type Engine = typeof import("three");
 export type Exhibit = { group: Three.Group; position: Three.Vector3 };
@@ -11,8 +12,12 @@ export async function buildGallery(T: Engine, renderer: Three.WebGLRenderer, com
     import("three/addons/objects/Reflector.js"),
   ]);
   const scene = new T.Scene();
+  const room = new T.Group(); scene.add(room);
+  const spatial = buildSpatial(T,compact); scene.add(spatial.group);
+  const spatialFog = new T.FogExp2(0x070b09,.018);
+  const roomFog = new T.FogExp2(0x090c0b,.018);
   scene.background = new T.Color(0x090c0b);
-  scene.fog = new T.FogExp2(0x090c0b, .018);
+  scene.fog = spatialFog;
   const environmentGenerator = new T.PMREMGenerator(renderer);
   const roomEnvironment = new RoomEnvironment();
   const environment = environmentGenerator.fromScene(roomEnvironment, .04);
@@ -61,22 +66,22 @@ export async function buildGallery(T: Engine, renderer: Three.WebGLRenderer, com
     parent.add(mesh); return mesh;
   }
   // Architecture: actual columns, ceiling, slabs and an open rear doorway.
-  box(scene,[26,.25,43],[0,-.2,-7],concrete);
-  box(scene,[26,.6,38],[0,10.5,-7],concrete);
+  box(room,[26,.25,43],[0,-.2,-7],concrete);
+  box(room,[26,.6,38],[0,10.5,-7],concrete);
   for (const x of [-12,12]) {
-    for (const z of [-21,-11,0,10]) box(scene,[1.4,10.2,1.6],[x,5,z],concrete);
-    box(scene,[.45,6,10],[x,3,-13],concrete);
+    for (const z of [-21,-11,0,10]) box(room,[1.4,10.2,1.6],[x,5,z],concrete);
+    box(room,[.45,6,10],[x,3,-13],concrete);
   }
-  for (const x of [-5.8,5.8]) box(scene,[8.8,10.4,1],[x,5,-24],concrete);
-  box(scene,[4.5,3.8,1],[0,8.3,-24],concrete);
-  for (const x of [-2.25,2.25]) box(scene,[.05,6.3,.09],[x,3.1,-23.45],lime);
-  box(scene,[1.2,.015,34],[0,.005,-7],lime);
-  for (const x of [-9,9]) box(scene,[.035,.02,30],[x,.01,-7],mutedLime);
+  for (const x of [-5.8,5.8]) box(room,[8.8,10.4,1],[x,5,-24],concrete);
+  box(room,[4.5,3.8,1],[0,8.3,-24],concrete);
+  for (const x of [-2.25,2.25]) box(room,[.05,6.3,.09],[x,3.1,-23.45],lime);
+  box(room,[1.2,.015,34],[0,.005,-7],lime);
+  for (const x of [-9,9]) box(room,[.035,.02,30],[x,.01,-7],mutedLime);
 
   let mirror: InstanceType<typeof Reflector> | null = null;
   if (!compact) {
     mirror = new Reflector(new T.PlaneGeometry(25,39),{ color:0x474e48, textureWidth:512, textureHeight:512, clipBias:.004 });
-    mirror.rotation.x = -Math.PI/2; mirror.position.set(0,-.055,-7); scene.add(mirror);
+    mirror.rotation.x = -Math.PI/2; mirror.position.set(0,-.055,-7); room.add(mirror);
     // Concrete islands leave a reflective centre path and reflective exhibition floor.
   }
   const daylight = new T.DirectionalLight(0xf1f1df,3.5);
@@ -99,10 +104,10 @@ export async function buildGallery(T: Engine, renderer: Three.WebGLRenderer, com
     const mountain = new T.Mesh(cone,landscapeMaterial);
     mountain.scale.set(5+(i%3),9+(i%4)*2,5);
     mountain.position.set(-25+i*6,2,-36-(i%3)*4);
-    scene.add(mountain);
+    room.add(mountain);
   }
   const backdrop = new T.Mesh(new T.PlaneGeometry(85,35),new T.MeshBasicMaterial({ color:0x77877d }));
-  backdrop.position.set(0,10,-55); scene.add(backdrop);
+  backdrop.position.set(0,10,-55); room.add(backdrop);
 
   const positions: Record<ProjectId,[number,number,number]> = {
     ediflow:[-5.7,1.25,-8], operational:[5.7,1.25,-9], futscan:[-5.7,1.25,1], campos:[5.7,1.25,1],
@@ -110,10 +115,10 @@ export async function buildGallery(T: Engine, renderer: Three.WebGLRenderer, com
   const exhibits = {} as Record<ProjectId,Exhibit>;
   const animations: Array<(time: number) => void> = [];
   for (const id of Object.keys(positions) as ProjectId[]) {
-    const group = new T.Group(); group.position.set(...positions[id]); scene.add(group);
-    box(scene,[5.8,1,4.7],[group.position.x,.5,group.position.z],concrete);
-    box(scene,[5.65,.035,4.55],[group.position.x,1.025,group.position.z],graphite);
-    box(scene,[5.6,.025,.028],[group.position.x,1.06,group.position.z+2.25],lime);
+    const group = new T.Group(); group.position.set(...positions[id]); room.add(group);
+    box(room,[5.8,1,4.7],[group.position.x,.5,group.position.z],concrete);
+    box(room,[5.65,.035,4.55],[group.position.x,1.025,group.position.z],graphite);
+    box(room,[5.6,.025,.028],[group.position.x,1.06,group.position.z+2.25],lime);
     exhibits[id] = { group, position:group.position.clone() };
   }
 
@@ -221,7 +226,9 @@ export async function buildGallery(T: Engine, renderer: Three.WebGLRenderer, com
 
   return {
     scene, exhibits,
-    update(time:number) { animations.forEach(animate => animate(time)); },
+    setView(projectView:boolean) { room.visible=projectView; spatial.group.visible=!projectView; scene.fog=projectView?roomFog:spatialFog; },
+    resize(isCompact:boolean) { spatial.resize(isCompact); },
+    update(time:number) { spatial.update(time); if(room.visible) animations.forEach(animate => animate(time)); },
     dispose() {
       const geometries = new Set<Three.BufferGeometry>(); const materials = new Set<Three.Material>();
       scene.traverse(node => { if (node instanceof T.Mesh || node instanceof T.Line) { geometries.add(node.geometry); (Array.isArray(node.material)?node.material:[node.material]).forEach(material=>materials.add(material)); } });

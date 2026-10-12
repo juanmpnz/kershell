@@ -381,6 +381,10 @@
     "choose_type": "Elegí una opción",
     "drag": "Arrastrá la escena para explorar el modelo",
     "loading": "Entrando al estudio 3D…",
-    "fallback": "Este navegador no pudo activar el 3D. Vista de compatibilidad."
+    "fallback": "Este navegador no pudo activar el 3D. Vista de compatibilidad.",
+    "intro": "Somos un estudio senior de ingeniería. Creamos software, IA y plataformas digitales para empresas que quieren avanzar.",
+    "explore_services": "Qué podemos construir juntos",
+    "meet_studio": "Conocé el estudio",
+    "discuss_project": "Hablemos de tu idea"
   }
 }

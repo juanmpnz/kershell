@@ -4,6 +4,14 @@ Approved correction, 2026-10-12: a single-viewport interactive 3D experience.
 The previous long landing and 2.5D image plate did not fulfill the request.
 Retain the architectural direction, logo and lime/graphite palette.
 
+Revision: studio and capabilities lead the homepage; the project catalogue is
+secondary. A bespoke folded metallic structure in a dark spatial environment
+replaces the architectural room on the homepage and information views. Project
+exhibits retain their own scene. Three prominent capability links open the full
+service selector. No star fields, planets, particles or generic torus knots.
+Use a matching vector compatibility composition instead of the old gallery
+poster. It is explicitly a compatibility view, not proof of GPU rendering.
+
 ## Navigation and layout
 
 The homepage mounts one fixed `100dvh` experience, with no vertical page flow.

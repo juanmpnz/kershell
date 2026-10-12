@@ -381,6 +381,10 @@
     "choose_type": "Choose an option",
     "drag": "Drag the scene to explore the model",
     "loading": "Entering the 3D studio…",
-    "fallback": "This browser could not enable 3D. Compatibility view."
+    "fallback": "This browser could not enable 3D. Compatibility view.",
+    "intro": "We are a senior engineering studio. We build software, AI and digital platforms for businesses ready to move forward.",
+    "explore_services": "What we can build together",
+    "meet_studio": "Meet the studio",
+    "discuss_project": "Let's discuss your idea"
   }
 }
