@@ -30,8 +30,15 @@ messages or changes to the mail backend are introduced.
 
 ## Actual 3D scene
 
-The active scene contains real geometry, not a projection of the gallery image.
-`buildGallery.ts` constructs concrete slabs, columns, ceiling, an open doorway,
+The active scene contains real geometry. On the homepage and information views,
+`buildSpatial.ts` builds an open ribbon with a varying bevelled cross-section,
+deliberate twist, a second graphite shell, metallic ribs and a luminous seam.
+Physical materials, environment lighting and a floating motion supply depth.
+The desktop sculpture uses 7,610 triangles across 16 meshes including its floor;
+CPU validation confirmed finite vertices/normals and valid indices. GPU visual
+verification still needs a WebGL-capable browser.
+
+In the project view, `buildGallery.ts` constructs concrete slabs, columns, ceiling, an open doorway,
 distant faceted landscape, luminous paths, exhibition plinths, materials,
 lighting, reflections and four native exhibits:
 
@@ -41,7 +48,8 @@ lighting, reflections and four native exhibits:
 - Campos: cantilevered volumes, glass fronts, terraces and architectural lights.
 
 These are conceptual product exhibits, not simulations of customer data or
-claims about the live products. The image plate is only a loading/WebGL fallback.
+claims about the live products. A matching vector spatial composition is the
+loading/WebGL fallback; the old gallery image is no longer mounted.
 Procedural models reproduce the direction and spatial logic of the reference;
 they do not promise photorealistic or pixel-identical reproduction of that render.
 
