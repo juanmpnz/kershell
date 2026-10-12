@@ -1,21 +1,36 @@
 {
   "nav": {
     "services": "Servicios",
-    "portfolio": "Portafolio",
+    "portfolio": "Proyectos",
     "process": "Proceso",
-    "why": "Por Qué",
+    "why": "Estudio",
     "contact": "Contacto",
-    "cta": "Evaluar mi proyecto"
+    "cta": "Hablemos",
+    "open_menu": "Abrir menú",
+    "close_menu": "Cerrar menú",
+    "switch_language": "Cambiar idioma a inglés"
   },
   "hero": {
-    "badge": "Software acelerado por IA, revisado por seniors",
-    "title1": "Software que ordena",
-    "title2": "operaciones complejas",
-    "subtitle": "Construimos SaaS, plataformas internas e IA aplicada para empresas que ya no pueden seguir operando entre hojas de cálculo, correos y procesos desconectados.",
+    "badge": "Ingeniería con imaginación",
+    "title1": "De la complejidad",
+    "title2": "a lo",
+    "subtitle": "Software a medida, inteligencia artificial y plataformas que transforman cómo opera tu empresa.",
     "differential": "Dos ingenieros senior: entendemos el problema, definimos la arquitectura y entregamos un sistema que tu equipo puede operar y evolucionar.",
     "cta_primary": "Contarnos el problema",
-    "cta_secondary": "Ver Casos Públicos",
-    "typing": ["SaaS Empresariales", "Sistemas Internos", "IA en Tiempo Real", "Automatización Operativa", "Arquitectura Técnica"]
+    "cta_secondary": "Explorar proyectos",
+    "typing": [
+      "SaaS Empresariales",
+      "Sistemas Internos",
+      "IA en Tiempo Real",
+      "Automatización Operativa",
+      "Arquitectura Técnica"
+    ],
+    "title3": "extraordinario.",
+    "discipline": "Software · Inteligencia artificial · Experiencias digitales",
+    "scroll": "Seguí explorando",
+    "location": "Barcelona · Sin fronteras",
+    "pause": "Pausar movimiento",
+    "play": "Reanudar movimiento"
   },
   "proof_bar": {
     "label": "Tecnologías que dominamos"
@@ -41,45 +56,45 @@
     }
   },
   "services": {
-    "badge": "Qué Construimos",
-    "title": "Software para Empresas que Necesitan Ventaja Técnica",
-    "subtitle": "Productos críticos de negocio diseñados para operar, escalar y seguir siendo tuyos.",
+    "badge": "Lo que hacemos",
+    "title": "Diseñamos lo que viene.",
+    "subtitle": "De una primera idea a una plataforma que tu equipo puede operar, conectar y evolucionar.",
     "items": [
       {
-        "title": "SaaS Profesionales a Medida",
+        "title": "Software a medida",
         "description": "Tu propio producto de software — con autenticación, roles, dashboards, facturación e integraciones. Arquitectado para crecer de 100 a 100.000 usuarios sin reescribir los cimientos.",
         "tag": "SaaS"
       },
       {
-        "title": "IA Aplicada en Tiempo Real",
+        "title": "Inteligencia artificial",
         "description": "Sistemas que procesan datos en vivo, detectan patrones y asisten decisiones en tiempo real — en analítica deportiva, monitoreo de operaciones, evaluación de riesgo o inteligencia comercial. No chatbots. Motores reales.",
         "tag": "IA aplicada"
       },
       {
-        "title": "Sistemas TI Cerrados con IA",
+        "title": "Plataformas internas",
         "description": "Plataformas internas donde la IA hace el trabajo pesado — clasificación, búsqueda semántica, recomendaciones, reportes automatizados. Tu equipo trabaja más rápido porque el sistema piensa por ellos.",
         "tag": "Interno"
       },
       {
-        "title": "Automatización de Operaciones",
+        "title": "Automatización",
         "description": "Conectamos tus APIs, fuentes de datos y workflows para eliminar el trabajo manual que te cuesta horas cada semana — en ventas, backoffice, logística y soporte.",
         "tag": "Automatización"
       },
       {
-        "title": "Arquitectura y Liderazgo Técnico",
+        "title": "Arquitectura",
         "description": "Cuando las malas decisiones técnicas son caras, necesitas a alguien que ya las haya cometido. Definimos arquitectura, roadmap, stack, quality gates y entregables para proyectos complejos.",
         "tag": "Arquitectura"
       },
       {
-        "title": "Plataformas Web de Alto Impacto",
+        "title": "Experiencias digitales",
         "description": "Plataformas web profesionales para negocios que necesitan captar clientes y construir confianza online — marketplaces, portales comerciales y presencia digital que convierte.",
         "tag": "Web"
       }
     ]
   },
   "aeo": {
-    "badge": "Respuesta directa para empresas y asistentes IA",
-    "title": "Qué Hace Kershell TI, en Términos Claros",
+    "badge": "Antes de empezar",
+    "title": "Buenas preguntas.",
     "summary": "Kershell TI es un estudio senior de ingeniería de software para empresas que necesitan productos SaaS, plataformas internas con IA, automatización y arquitectura capaz de operar negocio real.",
     "use_cases": [
       "SaaS para empresas con usuarios, roles, permisos, dashboards e integraciones.",
@@ -103,9 +118,9 @@
     ]
   },
   "process": {
-    "badge": "Cómo Trabajamos",
-    "title": "De Problema Complejo a Sistema Operativo",
-    "subtitle": "Trabajamos como un equipo técnico senior: entendemos el dominio, diseñamos la arquitectura y entregamos iteraciones reales.",
+    "badge": "Cómo trabajamos",
+    "title": "De la idea al impacto.",
+    "subtitle": "Entendemos tu operación, diseñamos el sistema y construimos con criterio. Un mismo equipo, de principio a fin.",
     "steps": [
       {
         "number": "01",
@@ -130,89 +145,109 @@
     ]
   },
   "portfolio": {
-    "badge": "Selected Work",
-    "title": "Productos Internos y Trabajo para Clientes",
-    "subtitle": "Productos públicos, herramientas internas y plataformas entregadas que muestran cómo pensamos y ejecutamos.",
+    "badge": "Lo que construimos",
+    "title": "Ideas que toman forma.",
+    "subtitle": "Productos propios y proyectos para clientes. Cada uno, una forma diferente de resolver un problema real.",
     "categories": [
-      { "key": "internal", "title": "Internal Products", "subtitle": "Built by Kershell" },
-      { "key": "client", "title": "Client Work", "subtitle": "Delivered" }
+      {
+        "key": "internal",
+        "title": "Internal Products",
+        "subtitle": "Built by Kershell"
+      },
+      {
+        "key": "client",
+        "title": "Client Work",
+        "subtitle": "Delivered"
+      }
     ],
     "items": [
       {
-        "category": "internal",
-        "visual": "ediflow",
-        "badge": "Built by Kershell",
+        "id": "ediflow",
         "title": "Ediflow",
-        "subtitle": "Gestión operativa para comunidades y administradores de fincas",
-        "description": "Plataforma que conecta incidencias, presupuestos comparables, decisiones, votaciones, derramas y ejecución. Un expediente único para que administradores, propietarios y proveedores sigan el proceso sin perder contexto.",
-        "tags": ["PropTech", "SaaS B2B", "Operaciones"],
-        "tech": ["React + TypeScript", "PostgreSQL", "Roles y permisos", "Flujos auditables", "Notificaciones", "Arquitectura multi-tenant"],
-        "url": "#",
-        "urlLabel": "Producto propio de Kershell",
-        "cta": "Caso de producto"
+        "category": "Producto Kershell · PropTech",
+        "description": "La vida de una comunidad, conectada. Incidencias, presupuestos, decisiones y derramas en un mismo lugar.",
+        "tags": [
+          "Comunidades",
+          "SaaS",
+          "Operaciones"
+        ],
+        "url": null,
+        "urlLabel": "",
+        "cta": ""
       },
       {
-        "category": "internal",
-        "visual": "football",
-        "badge": "Built by Kershell",
-        "title": "Live Match Analytics",
-        "subtitle": "Real-Time Football Intelligence System",
-        "description": "Motor de análisis de partidos de fútbol en tiempo real. Ingestión de datos en vivo, detección de eventos, reconocimiento de patrones tácticos, insights generados por IA, y dashboards de soporte a decisiones para cuerpos técnicos y analistas.",
-        "tags": ["Real-Time AI", "Sports Analytics", "Data Engine"],
-        "tech": ["Real-Time Data Pipeline", "AI Pattern Recognition", "Event-Driven Architecture", "WebSocket Live Updates", "Interactive Dashboards", "Python + FastAPI"],
-        "url": "#",
-        "urlLabel": "analytics.kershell.dev",
-        "cta": "Deploy pending"
+        "id": "operational",
+        "title": "Operational 3D",
+        "category": "Producto Kershell · Logística",
+        "description": "Otra perspectiva sobre las operaciones. Una plataforma visual 3D para supervisar patios, terminales y recintos industriales.",
+        "tags": [
+          "Visualización 3D",
+          "Logística",
+          "Tiempo real"
+        ],
+        "url": null,
+        "urlLabel": "",
+        "cta": ""
       },
       {
-        "category": "client",
-        "visual": "initials",
-        "initials": "CI",
-        "badge": "Delivered",
+        "id": "futscan",
+        "title": "Futscan",
+        "category": "Producto Kershell · SportTech",
+        "description": "El juego, desde otra mirada. Análisis de vídeo, contexto táctico y herramientas para que los analistas de fútbol preparen sus decisiones.",
+        "tags": [
+          "Visión artificial",
+          "Fútbol",
+          "Análisis táctico"
+        ],
+        "url": null,
+        "urlLabel": "",
+        "cta": ""
+      },
+      {
+        "id": "campos",
         "title": "Campos Inmobiliaria",
-        "description": "Plataforma inmobiliaria con listados, búsqueda avanzada y captación de leads.",
-        "tags": ["Real Estate", "Búsqueda"],
+        "category": "Proyecto para cliente · Real Estate",
+        "description": "Un lugar para encontrar el próximo lugar. Una plataforma inmobiliaria que conecta propiedades, búsqueda y nuevas oportunidades.",
+        "tags": [
+          "Real Estate",
+          "Plataforma web",
+          "Búsqueda"
+        ],
         "url": "https://www.camposinmobiliaria.com/",
         "urlLabel": "camposinmobiliaria.com",
-        "cta": "Ver Sitio"
-      },
-      {
-        "category": "client",
-        "visual": "initials",
-        "initials": "PJ",
-        "badge": "Delivered",
-        "title": "PJ Tornquist",
-        "description": "Portal institucional y de noticias con gestión de contenidos y presencia digital.",
-        "tags": ["Institucional", "Contenido"],
-        "url": "https://www.pjtornquist.ar/",
-        "urlLabel": "pjtornquist.ar",
-        "cta": "Ver Sitio"
-      },
-      {
-        "category": "client",
-        "visual": "initials",
-        "initials": "SF",
-        "badge": "Delivered",
-        "title": "Salones de Fiestas",
-        "description": "Marketplace nacional para descubrir espacios y proveedores de eventos.",
-        "tags": ["Marketplace", "Eventos"],
-        "url": "https://salonesdefiestas.ar/",
-        "urlLabel": "salonesdefiestas.ar",
-        "cta": "Ver Sitio"
+        "cta": "Visitar Campos"
       }
     ],
     "nda_note": "Nuestro trabajo enterprise en banca, logística y operaciones está bajo NDA. Los productos anteriores representan nuestro portfolio público y herramientas internas.",
-    "coming_soon": "Más proyectos próximamente"
+    "coming_soon": "Más proyectos próximamente",
+    "categories_label": "Áreas del proyecto",
+    "in_development": "Producto en desarrollo"
   },
   "testimonials": {
     "badge": "Opiniones de Clientes",
     "title": "Experiencia que Respalda la Ejecución",
     "subtitle": "Somos un equipo pequeño, senior y directo. Menos capas, más ingeniería.",
     "stats": [
-      { "value": 7, "suffix": "+", "label": "Años de Experiencia" },
-      { "value": 2, "suffix": "", "label": "Developers Senior" },
-      { "value": 100, "suffix": "%", "label": "Código Revisado por Humanos" },
-      { "value": 10, "suffix": "+", "label": "Proyectos Entregados" }
+      {
+        "value": 7,
+        "suffix": "+",
+        "label": "Años de Experiencia"
+      },
+      {
+        "value": 2,
+        "suffix": "",
+        "label": "Developers Senior"
+      },
+      {
+        "value": 100,
+        "suffix": "%",
+        "label": "Código Revisado por Humanos"
+      },
+      {
+        "value": 10,
+        "suffix": "+",
+        "label": "Proyectos Entregados"
+      }
     ],
     "items": [
       {
@@ -231,12 +266,30 @@
     "aspect": "Aspecto",
     "kershell": "Kershell TI",
     "rows": [
-      { "aspect": "Equipo", "kershell": "2 senior developers, mismo equipo de inicio a fin" },
-      { "aspect": "IA", "kershell": "IA corriendo dentro del producto, gobernada por reglas de ingeniería" },
-      { "aspect": "Arquitectura", "kershell": "Arquitectura específica del dominio, diseñada para tus datos y reglas" },
-      { "aspect": "Foco", "kershell": "Reglas de negocio, integridad de datos y evolución del sistema" },
-      { "aspect": "Handover", "kershell": "Documentación, transferencia de ownership y roadmap de evolución" },
-      { "aspect": "Modelo de costo", "kershell": "Alcance cerrado, roadmap transparente, sin costos ocultos" }
+      {
+        "aspect": "Equipo",
+        "kershell": "2 senior developers, mismo equipo de inicio a fin"
+      },
+      {
+        "aspect": "IA",
+        "kershell": "IA corriendo dentro del producto, gobernada por reglas de ingeniería"
+      },
+      {
+        "aspect": "Arquitectura",
+        "kershell": "Arquitectura específica del dominio, diseñada para tus datos y reglas"
+      },
+      {
+        "aspect": "Foco",
+        "kershell": "Reglas de negocio, integridad de datos y evolución del sistema"
+      },
+      {
+        "aspect": "Handover",
+        "kershell": "Documentación, transferencia de ownership y roadmap de evolución"
+      },
+      {
+        "aspect": "Modelo de costo",
+        "kershell": "Alcance cerrado, roadmap transparente, sin costos ocultos"
+      }
     ]
   },
   "stats": {
@@ -247,9 +300,9 @@
     "experience": "Años de Experiencia"
   },
   "contact": {
-    "badge": "Hablemos",
-    "title": "Contanos el problema operativo",
-    "subtitle": "En una primera conversación de 20 minutos entendemos el contexto, el alcance y si tiene sentido construir una solución.",
+    "badge": "Lo próximo empieza acá",
+    "title": "¿Qué imaginás?",
+    "subtitle": "Contanos qué querés transformar. Encontraremos juntos el mejor punto de partida.",
     "name": "Tu Nombre",
     "email": "Email Corporativo",
     "company": "Nombre de la Empresa",
@@ -258,7 +311,15 @@
     "submit": "Solicitar primera conversación",
     "submitting": "Enviando...",
     "success": "¡Mensaje enviado! Nos pondremos en contacto pronto.",
-    "types": ["SaaS Profesional", "IA en Tiempo Real", "Sistema Interno con IA", "Automatización Operativa", "Arquitectura TI", "Marketplace / Portal", "Otro"]
+    "types": [
+      "SaaS Profesional",
+      "IA en Tiempo Real",
+      "Sistema Interno con IA",
+      "Automatización Operativa",
+      "Arquitectura TI",
+      "Marketplace / Portal",
+      "Otro"
+    ]
   },
   "footer": {
     "tagline": "Sistemas empresariales, SaaS e IA aplicada para problemas complejos.",
@@ -266,7 +327,8 @@
     "legal": "Legal",
     "privacy": "Política de Privacidad",
     "terms": "Términos de Servicio",
-    "copyright": "Todos los derechos reservados."
+    "copyright": "Todos los derechos reservados.",
+    "expertise": "Ingeniería, diseño e IA"
   },
   "legal": {
     "privacy_title": "Política de Privacidad",
@@ -288,5 +350,12 @@
     "liability_body": "Kershell TI no será responsable de ningún daño indirecto, incidental, especial, consecuente o punitivo resultante del uso de nuestros servicios. Nuestra responsabilidad total por cualquier reclamación no excederá el monto pagado por usted por el servicio específico que da origen a la reclamación.",
     "governing_title": "Ley Aplicable",
     "governing_body": "Estos términos se regirán e interpretarán de acuerdo con la ley aplicable. Cualquier disputa que surja bajo estos términos se resolverá mediante negociación de buena fe antes de iniciar procedimientos legales formales."
+  },
+  "studio": {
+    "badge": "El estudio",
+    "title1": "Pensamos como ingenieros.",
+    "title2": "Imaginamos más allá.",
+    "description": "Somos dos ingenieros senior con experiencia en banca, logística y productos digitales. Trabajamos cerca de cada proyecto, combinando criterio técnico, diseño e IA para construir sistemas que merecen existir.",
+    "cta": "Conversemos sobre tu idea"
   }
 }

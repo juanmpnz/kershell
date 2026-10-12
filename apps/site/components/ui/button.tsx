@@ -31,7 +31,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       {...rest}
     >
       {children}
-      {arrow ? <span className="font-mono text-sm">-&gt;</span> : null}
+      {arrow ? <span aria-hidden="true" className="text-lg leading-none">↗</span> : null}
     </button>
   );
 });

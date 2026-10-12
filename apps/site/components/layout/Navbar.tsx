@@ -1,18 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { Logo } from "@kershell/ui/logo";
-import { Button } from "@/components/ui/button";
 
 const NAV_LINKS = [
   { key: "services", href: "#services" },
-  { key: "process", href: "#process" },
   { key: "portfolio", href: "#portfolio" },
   { key: "why", href: "#why" },
-  { key: "contact", href: "#contact" },
 ] as const;
 
 export default function Navbar() {
@@ -21,13 +18,17 @@ export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!mobileOpen) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    const onEscape = (event: KeyboardEvent) => { if (event.key === "Escape") { setMobileOpen(false); menuButtonRef.current?.focus(); } };
+    window.addEventListener("keydown", onEscape);
     return () => {
       document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onEscape);
     };
   }, [mobileOpen]);
 
@@ -51,16 +52,16 @@ export default function Navbar() {
   const languageLabel = locale === "en" ? "EN - ES" : "ES - EN";
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-ink/70 backdrop-blur-md">
-      <nav className="console-container flex h-16 items-center justify-between gap-6">
-        <Logo href={`/${locale}`} size={22} />
+    <header className="cinema-nav fixed inset-x-0 top-0 z-50">
+      <nav className="cinema-container flex h-16 items-center justify-between gap-6">
+        <Logo href={`/${locale}`} size={28} />
 
         <div className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map((link) => (
             <button
               key={link.key}
               onClick={() => scrollTo(link.href)}
-              className="font-mono text-[13px] text-text-dim transition-colors hover:text-accent"
+              className="text-[13px] text-text-dim transition-colors hover:text-accent"
             >
               {t(link.key)}
             </button>
@@ -70,18 +71,20 @@ export default function Navbar() {
         <div className="hidden items-center gap-3 md:flex">
           <button
             onClick={switchLocale}
-            aria-label={`${languageLabel} switch language`}
-            className="rounded-md border border-border px-3 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-text-dim transition-colors hover:border-accent hover:text-accent"
+            aria-label={t("switch_language")}
+            className="cinema-nav-language"
           >
             {languageLabel}
           </button>
-          <Button variant="primary" arrow onClick={() => scrollTo("#contact")}>
-            {t("cta")}
-          </Button>
+          <button className="cinema-nav-cta" onClick={() => scrollTo("#contact")}>
+            {t("cta")}<ArrowUpRight size={16} aria-hidden="true" />
+          </button>
         </div>
 
         <button
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          ref={menuButtonRef}
+          aria-controls="mobile-navigation"
+          aria-label={t(mobileOpen ? "close_menu" : "open_menu")}
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((open) => !open)}
           className="flex h-10 w-10 items-center justify-center rounded-md border border-border text-text-dim transition-colors hover:border-accent hover:text-accent md:hidden"
@@ -91,13 +94,13 @@ export default function Navbar() {
       </nav>
 
       {mobileOpen ? (
-        <div className="border-t border-border bg-ink md:hidden">
-          <div className="console-container flex flex-col gap-2 py-5">
+        <div id="mobile-navigation" className="border-t border-border bg-ink md:hidden">
+          <div className="cinema-container flex flex-col gap-2 py-5">
             {NAV_LINKS.map((link) => (
               <button
                 key={link.key}
                 onClick={() => scrollTo(link.href)}
-                className="rounded-md px-2 py-3 text-left font-mono text-sm text-text-dim hover:bg-surface hover:text-text"
+                className="rounded-md px-2 py-3 text-left text-sm text-text-dim hover:bg-surface hover:text-text"
               >
                 {t(link.key)}
               </button>
@@ -105,14 +108,14 @@ export default function Navbar() {
             <div className="mt-3 grid grid-cols-2 gap-3">
               <button
                 onClick={switchLocale}
-                aria-label={`${languageLabel} switch language`}
-                className="rounded-md border border-border px-3 py-3 font-mono text-[11px] uppercase tracking-[0.16em] text-text-dim"
+                aria-label={t("switch_language")}
+                className="rounded-md border border-border px-3 py-3 text-[11px] uppercase tracking-[0.16em] text-text-dim"
               >
                 {languageLabel}
               </button>
-              <Button variant="primary" arrow onClick={() => scrollTo("#contact")}>
-                {t("cta")}
-              </Button>
+              <button className="cinema-nav-cta" onClick={() => scrollTo("#contact")}>
+                {t("cta")}<ArrowUpRight size={16} aria-hidden="true" />
+              </button>
             </div>
           </div>
         </div>

@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { AlertCircle, CheckCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Eyebrow } from "@kershell/ui/eyebrow";
 
 export default function Contact() {
   const t = useTranslations("contact");
@@ -57,19 +56,19 @@ export default function Contact() {
     "transition placeholder:text-muted focus:border-accent focus:shadow-focus";
 
   return (
-    <section id="contact" className="console-section bg-surface">
-      <div className="console-container grid gap-10 lg:grid-cols-[1fr_1.4fr]">
+    <section id="contact" className="cinema-section cinema-contact">
+      <div className="cinema-container grid gap-10 lg:grid-cols-[1fr_1.4fr]">
         <div>
-          <Eyebrow variant="accent">{t("badge")}</Eyebrow>
+          <p className="cinema-label">{t("badge")}</p>
           <h2 className="mt-5 text-[36px] font-semibold leading-[1.06] tracking-[-0.03em] text-text md:text-h2">
             {t("title")}
           </h2>
           <p className="mt-4 max-w-md text-lead text-text-dim">{t("subtitle")}</p>
         </div>
 
-        <div className="rounded-lg border border-border bg-ink p-5 md:p-8">
+        <div className="cinema-contact-card">
           {success ? (
-            <div className="flex min-h-[360px] flex-col items-center justify-center gap-5 text-center">
+            <div role="status" className="flex min-h-[360px] flex-col items-center justify-center gap-5 text-center">
               <div className="flex h-14 w-14 items-center justify-center rounded-full border border-accent bg-accent-soft">
                 <CheckCircle className="h-7 w-7 text-accent" />
               </div>
@@ -90,7 +89,7 @@ export default function Contact() {
 
               <div className="grid gap-5 sm:grid-cols-2">
                 <label className="block">
-                  <span className="mb-2 block font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+                  <span className="mb-2 block text-[11px] uppercase tracking-[0.16em] text-muted">
                     {t("name")}
                   </span>
                   <input
@@ -105,7 +104,7 @@ export default function Contact() {
                   />
                 </label>
                 <label className="block">
-                  <span className="mb-2 block font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+                  <span className="mb-2 block text-[11px] uppercase tracking-[0.16em] text-muted">
                     {t("email")}
                   </span>
                   <input
@@ -123,7 +122,7 @@ export default function Contact() {
 
               <div className="grid gap-5 sm:grid-cols-2">
                 <label className="block">
-                  <span className="mb-2 block font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+                  <span className="mb-2 block text-[11px] uppercase tracking-[0.16em] text-muted">
                     {t("company")}
                   </span>
                   <input
@@ -136,7 +135,7 @@ export default function Contact() {
                   />
                 </label>
                 <label className="block">
-                  <span className="mb-2 block font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+                  <span className="mb-2 block text-[11px] uppercase tracking-[0.16em] text-muted">
                     {t("project_type")}
                   </span>
                   <select
@@ -158,7 +157,7 @@ export default function Contact() {
               </div>
 
               <label className="block">
-                <span className="mb-2 block font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+                <span className="mb-2 block text-[11px] uppercase tracking-[0.16em] text-muted">
                   {t("message")}
                 </span>
                 <textarea
@@ -174,7 +173,7 @@ export default function Contact() {
               </label>
 
               {error ? (
-                <div className="flex items-center gap-2 rounded-md border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+                <div role="alert" className="flex items-center gap-2 rounded-md border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
                   <AlertCircle className="h-4 w-4 shrink-0" />
                   {error}
                 </div>

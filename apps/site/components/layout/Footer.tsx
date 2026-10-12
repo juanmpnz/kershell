@@ -17,19 +17,16 @@ export default function Footer() {
     { label: navT("contact"), href: "#contact" },
   ];
 
-  const scrollTo = (href: string) => {
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
-    <footer className="border-t border-border bg-surface">
-      <div className="console-container py-14">
+    <footer className="cinema-footer">
+      <div className="cinema-container py-14">
         <div className="grid gap-10 md:grid-cols-[2fr_1fr_1fr]">
           <div>
             <Logo href={`/${locale}`} size={20} />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-text-dim">{t("tagline")}</p>
             <span className="mt-5 inline-flex rounded-full border border-accent bg-accent-soft px-3 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
-              AI + human expertise
+              {t("expertise")}
             </span>
             <div className="mt-6 flex items-center gap-2">
               {[
@@ -57,12 +54,12 @@ export default function Footer() {
             <ul className="space-y-3">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <button
-                    onClick={() => scrollTo(link.href)}
+                  <a
+                    href={`/${locale}${link.href}`}
                     className="text-sm text-text-dim transition-colors hover:text-accent"
                   >
                     {link.label}
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -87,9 +84,10 @@ export default function Footer() {
           </div>
         </div>
 
+        <span className="cinema-footer-word" aria-hidden="true">kershell<span>_</span></span>
         <div className="mt-12 flex flex-col justify-between gap-4 border-t border-border pt-6 font-mono text-[11px] uppercase tracking-[0.16em] text-muted md:flex-row">
           <p>&copy; {new Date().getFullYear()} Kershell. {t("copyright")}</p>
-          <p>v0.console</p>
+
         </div>
       </div>
     </footer>

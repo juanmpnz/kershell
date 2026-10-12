@@ -5,6 +5,8 @@ const siteUrl = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.heykers
 export default async function HomeJsonLd({ locale }: { locale: string }) {
   const isEs = locale === "es";
   const translations = await getTranslations({ locale, namespace: "aeo" });
+  const portfolioTranslations = await getTranslations({ locale, namespace: "portfolio" });
+  const projects = portfolioTranslations.raw("items") as Array<{ id: string; title: string; description: string; url: string | null }>;
   const answers = translations.raw("answers") as Array<{ question: string; answer: string }>;
 
   const organizationSchema = {
@@ -102,53 +104,16 @@ export default async function HomeJsonLd({ locale }: { locale: string }) {
     "@type": "ItemList",
     "@id": `${siteUrl.origin}/${locale}#public-portfolio`,
     name: isEs ? "Casos públicos de Kershell TI" : "Kershell TI public portfolio",
-    itemListElement: [
-      {
+    itemListElement: projects.map((project, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
         "@type": "CreativeWork",
-        position: 1,
-        name: "Ediflow",
-        url: `${siteUrl.origin}/${locale}#portfolio`,
-        description: isEs
-          ? "Plataforma de gestión para administradores de fincas y comunidades: incidencias, presupuestos, decisiones, votaciones y derramas en un único flujo."
-          : "Management platform for property managers and residential communities: incidents, quotes, decisions, votes, and assessments in one connected flow.",
+        name: project.title,
+        description: project.description,
+        url: project.url ?? `${siteUrl.origin}/${locale}#portfolio`,
       },
-      {
-        "@type": "CreativeWork",
-        position: 2,
-        name: "Live Match Analytics",
-        url: "https://analytics.kershell.dev/",
-        description: isEs
-          ? "Motor de análisis de fútbol en tiempo real con ingesta de datos, detección de eventos e insights generados por IA."
-          : "Real-time football analytics engine with live data ingestion, event detection, and AI-powered insights.",
-      },
-      {
-        "@type": "CreativeWork",
-        position: 3,
-        name: "Campos Inmobiliaria",
-        url: "https://www.camposinmobiliaria.com/",
-        description: isEs
-          ? "Plataforma web inmobiliaria con listados, búsqueda avanzada y captación de leads."
-          : "Real estate web platform with listings, advanced search, and lead capture.",
-      },
-      {
-        "@type": "CreativeWork",
-        position: 4,
-        name: "PJ Tornquist",
-        url: "https://www.pjtornquist.ar/",
-        description: isEs
-          ? "Portal institucional y de noticias con gestión de contenido y presencia digital."
-          : "Institutional news portal with content management and digital presence.",
-      },
-      {
-        "@type": "CreativeWork",
-        position: 5,
-        name: "Salones de Fiestas",
-        url: "https://salonesdefiestas.ar/",
-        description: isEs
-          ? "Marketplace nacional para espacios y proveedores de eventos."
-          : "National marketplace for event venues and providers.",
-      },
-    ],
+    })),
   };
 
   const faqSchema = {
