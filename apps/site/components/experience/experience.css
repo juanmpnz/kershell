@@ -278,6 +278,7 @@
 }
 /* Approved concept 03: the landscape is preserved in the lightweight view. */
 .experience-relief-backdrop { background:#111716; overflow:hidden; }
+.experience-header::before { content:""; position:fixed; inset:0 0 auto; height:145px; z-index:-1; pointer-events:none; background:linear-gradient(180deg,rgb(4 7 5 / .72),transparent); }
 .experience-relief-backdrop img { object-fit:cover; object-position:center; }
 .experience-mist { position:absolute; left:-12%; width:125%; height:42%; background:url('/art/mist.svg') center / 100% 100% no-repeat; pointer-events:none; will-change:transform; }
 .experience-mist-far { bottom:20%; opacity:.16; animation:mist-far 100s ease-in-out infinite alternate; }
@@ -286,5 +287,5 @@
 @keyframes mist-near { from { transform:translate3d(4%,1%,0); } to { transform:translate3d(-4%,-1%,0); } }
 .experience-root[data-paused="true"] .experience-mist, .experience-root[data-render-status="ready"] .experience-mist { animation-play-state:paused; }
 .experience-root[data-render-status="ready"] .experience-fallback { visibility:hidden; }
-@media(max-width:767px) { .experience-relief-backdrop img { object-position:right center; } .experience-mist { width:180%; left:-40%; opacity:.16; } }
+@media(max-width:767px) { .experience-header::before { height:110px; } .experience-relief-backdrop img { object-position:right center; } .experience-mist { width:180%; left:-40%; opacity:.16; } }
 @media(prefers-reduced-motion:reduce) { .experience-mist { animation:none; } }
