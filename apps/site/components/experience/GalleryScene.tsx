@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import type { ExperienceLocation, ProjectId, View } from "@/lib/experience/navigation";
+import { RELIEF_HOME_CAMERA, RELIEF_HOME_TARGET } from "@/lib/experience/reliefGeometry";
 
 export type RenderStatus = "loading" | "ready" | "fallback";
 
@@ -26,17 +27,18 @@ export default function GalleryScene({ location, paused, onStatus }: { location:
       renderer.toneMappingExposure = 1.4;
       renderer.shadowMap.enabled = !compact.matches;
       renderer.shadowMap.type = T.PCFSoftShadowMap;
+      renderer.debug.onShaderError=()=>{throw new Error("Relief shader compilation failed");};
       let gallery: Awaited<ReturnType<typeof buildGallery>>;
       try { gallery = await buildGallery(T,renderer,compact.matches); } catch { renderer.dispose(); onStatus("fallback"); return; }
       if (cancelled) { gallery.dispose(); renderer.dispose(); return; }
-      const camera = new T.PerspectiveCamera(45,1,.1,100);
-      camera.position.set(0,3.4,15);
+      const camera = new T.PerspectiveCamera(45,1,.1,220);
+      camera.position.set(...RELIEF_HOME_CAMERA);
       const controls = new OrbitControls(camera,renderer.domElement);
       controls.enableZoom = false; controls.enablePan = false;
       controls.enableDamping = true; controls.dampingFactor = .065;
-      controls.minPolarAngle = .4; controls.maxPolarAngle = 1.5;
+      controls.minPolarAngle = .4; controls.maxPolarAngle = 1.6;
       controls.minAzimuthAngle = -1.4; controls.maxAzimuthAngle = 1.4;
-      controls.target.set(0,3.3,-5);
+      controls.target.set(...RELIEF_HOME_TARGET);
       controls.enabled = false;
       host.appendChild(renderer.domElement);
       const desiredCamera = camera.position.clone();
@@ -63,10 +65,10 @@ export default function GalleryScene({ location, paused, onStatus }: { location:
           desiredCamera.set(exhibit.position.x+3.8*scale,exhibit.position.y+(project==="futscan"?4:2.5)*scale,exhibit.position.z+7.6*scale);
           desiredTarget.set(exhibit.position.x-(compact.matches?0:1.3),exhibit.position.y+1.1,exhibit.position.z);
         } else if (activeView === "home") {
-          desiredCamera.set(0,3.4,compact.matches?20:15); desiredTarget.set(0,3.3,-5);
+          desiredCamera.set(compact.matches?7:10,5,compact.matches?30:22); desiredTarget.set(...RELIEF_HOME_TARGET);
         } else {
-          desiredCamera.set(activeView==="studio"?-2:1.5,3.8,compact.matches?20:13);
-          desiredTarget.set(0,3.3,-5);
+          desiredCamera.set(activeView==="studio"?8:11,5.4,compact.matches?30:20);
+          desiredTarget.set(...RELIEF_HOME_TARGET);
         }
       };
       const tick = (now: number) => {
@@ -79,13 +81,15 @@ export default function GalleryScene({ location, paused, onStatus }: { location:
           camera.position.lerp(desiredCamera,alpha); controls.target.lerp(desiredTarget,alpha);
           if (camera.position.distanceTo(desiredCamera)<.015 && controls.target.distanceTo(desiredTarget)<.015) transitioning=false;
         } else if (activeView === "home" && !immobile) {
-          camera.position.x += (pointer.x*.14-camera.position.x)*.025;
-          camera.position.y += (3.4+pointer.y*.06-camera.position.y)*.025;
+          camera.position.x += ((compact.matches?7:10)+pointer.x*.1-camera.position.x)*.025;
+          camera.position.y += (5+pointer.y*.04-camera.position.y)*.025;
         }
         controls.enabled = activeView==="project" && !transitioning && !immobile;
         controls.update();
         gallery.update(time);
-        renderer.render(gallery.scene,camera);
+        try { gallery.render(camera,time); } catch {
+          lost=true;host.dataset.ready="false";onStatus("fallback");return;
+        }
         if (host.dataset.ready !== "true") onStatus("ready");
         host.dataset.ready="true";
         if (!immobile) frame=requestAnimationFrame(tick);
@@ -99,8 +103,8 @@ export default function GalleryScene({ location, paused, onStatus }: { location:
         const { width,height } = host.getBoundingClientRect();
         if (!width || !height) return;
         renderer.setPixelRatio(Math.min(devicePixelRatio,compact.matches?1:1.5));
-        gallery.resize(compact.matches);
         renderer.setSize(width,height,false); camera.aspect=width/height;
+        const pixels=renderer.getDrawingBufferSize(new T.Vector2());gallery.resize(pixels.x,pixels.y,compact.matches);
         camera.fov=compact.matches?52:45; camera.updateProjectionMatrix(); synchronize();
       };
       const onPointer = (event: PointerEvent) => { if(event.pointerType==="mouse") { pointer.x=event.clientX/innerWidth*2-1; pointer.y=event.clientY/innerHeight*2-1; } };

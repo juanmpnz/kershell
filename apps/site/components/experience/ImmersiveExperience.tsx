@@ -10,7 +10,7 @@ import { adjacentProject, locationHash, parseLocation, type ProjectId, type View
 import "./experience.css";
 import GalleryScene, { type RenderStatus } from "./GalleryScene";
 import ContactWizard from "./ContactWizard";
-import SpatialBackdrop from "./SpatialBackdrop";
+import ReliefBackdrop from "./ReliefBackdrop";
 
 type Project = { id:ProjectId; title:string; category:string; description:string; tags:string[]; url:string|null; cta:string };
 type Service = { title:string; description:string; tag:string };
@@ -77,8 +77,8 @@ export default function ImmersiveExperience() {
     router.push(`/${next}${window.location.hash}`);
   };
 
-  return <div className={`experience-root experience-view-${location.view}`} data-paused={String(paused)}>
-    <SpatialBackdrop/>
+  return <div className={`experience-root experience-view-${location.view}`} data-paused={String(paused)} data-render-status={renderStatus}>
+    <ReliefBackdrop/>
     <GalleryScene location={location} paused={paused} onStatus={setRenderStatus}/>
     <div className="experience-vignette" aria-hidden="true"/>
     <header className="experience-header">

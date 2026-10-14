@@ -1,6 +1,7 @@
 import type * as Three from "three";
 import type { ProjectId } from "@/lib/experience/navigation";
-import { buildSpatial } from "./buildSpatial";
+import { buildRelief } from "./buildRelief";
+import { createReliefAtmosphere } from "./ReliefAtmosphere";
 
 type Engine = typeof import("three");
 export type Exhibit = { group: Three.Group; position: Three.Vector3 };
@@ -13,8 +14,9 @@ export async function buildGallery(T: Engine, renderer: Three.WebGLRenderer, com
   ]);
   const scene = new T.Scene();
   const room = new T.Group(); scene.add(room);
-  const spatial = buildSpatial(T,compact); scene.add(spatial.group);
-  const spatialFog = new T.FogExp2(0x070b09,.018);
+  const spatial = await buildRelief(T,renderer,compact); scene.add(spatial.group);
+  const spatialFog = new T.FogExp2(0x919a9e,.004);
+  const atmosphere = createReliefAtmosphere(T,renderer,compact);
   const roomFog = new T.FogExp2(0x090c0b,.018);
   scene.background = new T.Color(0x090c0b);
   scene.fog = spatialFog;
@@ -89,15 +91,15 @@ export async function buildGallery(T: Engine, renderer: Three.WebGLRenderer, com
   daylight.shadow.mapSize.set(1024,1024);
   daylight.shadow.camera.left = -18; daylight.shadow.camera.right = 18;
   daylight.shadow.camera.top = 18; daylight.shadow.camera.bottom = -18;
-  daylight.shadow.normalBias = .035; scene.add(daylight);
-  scene.add(new T.HemisphereLight(0xdde3dd,0x141a17,1.1));
+  daylight.shadow.normalBias = .035; room.add(daylight);
+  room.add(new T.HemisphereLight(0xdde3dd,0x141a17,1.1));
   for (const [x,z] of [[-6,-7],[6,-8],[-6,1],[6,1]]) {
     const light = new T.SpotLight(0xe2e8db,compact?26:42,18,.65,.6,1.5);
     light.position.set(x,8,z+1); light.target.position.set(x,1,z);
-    scene.add(light,light.target);
+    room.add(light,light.target);
   }
   const entranceLight = new T.PointLight(0xb4f23f,28,22,2);
-  entranceLight.position.set(0,2,-18); scene.add(entranceLight);
+  entranceLight.position.set(0,2,-18); room.add(entranceLight);
   // Distant, faceted landscape seen through the open rear doorway.
   const landscapeMaterial = new T.MeshStandardMaterial({ color:0x69746e, flatShading:true, roughness:1 });
   for (let i=0;i<10;i++) {
@@ -227,13 +229,14 @@ export async function buildGallery(T: Engine, renderer: Three.WebGLRenderer, com
   return {
     scene, exhibits,
     setView(projectView:boolean) { room.visible=projectView; spatial.group.visible=!projectView; scene.fog=projectView?roomFog:spatialFog; },
-    resize(isCompact:boolean) { spatial.resize(isCompact); },
+    resize(width:number,height:number,isCompact:boolean) { spatial.resize(isCompact); atmosphere.resize(width,height,isCompact); },
+    render(camera:Three.PerspectiveCamera,time:number) { if(spatial.group.visible) atmosphere.render(scene,camera,time); else renderer.render(scene,camera); },
     update(time:number) { spatial.update(time); if(room.visible) animations.forEach(animate => animate(time)); },
     dispose() {
       const geometries = new Set<Three.BufferGeometry>(); const materials = new Set<Three.Material>();
       scene.traverse(node => { if (node instanceof T.Mesh || node instanceof T.Line) { geometries.add(node.geometry); (Array.isArray(node.material)?node.material:[node.material]).forEach(material=>materials.add(material)); } });
       geometries.forEach(geometry=>geometry.dispose()); materials.forEach(material=>material.dispose());
-      mirror?.getRenderTarget().dispose(); environment.dispose(); stoneTexture.dispose(); daylight.shadow.map?.dispose();
+      spatial.dispose(); atmosphere.dispose(); mirror?.getRenderTarget().dispose(); environment.dispose(); stoneTexture.dispose(); daylight.shadow.map?.dispose();
     },
   };
 }

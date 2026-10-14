@@ -4,13 +4,14 @@ Approved correction, 2026-10-12: a single-viewport interactive 3D experience.
 The previous long landing and 2.5D image plate did not fulfill the request.
 Retain the architectural direction, logo and lime/graphite palette.
 
-Revision: studio and capabilities lead the homepage; the project catalogue is
-secondary. A bespoke folded metallic structure in a dark spatial environment
-replaces the architectural room on the homepage and information views. Project
-exhibits retain their own scene. Three prominent capability links open the full
-service selector. No star fields, planets, particles or generic torus knots.
-Use a matching vector compatibility composition instead of the old gallery
-poster. It is explicitly a compatibility view, not proof of GPU rendering.
+Approved design, 2026-10-14: concept 03 Relieve with a low sun. Studio and
+capabilities lead the homepage; the project catalogue is secondary. Build a
+basalt canyon with terraced architecture, a lime-lit cantilever, water and a
+small sun behind the distant grey haze. The metallic sculpture is rejected.
+Depth-aware volumetric mist drifts slowly through the valleys. Project exhibits
+retain their own secondary scene. The clean approved landscape is the loading
+and lightweight compatibility background, with subtle animated mist layers;
+it must not be presented as evidence of GPU rendering.
 
 ## Navigation and layout
 
@@ -30,13 +31,21 @@ messages or changes to the mail backend are introduced.
 
 ## Actual 3D scene
 
-The active scene contains real geometry. On the homepage and information views,
-`buildSpatial.ts` builds an open ribbon with a varying bevelled cross-section,
-deliberate twist, a second graphite shell, metallic ribs and a luminous seam.
-Physical materials, environment lighting and a floating motion supply depth.
-The desktop sculpture uses 7,610 triangles across 16 meshes including its floor;
-CPU validation confirmed finite vertices/normals and valid indices. GPU visual
-verification still needs a WebGL-capable browser.
+The active homepage uses real three-dimensional geometry. `buildRelief.ts`
+constructs 25 textured meshes: a basalt wall, terraced rock platforms, a lime-lit
+cantilever, water, distant ridges and a procedural sky with a small low sun.
+Stone vertices are displaced consistently across adjacent faces; tests check
+closed surfaces, finite normals and world-scale UVs. The generated basalt
+material and approved clean landscape are committed at `/art/basalt.webp` and
+`/art/relieve-sun.webp`.
+
+`ReliefAtmosphere.ts` captures linear scene color and depth, marches through a
+height-based, three-octave noise volume at reduced resolution (40 steps desktop,
+20 mobile), and composites with depth-aware upsampling. Wind advances at a slow,
+continuous rate. Sunlight and the lime ledge tint scattering subtly. Desktop
+water has a 512px planar reflection with slow procedural ripples; mobile uses a
+lighter sun-reflection shader. Sky, water, fog and camera motion share the active
+clock, frozen by pause/reduced-motion and hidden-tab handling.
 
 In the project view, `buildGallery.ts` constructs concrete slabs, columns, ceiling, an open doorway,
 distant faceted landscape, luminous paths, exhibition plinths, materials,
@@ -48,8 +57,8 @@ lighting, reflections and four native exhibits:
 - Campos: cantilevered volumes, glass fronts, terraces and architectural lights.
 
 These are conceptual product exhibits, not simulations of customer data or
-claims about the live products. A matching vector spatial composition is the
-loading/WebGL fallback; the old gallery image is no longer mounted.
+claims about the live products. The clean approved landscape with two CSS mist banks is the loading and
+lightweight compatibility view. The rejected metal composition is removed.
 Procedural models reproduce the direction and spatial logic of the reference;
 they do not promise photorealistic or pixel-identical reproduction of that render.
 
@@ -81,7 +90,14 @@ main branch under the user's earlier authorization. Verify remote file/tree
 hashes; do not overwrite concurrent commits. Rollback is the previous main
 commit. No database migrations or admin changes.
 
-Validation completed: site lint, typecheck, 20 tests and production build pass.
+Validation for this revision: site lint, typecheck, 22 tests and production
+build pass. The four GLSL programs compile and link in an offscreen Mesa
+OpenGL context. Fog rendering changes slowly over 30 seconds, repeated paused
+frames are identical, near-depth transmission exceeds 0.99, and distant valleys
+receive volume scattering. A geometry composition render was inspected with
+simplified lighting; it is not a browser capture or proof of Three.js PBR output.
+
+Previous browser validation:
 The deployed homepage's document height equals the 936px browser viewport;
 project navigation, all seven views, menu and required contact field validation
 were exercised without submitting mail. This cloud browser has WebGL disabled
