@@ -28,15 +28,13 @@
     "next-intl": "^4.14.2",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "resend": "^6.18.1",
-    "three": "^0.186.1"
+    "resend": "^6.18.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^24.13.3",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@types/three": "^0.186.0",
     "eslint": "9.39.5",
     "eslint-config-next": "16.3.4",
     "tailwindcss": "^4",

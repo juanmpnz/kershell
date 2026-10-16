@@ -1,107 +1,67 @@
-# Kershell viewport gallery
+# Kershell viewport experience
 
-Approved correction, 2026-10-12: a single-viewport interactive 3D experience.
-The previous long landing and 2.5D image plate did not fulfill the request.
-Retain the architectural direction, logo and lime/graphite palette.
+Approved correction, 2026-10-16: remove the Three.js environments, models,
+volumetric mist and architectural backgrounds. Use a quiet, full-bleed video
+background inspired by the slow optical movement on https://payloadcms.com/.
+Keep Kershell's logo, graphite/lime palette and the single-viewport navigation.
 
-Approved design, 2026-10-14: concept 03 Relieve with a low sun. Studio and
-capabilities lead the homepage; the project catalogue is secondary. Build a
-basalt canyon with terraced architecture, a lime-lit cantilever, water and a
-small sun behind the distant grey haze. The metallic sculpture is rejected.
-Depth-aware volumetric mist drifts slowly through the valleys. Project exhibits
-retain their own secondary scene. The clean approved landscape is the loading
-and lightweight compatibility background, with subtle animated mist layers;
-it must not be presented as evidence of GPU rendering.
+## Background
+
+Use an original 20-second, seamless, silent optical film. Broad curved folds,
+soft highlights and a restrained lime reflection leave room for typography.
+The film is pre-rendered with `scripts/render-brand-film.py`; no WebGL, canvas,
+Three.js or frame-by-frame animation runs in the visitor's browser. Desktop
+and portrait MP4s and matching WebP posters are self-hosted under `/film/`.
+Payload's video is a reference only and is not redistributed or hotlinked.
+
+Use native muted, looping, inline playback. Only the chosen responsive asset
+is requested. Pause stops playback; reduced-motion and data-saving preferences
+show the poster without requesting the film. Hidden tabs pause. Failed or
+blocked playback leaves the poster visible and offers the normal play control.
+No diagnostic renderer text is shown to visitors.
 
 ## Navigation and layout
 
-The homepage mounts one fixed `100dvh` experience, with no vertical page flow.
-Projects, capabilities, studio, process, questions and contact are views inside
-that viewport. Clicks change the URL fragment and the active content; they do
-not call scrollIntoView or navigate down the page. Back/forward and shareable
-project URLs work. Existing #portfolio, #why and #process bookmarks resolve to
-the appropriate new views. Legal and commercial pages retain their existing
-standalone layouts.
+One fixed `100dvh` experience contains home, services, studio, project, process,
+questions and contact views. Hash links change the active panel, not scroll
+position. Back/forward, direct project URLs and existing bookmarks are retained.
+Projects remain secondary and contain editorial information, without screenshots
+or models. Four projects: Ediflow, Operational 3D, Futscan and Campos Inmobiliaria.
+Only Campos has an external website link.
 
-The translated catalogue is the authority for the four projects. Their deep
-URLs also feed JSON-LD. Off-view content stays in the server-rendered HTML,
-but is hidden and inert; selecting the corresponding navigation shows it.
-Contact uses three steps and the existing /api/contact endpoint. No automatic
-messages or changes to the mail backend are introduced.
-
-## Actual 3D scene
-
-The active homepage uses real three-dimensional geometry. `buildRelief.ts`
-constructs 25 textured meshes: a basalt wall, terraced rock platforms, a lime-lit
-cantilever, water, distant ridges and a procedural sky with a small low sun.
-Stone vertices are displaced consistently across adjacent faces; tests check
-closed surfaces, finite normals and world-scale UVs. The generated basalt
-material and approved clean landscape are committed at `/art/basalt.webp` and
-`/art/relieve-sun.webp`.
-
-`ReliefAtmosphere.ts` captures linear scene color and depth, marches through a
-height-based, three-octave noise volume at reduced resolution (40 steps desktop,
-20 mobile), and composites with depth-aware upsampling. Wind advances at a slow,
-continuous rate. Sunlight and the lime ledge tint scattering subtly. Desktop
-water has a 512px planar reflection with slow procedural ripples; mobile uses a
-lighter sun-reflection shader. Sky, water, fog and camera motion share the active
-clock, frozen by pause/reduced-motion and hidden-tab handling.
-
-In the project view, `buildGallery.ts` constructs concrete slabs, columns, ceiling, an open doorway,
-distant faceted landscape, luminous paths, exhibition plinths, materials,
-lighting, reflections and four native exhibits:
-
-- Ediflow: residential volumes, window panes and lit community spaces.
-- Operational 3D: instanced containers and ribs, gantry crane, moving hoist/truck.
-- Futscan: 3D pitch lines/goals and instanced animated player markers.
-- Campos: cantilevered volumes, glass fronts, terraces and architectural lights.
-
-These are conceptual product exhibits, not simulations of customer data or
-claims about the live products. The clean approved landscape with two CSS mist banks is the loading and
-lightweight compatibility view. The rejected metal composition is removed.
-Procedural models reproduce the direction and spatial logic of the reference;
-they do not promise photorealistic or pixel-identical reproduction of that render.
-
-Selecting a project interpolates a perspective camera and target to its plinth.
-After the camera settles, OrbitControls allow dragging around the model. Wheel
-zoom is disabled. Content uses opacity/blur/translation transitions. Project
-previous/next links wrap around the four exhibits. No wheel-based navigation.
-
-## Quality and accessibility
-
-Render at 30 FPS and DPR <=1.5 on desktop or 1 on mobile. Desktop uses a 512px
-planar floor reflection and shadows; mobile uses lighter materials without that
-reflection or shadow pass. Containers/ribs and players are instanced. Stop when
-the tab is hidden. Pause and reduced-motion preferences stop ambient animations;
-view changes then snap the camera. Dispose geometries, materials, render targets,
-textures, controls, observers and listeners on unmount.
-
-Keyboard links/buttons remain the primary navigation. Focus moves to the main
-view after navigation; Escape closes the menu and returns focus. Inactive panels
-are inert. Content adapts to smaller viewport heights; contact shows at most two
-fields per step. Browser verification should include scroll extent, each view,
-camera transitions, drag, pause, history and form error states without sending
-live test mail.
+Header, content and footer occupy explicit rows. Home capabilities and project
+selection occupy their own bottom row. Small screens use compact layouts;
+services and questions reveal one detail at a time, and contact retains three
+steps. Controls respect safe-area insets and keyboard focus. Inactive sections
+are inert but retained in server-rendered HTML. Legal pages keep their existing
+standalone layout; no backend/admin behavior changes.
 
 ## Validation and release
 
-Run site lint, typecheck, tests and production build. Publish to the existing
-main branch under the user's earlier authorization. Verify remote file/tree
-hashes; do not overwrite concurrent commits. Rollback is the previous main
-commit. No database migrations or admin changes.
+Run site lint, typecheck, tests, production build and dependency audit. Verify
+all views in desktop, portrait and short landscape viewports when browser QA
+is available. Check actual video time advancement, pause, hash history, contact
+validation, absence of canvas/WebGL and document scroll extent. Do not send test
+email. Publish to the existing main branch with a checked expected-head lease.
+Rollback: restore the previous main tree (53d4d61). No database migrations.
 
-Validation for this revision: site lint, typecheck, 22 tests and production
-build pass. The four GLSL programs compile and link in an offscreen Mesa
-OpenGL context. Fog rendering changes slowly over 30 seconds, repeated paused
-frames are identical, near-depth transmission exceeds 0.99, and distant valleys
-receive volume scattering. A geometry composition render was inspected with
-simplified lighting; it is not a browser capture or proof of Three.js PBR output.
+Validation, 2026-10-16: both silent H.264 assets contain 480 frames at 24 FPS
+and exactly 20 seconds. The desktop film is 565,259 bytes and the portrait film
+254,516 bytes. Sampled decoded frames confirm movement and a small loop seam.
+Site lint, TypeScript, 20 characterization tests and production build passed.
+The managed preview supervisor could not start because its command cannot find
+pnpm; browser layout checks remain pending rather than claimed as passed.
 
-Previous browser validation:
-The deployed homepage's document height equals the 936px browser viewport;
-project navigation, all seven views, menu and required contact field validation
-were exercised without submitting mail. This cloud browser has WebGL disabled
-(GL_VENDOR/GL_RENDERER Disabled), so its compatibility view was observed.
-GPU rendering, camera flights, reflections and model drag remain unverified
-visually in a WebGL-capable browser. Do not present the fallback screenshot as
-proof of the native 3D render.
+Dependency audit reports existing findings in the locked stack. The critical
+next/og advisory GHSA-vcvr-r3jv-pc5j requires attacker-controlled SVG passed to
+ImageResponse; this application has no next/og or ImageResponse route. The high
+Image Optimization advisory GHSA-cjq9-62q9-8jv4 requires an allow-listed remote
+URL; this app configures no remotePatterns. The high librsvg/sharp advisory
+GHSA-wq5f-xc86-pv6w requires SVG decoding; the landing uses native picture/video,
+no uploads, no untrusted image processing, and Next's SVG optimization remains
+disabled by default. The high source-map-js advisory GHSA-68fv-2mgg-jv7q requires
+parsing an attacker-controlled indexed source map; no public route accepts source
+maps. No new dependency is introduced and the removal does not update versions.
+These production entry points remain absent; review and patch these existing
+dependencies in a separate maintenance change by 2026-10-23. This is a bounded
+reachability assessment for the public site, not an audit of the private admin.

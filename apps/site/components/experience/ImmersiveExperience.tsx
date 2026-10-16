@@ -8,9 +8,8 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, Menu, Pause, Play, X } from "lucid
 import { Logo } from "@kershell/ui/logo";
 import { adjacentProject, locationHash, parseLocation, type ProjectId, type View } from "@/lib/experience/navigation";
 import "./experience.css";
-import GalleryScene, { type RenderStatus } from "./GalleryScene";
 import ContactWizard from "./ContactWizard";
-import ReliefBackdrop from "./ReliefBackdrop";
+import VideoBackdrop from "./VideoBackdrop";
 
 type Project = { id:ProjectId; title:string; category:string; description:string; tags:string[]; url:string|null; cta:string };
 type Service = { title:string; description:string; tag:string };
@@ -30,12 +29,11 @@ export default function ImmersiveExperience() {
   const locale=useLocale(); const router=useRouter();
   const e=useTranslations("experience"); const hero=useTranslations("hero"); const portfolio=useTranslations("portfolio");
   const services=useTranslations("services"); const studio=useTranslations("studio"); const approach=useTranslations("process");
-  const faq=useTranslations("aeo"); const contact=useTranslations("contact"); const footer=useTranslations("footer");
+  const faq=useTranslations("aeo"); const contact=useTranslations("contact");
   const projects=portfolio.raw("items") as Project[];
   const capabilities=services.raw("items") as Service[];
   const steps=approach.raw("steps") as Step[];
   const answers=faq.raw("answers") as Answer[];
-  const [renderStatus,setRenderStatus]=useState<RenderStatus>("loading");
   const [paused,setPaused]=useState(false); const [menuOpen,setMenuOpen]=useState(false);
   const [serviceIndex,setServiceIndex]=useState(0); const [stepIndex,setStepIndex]=useState(0); const [faqIndex,setFaqIndex]=useState(0);
   const reduced=useReducedMotion();
@@ -77,9 +75,8 @@ export default function ImmersiveExperience() {
     router.push(`/${next}${window.location.hash}`);
   };
 
-  return <div className={`experience-root experience-view-${location.view}`} data-paused={String(paused)} data-render-status={renderStatus}>
-    <ReliefBackdrop/>
-    <GalleryScene location={location} paused={paused} onStatus={setRenderStatus}/>
+  return <div className={`experience-root experience-view-${location.view}`} data-paused={String(paused)}>
+    <VideoBackdrop paused={paused} onPlaybackChange={setPaused}/>
     <div className="experience-vignette" aria-hidden="true"/>
     <header className="experience-header">
       <a href="#home" onClick={event=>navClick(event,"home")} aria-label={e("home")}><Logo size={25}/></a>
@@ -107,7 +104,6 @@ export default function ImmersiveExperience() {
           <p className="experience-eyebrow">{item.category}</p><h2>{item.title}</h2><p className="experience-description">{item.description}</p>
           <ul className="experience-tags">{item.tags.map(tag=><li key={tag}>{tag}</li>)}</ul>
           {item.url?<a href={item.url} target="_blank" rel="noopener noreferrer" className="experience-link">{item.cta}<ArrowUpRight size={18}/></a>:<span className="experience-project-status">{portfolio("in_development")}</span>}
-          <p hidden={renderStatus!=="ready" || paused || Boolean(reduced)} className="experience-drag-hint">{e("drag")}</p>
         </article>)}
         {view==="services"&&<div className="experience-info-layout"><div><p className="experience-eyebrow">{services("badge")}</p><h2>{services("title")}</h2><div className="experience-selector">{capabilities.map((item,index)=><button key={item.title} aria-pressed={serviceIndex===index} onClick={()=>setServiceIndex(index)}><small>{String(index+1).padStart(2,"0")}</small><span>{item.title}</span><ArrowUpRight size={18}/></button>)}</div></div>
           <div className="experience-detail">{capabilities.map((item,index)=><article key={item.title} hidden={index!==serviceIndex}><p className="experience-eyebrow">{item.tag}</p><h3>{item.title}</h3><p>{item.description}</p></article>)}<a href="#contact" className="experience-link" onClick={event=>navClick(event,"contact")}>{e("discuss_project")}<ArrowUpRight size={18}/></a></div></div>}
@@ -121,9 +117,8 @@ export default function ImmersiveExperience() {
       {location.view==="home"&&<nav className="experience-capability-dock" aria-label={services("badge")}>{capabilities.slice(0,3).map((item,index)=><a key={item.title} href="#services" onClick={event=>{setServiceIndex(index);navClick(event,"services");}}><small>{String(index+1).padStart(2,"0")}</small><span>{item.title}</span><ArrowUpRight size={22}/></a>)}</nav>}
       {location.view==="project"&&<div className="experience-project-controls"><a href={locationHash("project",adjacentProject(location.project,-1))} onClick={event=>navClick(event,"project",adjacentProject(location.project,-1))} aria-label={e("previous")}><ArrowLeft size={20}/></a><span>{String(projects.indexOf(project)+1).padStart(2,"0")} / 04</span><a href={locationHash("project",adjacentProject(location.project,1))} onClick={event=>navClick(event,"project",adjacentProject(location.project,1))} aria-label={e("next")}><ArrowRight size={20}/></a></div>}
       {location.view==="project"&&<nav className="experience-project-dock" aria-label={hero("project_navigation")}>{projects.map((item,index)=><a key={item.id} href={locationHash("project",item.id)} aria-current={location.project===item.id?"page":undefined} onClick={event=>navClick(event,"project",item.id)}><span>{item.title}</span><small>{String(index+1).padStart(2,"0")}</small></a>)}</nav>}
-      <footer className="experience-footer"><div><a href="#services" onClick={event=>navClick(event,"services")}>{e("services")}</a><a href="#approach" onClick={event=>navClick(event,"approach")}>{e("approach")}</a><a href="#faq" onClick={event=>navClick(event,"faq")}>{e("faq")}</a><a href={`/${locale}/privacy`}>{footer("privacy")}</a><a href={`/${locale}/terms`}>{footer("terms")}</a></div><button aria-pressed={paused} onClick={()=>setPaused(value=>!value)}>{paused?<Play size={12}/>:<Pause size={12}/>}<span>{hero(paused?"play":"pause")}</span></button></footer>
+      <footer className="experience-footer"><div><a href="#services" onClick={event=>navClick(event,"services")}>{e("services")}</a><a href="#approach" onClick={event=>navClick(event,"approach")}>{e("approach")}</a><a href="#faq" onClick={event=>navClick(event,"faq")}>{e("faq")}</a><a href={`/${locale}/privacy`}>{e("privacy")}</a><a href={`/${locale}/terms`}>{e("terms")}</a></div><button aria-label={hero(paused?"play":"pause")} aria-pressed={paused} onClick={()=>setPaused(value=>!value)}>{paused?<Play size={12}/>:<Pause size={12}/>}<span>{hero(paused?"play":"pause")}</span></button></footer>
     </div>
-    {renderStatus!=="ready"&&<p className="experience-render-status" role="status">{e(renderStatus==="loading"?"loading":"fallback")}</p>}
     <p className="sr-only" role="status">{e(location.view)}{location.view==="project"?`: ${project.title}`:""}</p>
   </div>;
 }
